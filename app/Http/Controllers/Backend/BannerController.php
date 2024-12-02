@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Banner;
-use Image;
+use Intervention\Image\Facades\Image;
 use Session;
 
 class BannerController extends Controller
@@ -48,7 +48,7 @@ class BannerController extends Controller
         if($request->hasfile('banner_img')){
             $img = $request->file('banner_img');
             $name_gen = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
-            Image::make($img)->save('upload/banner/'.$name_gen);
+            Image::make($img)->resize(550,300)->save('upload/banner/'.$name_gen);
             $save_url = 'upload/banner/'.$name_gen;
         }else{
             $save_url = '';
@@ -118,20 +118,20 @@ class BannerController extends Controller
         $this->validate($request,[
             'title_en' => 'required',
         ]);
-        
+
         $banner = Banner::find($id);
-        // //banner Photo Update
+        //banner Photo Update
         if($request->hasfile('banner_img')){
             try {
                 if(file_exists($banner->banner_img)){
                     unlink($banner->banner_img);
                 }
             } catch (Exception $e) {
-                
+
             }
             $banner_img = $request->banner_img;
             $banner_save = time().$banner_img->getClientOriginalName();
-            $banner_img->move('upload/banner/',$banner_save);
+            Image::make($banner_img)->resize(550,300)->save('upload/banner/'.$banner_save);
             $banner->banner_img = 'upload/banner/'.$banner_save;
         }else{
            $banner_save = '';
@@ -156,7 +156,6 @@ class BannerController extends Controller
         }
         $banner->status = $request->status;
         $banner->position = $request->position;
-
         $banner->update();
 
         $notification = array(
@@ -180,7 +179,7 @@ class BannerController extends Controller
                 unlink($banner->banner_img);
             }
         } catch (Exception $e) {
-            
+
         }
 
     	$banner->delete();
