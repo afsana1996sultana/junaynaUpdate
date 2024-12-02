@@ -69,7 +69,7 @@ class BlogController extends Controller
         $blog->status = $request->status;
         $blog->blog_img = $save_url;
         $blog->created_at = Carbon::now();
-        
+
         /* =========== Start Blog Tags =========== */
         $blog->tags = implode(',', $request->tags);
         /* =========== End Blog Tags =========== */
@@ -116,7 +116,7 @@ class BlogController extends Controller
         $this->validate($request,[
             'title_en' => 'required',
         ]);
-        
+
         $blog = Blog::find($id);
 
         // Blog Photo Update
@@ -126,11 +126,11 @@ class BlogController extends Controller
                     unlink($blog->blog_img);
                 }
             } catch (Exception $e) {
-                
+
             }
             $blog_img = $request->blog_img;
             $blog_save = time().$blog_img->getClientOriginalName();
-            $blog_img->move('upload/blog/',$blog_save);
+            Image::make($blog_img)->resize(300,300)->save('upload/blog/'.$blog_save);
             $blog->blog_img = 'upload/blog/'.$blog_save;
         }else{
             $blog_save = '';
@@ -147,12 +147,12 @@ class BlogController extends Controller
         if($request->status == Null){
             $request->status = 0;
         }
-        
+
         $blog->tags = $request->tags;
         $blog->description = $request->description;
         $blog->status = $request->status;
         $blog->created_at = Carbon::now();
-        
+
         /* =========== Start Blog Tags =========== */
         $blog->tags = implode(',', $request->tags);
         /* =========== End Blog Tags =========== */
@@ -180,7 +180,7 @@ class BlogController extends Controller
                 unlink($blog->blog_img);
             }
         } catch (Exception $e) {
-            
+
         }
 
         $blog->delete();
