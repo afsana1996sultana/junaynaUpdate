@@ -45,7 +45,7 @@ class FrontendController extends Controller
         // Category Featured all
         $featured_category = Category::orderBy('name_en','DESC')->where('is_featured','=',1)->where('status','=',1)->limit(15)->get();
         //Slider
-        $sliders = Slider::where('status',1)->orderBy('id','DESC')->limit(10)->get();
+        $sliders = Slider::where('status',1)->orderBy('id','ASC')->limit(10)->get();
         // Product Top Selling
         $product_top_sellings = Product::where('status',1)->orderBy('id','ASC')->limit(2)->get();
         //Product Trending
@@ -57,23 +57,23 @@ class FrontendController extends Controller
         $product_top_rates = Product::where('status',1)->orderBy('regular_price')->limit(2)->get();
         // Home Banner
         $home_banners = Banner::where('status',1)->where('position',1)->orderBy('id','DESC')->get();
-        // Daily Best Sells 
+        // Daily Best Sells
         $todays_sale  = OrderDetail::where('created_at', 'like', '%'.date('Y-m-d').'%')->get();
         $todays_sale = $todays_sale->unique('product_id');
         //Home2 featured category
         $home2_featured_categories = Category::where('is_featured','=',1)->where('parent_id', 0)->where('status', 1)->orderBy('id','DESC')->limit(8)->get();
-        
+
         foreach($home2_featured_categories as $home2_featured_category){
             $fcat_products = null;
             $conditions = array();
-            
+
             $category_ids = CategoryUtility::children_ids($home2_featured_category->id);
             $category_ids[] = $home2_featured_category->id;
-            
+
             $fcat_products = Product::where($conditions)->whereIn('category_id', $category_ids)->limit(10)->latest()->get();
             $home2_featured_category->cat_products = $fcat_products;
         }
-        
+
         //$home2_featured_categories = Category::where('is_featured', 1)->where('status', 1)->limit(8)->latest()->get();
         // Hot deals product
         $hot_deals = Product::where('status',1)->where('is_deals',1)->latest()->get();
@@ -94,33 +94,33 @@ class FrontendController extends Controller
             if($product->id){
                 $multiImg = MultiImg::where('product_id',$product->id)->get();
             }
-    
+
             /* ================= Product Color Eng ================== */
             $color_en = $product->product_color_en;
             $product_color_en = explode(',', $color_en);
-    
+
             /* ================= Product Size Eng =================== */
             $size_en = $product->product_size_en;
             $product_size_en = explode(',', $size_en);
-    
+
             /* ================= Realted Product =============== */
             $cat_id = $product->category_id;
             $relatedProduct = Product::where('category_id', $cat_id)->where('id', '!=', $product->id)->where('status', 1)->orderBy('id', 'DESC')->get();
-    
+
             $categories = Category::orderBy('name_en','ASC')->where('status','=',1)->limit(5)->get();
             $new_products = Product::orderBy('name_en')->where('status','=',1)->limit(3)->latest()->get();
-            
+
             return view('frontend.product.product_details', compact('product','multiImg','categories','new_products','product_color_en','product_size_en','relatedProduct'));
         }
-        
+
         return view('frontend.product.productNotFound');
     }
-    
+
     /* ========== Start BlogDetails Method ======== */
     public function blogDetails($slug){
-        
+
         // $data['blogData'] = Blog::where('blogs.slug',$request->slug)->first();
-        
+
         $blog = Blog::where('slug', $slug)->first();
         $relatedBlog = Blog::where('status',1)->latest()->limit(5)->orderBy('id','DESC')->get();
         return view('frontend.product.blog_details', compact('blog','relatedBlog'));
@@ -131,29 +131,29 @@ class FrontendController extends Controller
         $category = Category::where('slug', $slug)->first();
         $sort_by = $request->input('sort_by');
         $brand_id = $request->brand_id;
-        
+
         $conditions = ['status' => 1];
-        
+
         if($brand_id != null){
             $conditions = array_merge($conditions, ['brand_id' => $brand_id]);
         }
-    
+
         // Start building the query with conditions
         $products = Product::where($conditions);
-    
+
         // Apply category filtering
         $category_ids = CategoryUtility::children_ids($category->id);
         $category_ids[] = $category->id;
         $products = $products->whereIn('category_id', $category_ids);
-    
+
         // Apply price filtering
         $min_price = $request->get('filter_price_start');
         $max_price = $request->get('filter_price_end');
-    
+
         if ($min_price != null && $max_price != null) {
             $products = $products->whereBetween('regular_price', [$min_price, $max_price]);
         }
-    
+
         // Apply sorting
         switch ($sort_by) {
             case 'newest':
@@ -173,7 +173,7 @@ class FrontendController extends Controller
                 $products = $products->orderBy('id', 'desc');
                 break;
         }
-        
+
         $products = $products->paginate(32)->appends(request()->query());
         //$products = $products->get();
         //dd($products);
@@ -181,8 +181,8 @@ class FrontendController extends Controller
         $subcategories = Category::orderBy('name_en', 'ASC')->where('status', 1)->where('parent_id', $category->id)->get();
         return view('frontend.product.category_view', compact('products', 'categories', 'category', 'sort_by', 'brand_id', 'subcategories'));
     }
-    
-    
+
+
     public function BrandWiseProduct(Request $request, $slug)
     {
         $brands = Brand::where('slug', $slug)->first();
@@ -191,20 +191,20 @@ class FrontendController extends Controller
         if ($brands) {
             $products = $products->where('brand_id', $brands->id);
         }
-    
+
         $min_price = $request->get('filter_price_start');
         $max_price = $request->get('filter_price_end');
-    
+
         if ($min_price != null && $max_price != null) {
             $products = $products->whereBetween('regular_price', [$min_price, $max_price]);
         }
-        
+
         $products = $products->paginate(32)->appends(request()->query());
         return view('frontend.product.brand_view', compact('products', 'brands'));
     }
 
-    
-    
+
+
     /* ========== Start AllFeaturedProduct Method ======== */
     public function AllFeaturedProduct(Request $request){
         $sort_by = $request->sort_by;
@@ -220,7 +220,7 @@ class FrontendController extends Controller
         }
 
         $products_sort_by = Product::where($conditions);
-        
+
         switch ($sort_by) {
             case 'newest':
                 $products_sort_by->orderBy('created_at', 'desc')->paginate(32)->appends(request()->query());
@@ -258,7 +258,7 @@ class FrontendController extends Controller
         }
 
     return view('frontend.product.featuredproduct_view',compact('products'));
-    
+
     } // end method
 
      /* ========== Start CatWiseProduct Method ======== */
@@ -266,10 +266,10 @@ class FrontendController extends Controller
 
         $vendor = Vendor::where('slug', $slug)->first();
         // dd($category);
-        
+
         $products = Product::where('status', 1)->where('vendor_id',$vendor->id)->orderBy('id','DESC')->paginate(32)->appends(request()->query());
         // Price Filter
-        if ($request->get('filter_price_start')!== Null && $request->get('filter_price_end')!== Null ){ 
+        if ($request->get('filter_price_start')!== Null && $request->get('filter_price_end')!== Null ){
             $filter_price_start = $request->get('filter_price_start');
             $filter_price_end = $request->get('filter_price_end');
 
@@ -280,7 +280,7 @@ class FrontendController extends Controller
 
         }
 
-        $categories = Category::orderBy('name_en','ASC')->where('status','=',1)->get();      
+        $categories = Category::orderBy('name_en','ASC')->where('status','=',1)->get();
         // dd($products);
 
         return view('frontend.product.vendor_view',compact('products','categories','vendor'));
@@ -302,7 +302,7 @@ class FrontendController extends Controller
             $attr->values = $attribute_value->values;
             $attributes->add($attr);
         }
-    
+
 
         return response()->json(array(
             'product' => $product,
@@ -318,11 +318,11 @@ class FrontendController extends Controller
     }
 
     public function orderTracking()
-    { 
+    {
         return view('frontend.settings.page.order_tracking');
     }
 
-    
+
     public function orderTrack(Request $request)
     {
         $this->validate($request,[
@@ -332,7 +332,7 @@ class FrontendController extends Controller
         $order = Order::where('invoice_no', $request->invoice_no)->where('phone', $request->phone)->first();
         if(!$order){
             $notification = array(
-                'message' => 'Required Data Not Found.', 
+                'message' => 'Required Data Not Found.',
                 'alert-type' => 'error'
             );
             return redirect()->back()->with($notification);
@@ -358,7 +358,7 @@ class FrontendController extends Controller
         }
 
         $products_sort_by = Product::where($conditions);
-        
+
         switch ($sort_by) {
             case 'newest':
                 $products_sort_by->orderBy('created_at', 'desc')->paginate(32)->appends(request()->query());
@@ -395,7 +395,7 @@ class FrontendController extends Controller
 
         return view('frontend.product.search',compact('products','categories','attributes','sort_by','brand_id'));
 
-    } // end method 
+    } // end method
 
     /* ================= End Product Search =================== */
 
@@ -425,7 +425,7 @@ class FrontendController extends Controller
 
         return view('frontend.product.advance_search',compact('products','categories','attributes'));
 
-    } // end method 
+    } // end method
 
     /* ================= End Advance Product Search =================== */
 
@@ -445,7 +445,7 @@ class FrontendController extends Controller
         }
 
         $products_sort_by = Product::where($conditions);
-        
+
         switch ($sort_by) {
             case 'newest':
                 $products_sort_by->orderBy('created_at', 'desc')->paginate(32)->appends(request()->query());
@@ -487,5 +487,5 @@ class FrontendController extends Controller
         // End Shop Product //
         return view('frontend.deals.hot_deals',compact('attributes','products','sort_by','brand_id'));
 
-    } // end method 
+    } // end method
 }

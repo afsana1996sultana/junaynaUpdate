@@ -82,10 +82,8 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 		Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
 		Route::post('/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 		Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
-
 		Route::get('/category_active/{id}', [CategoryController::class, 'active'])->name('category.active');
 		Route::get('/category_inactive/{id}', [CategoryController::class, 'inactive'])->name('category.in_active');
-
 		Route::get('/category_feature_status_change/{id}', [CategoryController::class, 'changeFeatureStatus'])->name('category.changeFeatureStatus');
 
 	});
@@ -257,6 +255,8 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 	Route::post('/orders/update_payment_status', [OrderController::class, 'update_payment_status'])->name('orders.update_payment_status');
 	// delivery status
 	Route::post('/orders/update_delivery_status', [OrderController::class, 'update_delivery_status'])->name('orders.update_delivery_status');
+    // Note status
+	Route::post('/orders/update_note_status', [OrderController::class, 'update_note_status'])->name('orders.update_note_status');
 
 	// Report All Route
 	Route::get('/stock_report', [ReportController::class, 'index'])->name('stock_report.index');

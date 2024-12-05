@@ -40,12 +40,12 @@ class CartController extends Controller
                     $prev_cart_qty += $cart->qty;
                 }
             }
-            
+
             $qty = $prev_cart_qty + $request->quantity;
-            
-            if($qty > $product->stock_qty){
-                return response()->json(['error'=> 'Not enough stock']);
-            }
+
+            // if($qty > $product->stock_qty){
+            //     return response()->json(['error'=> 'Not enough stock']);
+            // }
         }else{
             $prev_cart_qty = 0;
             foreach($carts as $cart){
@@ -55,15 +55,15 @@ class CartController extends Controller
                     }
                 }
             }
-            
+
             $qty = $prev_cart_qty + $request->quantity;
             $stock = ProductStock::where('product_id', $id)->where('varient', $request->product_varient)->first();
-            
-            if($qty > $stock->qty){
-                return response()->json(['error'=> 'Not enough stock']);
-            }
+
+            // if($qty > $stock->qty){
+            //     return response()->json(['error'=> 'Not enough stock']);
+            // }
         }
-        
+
         if($product->is_varient){
             foreach($options as $option){
                 if($option->name == 'attribute_ids[]'){
@@ -96,10 +96,10 @@ class CartController extends Controller
     	if($product->is_varient){
             Cart::add([
                 'id' => $id,
-                'name' => $request->product_name, 
+                'name' => $request->product_name,
                 'qty' => $request->quantity,
                 'price' => $price,
-                'weight' => 1, 
+                'weight' => 1,
                 'options' => [
                     'image' => $product->product_thumbnail,
                     'slug' => $product->slug,
@@ -115,10 +115,10 @@ class CartController extends Controller
         }else{
             Cart::add([
                 'id' => $id,
-                'name' => $request->product_name, 
+                'name' => $request->product_name,
                 'qty' => $request->quantity,
                 'price' => $price,
-                'weight' => 1, 
+                'weight' => 1,
                 'options' => [
                     'image' => $product->product_thumbnail,
                     'slug' => $product->slug,
@@ -177,9 +177,9 @@ class CartController extends Controller
         $row = Cart::get($rowId);
         //dd($row);
         $id = $row->id;
-        
+
         $product = Product::findOrFail($id);
-        
+
         if(!$product->is_varient){
             $prev_cart_qty = 0;
             $carts = Cart::content();
@@ -188,12 +188,12 @@ class CartController extends Controller
                     $prev_cart_qty += $cart->qty;
                 }
             }
-            
+
             $qty = $prev_cart_qty + $row->qty;
-            
-            if($qty > $product->stock_qty){
-                return response()->json(['error'=> 'Not enough stock']);
-            }
+
+            // if($qty > $product->stock_qty){
+            //     return response()->json(['error'=> 'Not enough stock']);
+            // }
         }else{
             $prev_cart_qty = 0;
             $carts = Cart::content();
@@ -204,20 +204,20 @@ class CartController extends Controller
                     }
                 }
             }
-            
+
             $qty = $prev_cart_qty + $row->qty;
             $stock = ProductStock::where('product_id', $id)->where('varient', $row->options->varient)->first();
-           
-            if($qty > $stock->qty){
-                return response()->json(['error'=> 'Not enough stock']);
-            }
+
+            // if($qty > $stock->qty){
+            //     return response()->json(['error'=> 'Not enough stock']);
+            // }
         }
-        
+
         Cart::update($rowId, $row->qty + 1);
- 
+
         return response()->json(['success'=> 'Successfully Added on Your Cart']);
 
-    } // end mehtod 
+    } // end mehtod
 
     /* ================= End CartIncrement Method =================== */
 

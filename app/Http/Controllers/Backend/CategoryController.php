@@ -23,7 +23,7 @@ class CategoryController extends Controller
         $categories = DB::table('categories as c')
             ->leftJoin('categories as sc', 'c.parent_id', '=', 'sc.id')
             ->select('c.*', 'sc.id as parent_id', 'sc.name_en as parent_name')
-            ->orderBy('c.id', 'ASC') 
+            ->orderBy('c.id', 'ASC')
             ->latest()
             ->get();
 
@@ -50,8 +50,8 @@ class CategoryController extends Controller
         if($request->hasfile('image')){
             $image = $request->file('image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(300,300)->save('upload/category/'.$name_gen);
-            $save_url = 'upload/category/'.$name_gen; 
+            Image::make($image)->resize(600,450)->save('upload/category/'.$name_gen);
+            $save_url = 'upload/category/'.$name_gen;
         }else{
             $save_url = '';
         }
@@ -134,7 +134,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
         $this->validate($request,[
             'name_en' => 'required',
         ]);
@@ -147,11 +147,11 @@ class CategoryController extends Controller
                     unlink($category->image);
                 }
             } catch (Exception $e) {
-                
+
             }
             $image = $request->image;
             $category_save = time().$image->getClientOriginalName();
-            $image->move('upload/category/',$category_save);
+            Image::make($image)->resize(600,450)->save('upload/category/'.$category_save);
             $category->image = 'upload/category/'.$category_save;
         }else{
             $category_save = '';
@@ -222,25 +222,23 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        if(!demo_mode()){
-            $category = Category::findOrFail($id);
-    
-            CategoryUtility::delete_category($id);
-            
-            Session::flash('success','Category has been deleted successfully');
-            return redirect()->route('category.index');
-        }else{
-            $notification = array(
-                'message' => 'Category can not be deleted on demo mode.',
-                'alert-type' => 'error'
-            );
-            return redirect()->back()->with($notification);
+        $category = Category::findOrFail($id);
+
+        try {
+            if(file_exists($category->image)){
+                unlink($category->image);
+            }
+        } catch (Exception $e) {
+
         }
+
+        $category->delete();
+        $notification = array(
+            'message' => 'Category Deleted Successfully.',
+            'alert-type' => 'error'
+        );
+        return redirect()->back()->with($notification);
     }
-
-
-
-
 
     /*=================== Start CategoryUpdate Methoed ===================*/
     public function CategoryUpdate(Request $request, $id){
@@ -301,12 +299,12 @@ class CategoryController extends Controller
     	$category->delete();
 
     	$notification = array(
-            'message' => 'Category Deleted Successfully.', 
+            'message' => 'Category Deleted Successfully.',
             'alert-type' => 'error'
         );
 		return redirect()->back()->with($notification);
 
-    } // end method 
+    } // end method
 
     /*=================== Start Active/Inactive Methoed ===================*/
     public function active($id){

@@ -16,9 +16,9 @@
                     <thead>
                         <tr>
                             <th scope="col">Sl</th>
-                            <th scope="col">Cover Photo</th> 
-                            <th scope="col">Name (English)</th> 
-                            <th scope="col">Name (Bangla)</th> 
+                            <th scope="col">Cover Photo</th>
+                            <th scope="col">Name (English)</th>
+                            <th scope="col">Name (Bangla)</th>
                             <th scope="col">Status</th>
                             @if(Auth::guard('admin')->user()->role != '2')
                                 <th scope="col" class="text-end">Action</th>
@@ -49,7 +49,6 @@
                             </td>
                             @if(Auth::guard('admin')->user()->role != '2')
                                 <td class="text-end">
-                                    <a href="#" class="btn btn-md rounded font-sm">Detail</a>
                                     <div class="dropdown">
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
                                         <div class="dropdown-menu">

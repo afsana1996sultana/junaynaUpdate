@@ -15,9 +15,9 @@
                     <thead>
                         <tr>
                             <th scope="col">Sl</th>
-                            <th scope="col">Name</th> 
-                            <th scope="col">Phone</th> 
-                            <th scope="col">Email</th> 
+                            <th scope="col">Name</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Address</th>
                             <th scope="col">Status</th>
                             @if(Auth::guard('admin')->user()->role != '2')
@@ -44,17 +44,8 @@
                             </td>
                             @if(Auth::guard('admin')->user()->role != '2')
                                 <td class="text-end">
-                                    {{-- <a href="#" class="btn btn-md rounded font-sm">Detail</a> --}}
                                     <a class="btn btn-md rounded font-sm" href="{{ route('supplier.edit',$item->id) }}">Edit info</a>
                                     <a class="btn btn-md rounded font-sm bg-danger" href="{{ route('supplier.destroy',$item->id) }}" id="delete">Delete</a>
-                                    {{-- <div class="dropdown">
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('supplier.edit',$item->id) }}">Edit info</a>
-                                            <a class="dropdown-item text-danger" href="{{ route('supplier.destroy',$item->id) }}" id="delete">Delete</a>
-                                        </div>
-                                    </div> --}}
-                                    <!-- dropdown //end -->
                                 </td>
                             @endif
                         </tr>

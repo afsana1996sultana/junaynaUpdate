@@ -28,7 +28,8 @@ class CreateOrderDetailsTable extends Migration
             $table->string('shipping_type')->nullable();
             $table->integer('pickup_point_id')->nullable();
             $table->string('product_referral_code')->nullable();
-            $table->string('delivery_status')->default('pending');
+            $table->string('delivery_status')->default('Pending');
+            $table->string('note_status')->default('pending');
             $table->timestamps();
         });
     }

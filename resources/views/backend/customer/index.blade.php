@@ -15,9 +15,9 @@
                     <thead>
                         <tr>
                             <th scope="col">Sl</th>
-                            <th scope="col">Name</th> 
-                            <th scope="col">Phone</th> 
-                            <th scope="col">Email</th> 
+                            <th scope="col">Name</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Address</th>
                             <th scope="col" class="text-end">Action</th>
                         </tr>
@@ -31,7 +31,6 @@
                             <td> {{ $customer->email ?? 'No Email' }} </td>
                             <td> {{ $customer->address ?? 'No Address' }} </td>
                             <td class="text-end">
-                                <a href="#" class="btn btn-md rounded font-sm">Detail</a>
                                 <!-- dropdown //end -->
                             </td>
                         </tr>

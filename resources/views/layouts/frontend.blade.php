@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:image" content="{{ asset(get_setting('site_favicon')->value ?? 'upload/no_image.jpg') }}" />
-    
+
     @yield('meta')
     <!-- Favicon -->
     @php
@@ -20,7 +20,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('upload/no_image.jpg') }}"
             alt="{{ env('APP_NAME') }}">
     @endif
-    
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=5.3') }}">
@@ -40,41 +40,70 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
     <script src="{{ asset('frontend/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
-
     @stack('css')
-
-    @if (get_setting('pixel_status')->value == 1)
-        <!-- Meta Pixel Code -->
-        <script>
-            ! function(f, b, e, v, n, t, s) {
-                if (f.fbq) return;
-                n = f.fbq = function() {
-                    n.callMethod ?
-                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-                };
-                if (!f._fbq) f._fbq = n;
-                n.push = n;
-                n.loaded = !0;
-                n.version = '{{ get_setting('pixel_version')->value ?? ' ' }}';
-                n.queue = [];
-                t = b.createElement(e);
-                t.async = !0;
-                t.src = v;
-                s = b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t, s)
-            }(window, document, 'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '{{ get_setting('pixel_id')->value ?? ' ' }}');
-            fbq('track', 'PageView');
-        </script>
-        <noscript>
-            <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{ get_setting('pixel_id')->value ?? ' ' }}&ev=PageView&noscript=1" />
-        </noscript>
-        <!-- End Meta Pixel Code -->
-    @endif
     <style>
         .subscribe-area::after {
             background-image: url("{{ asset('frontend/assets/imgs/subscribe.svg') }}");
+        }
+
+        .messenger-btn {
+            display: inline-block;
+            position:relative;
+        }
+
+        .messenger-links {
+        	transform: scale(0);
+        	transform-origin: 100% 50%;
+        	-webkit-transition: all 0.3s;
+        	-o-transition: all 0.3s;
+        	overflow: hidden;
+        	transition: all 0.3s;
+        	z-index: 9999999999999999999999;
+        	position: absolute;
+        	bottom:120%;
+        }
+
+        .messenger-links.show {
+            transform: scale(1);
+        }
+
+        .messenger-links a {
+            /*width: 40px;*/
+            margin-top:5px;
+            display: block;
+            margin-left: 4px;
+        }
+
+        .messenger-btn i {
+            background: #1977f3;
+            display: inline-block;
+            color: #fff;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 100%;
+        }
+          #messenger-links a i {
+            font-size: 25px;
+            border: 1px solid #ddd;
+            padding: 7px;
+            width: 45px;
+            border-radius: 5px;
+            background: #fff;
+            text-align:center;
+        }
+        .messenger-links a .fa-facebook-messenger {
+            color: #6631B3;
+        }
+
+        .messenger-links a .fa-whatsapp {
+            color: #25D366;
+        }
+
+       .messenger {
+        	display: inline-block;
+        	position: fixed;
+        	right: 30px;
+        	bottom: 70px;
         }
     </style>
 </head>
@@ -95,6 +124,17 @@
     <!-- Footer -->
     @include('frontend.body.footer')
     <!--/ Footer -->
+
+    <div class="messenger">
+        <div title="" class="messenger-btn"><i class="fa-brands fa-rocketchat"></i></div>
+
+        <div id="messenger-links" class="messenger-links">
+            <a title="Whatsapp"  href="https://api.whatsapp.com/send/?phone=8801776633155&text&type=phone_number&app_absent=0" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
+            <a title="Mobile" href="https://m.me/179071828620201/" target="_blank"><i class="fa-brands fa-facebook-messenger"></i></a>
+        </div>
+    </div>
+
     <!-- Vendor JS-->
     <script src="{{ asset('frontend/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
@@ -181,52 +221,6 @@
             ]
         });
     </script>
-    
-    
-    <script type="text/javascript">
-        // $('.announcement-active').slick({
-        //     dots: false,
-        //     infinite: true,
-        //     speed: 3000,
-        //     autoplay: true,
-        //     centerPadding: '60px',
-        //     arrows: true,
-        //     prevArrow: '<button type="button" class="slick-prev"><i class="fa fa-angle-left"></i></button>',
-        //     nextArrow: '<button type="button" class="slick-next"><i class="fa fa-chevron-right"></i></button>',
-        //     slidesToShow: 4,
-        //     slidesToScroll: 2,
-        //     responsive: [{
-        //             breakpoint: 1200,
-        //             settings: {
-        //                 slidesToShow: 3,
-        //                 slidesToScroll: 2,
-        //             }
-        //         },
-        //         {
-        //             breakpoint: 992,
-        //             settings: {
-        //                 slidesToShow: 2,
-        //                 slidesToScroll: 2
-        //             }
-        //         },
-        //         {
-        //             breakpoint: 600,
-        //             settings: {
-        //                 slidesToShow: 2,
-        //                 slidesToScroll: 2
-        //             }
-        //         },
-        //         {
-        //             breakpoint: 480,
-        //             settings: {
-        //                 slidesToShow: 1,
-        //                 slidesToScroll: 1
-        //             }
-        //         }
-        //     ]
-        // });
-    </script>
-
     <!-- sweetalert js-->
     <script type="text/javascript">
         $(function() {
@@ -425,13 +419,14 @@
                 url: '/product/view/modal/' + id,
                 dataType: 'json',
                 success: function(data) {
+                    var sanitizedProductDetail = data.product.short_description_en.replace(/<\/?p>/g, '');
                     $('#product_name').text(data.product.name_en);
                     $('#pname').val(data.product.name_en);
                     $('#product_id').val(id);
                     $('#pcode').text(data.product.product_code);
                     $('#ptag').text(data.product.tags);
                     $('#pcategory').text(data.product.category.name_en);
-                    $('#pdetail').text(data.product.short_description_en);
+                    $('#pdetail').text(sanitizedProductDetail);
                     $('#pbrand').text(data.product.brand.name_en);
                     $('#pimage').attr('src', '/' + data.product.product_thumbnail);
                     $('#stock_qty').val(data.product.stock_qty);
@@ -552,7 +547,7 @@
             var total_attributes = parseInt($('#total_attributes').val()) || 0;
             var checkNotSelected = 0;
             var checkAlertHtml = '';
-        
+
             // Check if any attributes are not selected
             for (var i = 1; i <= total_attributes; i++) {
                 var checkSelected = parseInt($('#attribute_check_' + i).val());
@@ -560,7 +555,7 @@
                     checkNotSelected = 1;
                     checkAlertHtml += `
                         <div class="attr-detail mb-5">
-                            <div class="alert alert-danger d-flex align-items-center" role="alert"> 
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
                                 <div>
                                     <i class="fa fa-warning mr-10"></i> <span> Select ${$('#attribute_name_' + i).val()}</span>
                                 </div>
@@ -568,21 +563,21 @@
                         </div>`;
                 }
             }
-        
+
             // If attributes are not selected, display an error message
             if (checkNotSelected === 1) {
                 $('#qty_alert').html('');
                 $('#attribute_alert').html(checkAlertHtml);
                 return false;
             }
-        
+
             // Clear active selection on size filter
             $('.size-filter li').removeClass("active");
             // Extract necessary data from input fields
             var product_name = $('#pname').val();
             console.log(product_name);
             var id = $('#product_id').val();
-          
+
             var price = $('#product_price').val();
             var color = $('#color option:selected').val();
             var size = $('#size option:selected').val();
@@ -590,13 +585,13 @@
             var varient = $('#pvarient').val();
             var min_qty = parseInt($('#minimum_buy_qty').val());
             var p_qty = parseInt($('#stock_qty').val());
-        
+
             // Check if quantity is less than the minimum buy quantity
             if (quantity < min_qty) {
                 $('#attribute_alert').html('');
                 $('#qty_alert').html(`
                     <div class="attr-detail mb-5">
-                        <div class="alert alert-danger d-flex align-items-center" role="alert"> 
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
                             <div>
                                 <i class="fa fa-warning mr-10"></i> <span> Minimum quantity ${min_qty} required.</span>
                             </div>
@@ -604,12 +599,12 @@
                     </div>`);
                 return false;
             }
-        
+
             // Check if the selected quantity exceeds the available stock
             if (quantity > p_qty) {
                 $('#stock_alert').html(`
                     <div class="attr-detail mb-5">
-                        <div class="alert alert-danger d-flex align-items-center" role="alert"> 
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
                             <div>
                                 <i class="fa fa-warning mr-10"></i> <span> Not enough stock.</span>
                             </div>
@@ -617,11 +612,11 @@
                     </div>`);
                 return false;
             }
-        
+
             // Prepare options data for the AJAX request
             var options = $('#choice_form').serializeArray();
             var jsonString = JSON.stringify(options);
-        
+
             // Make an AJAX request to add the product to the cart
             $.ajax({
                 type: 'POST',
@@ -640,7 +635,7 @@
                     // Handle the response, update the mini cart, and show success/error messages
                     miniCart();
                     $('#closeModel').click();
-        
+
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -648,12 +643,12 @@
                         showConfirmButton: false,
                         timer: 1200,
                     });
-        
+
                     Toast.fire({
                         type: data.success ? 'success' : 'error',
                         title: data.success ? data.success : data.error,
                     });
-        
+
                     var buyNowCheck = $('#buyNowCheck').val();
                     if (buyNowCheck === '1') {
                         $('#buyNowCheck').val('0');
@@ -1095,5 +1090,24 @@
         }
     </script>
     @stack('footer-script')
+
+    <script>
+        var menuBtn = $('.messenger-btn'),
+            menu = $('.messenger-links');
+        menuBtn.on('click', function () {
+            if (menu.hasClass('show')) {
+                menu.removeClass('show');
+            } else {
+                menu.addClass('show');
+            }
+        });
+        $(document).mouseup(function (e) {
+            var div = $('.messenger');
+            if (!div.is(e.target)
+                && div.has(e.target).length === 0) {
+                $('.messenger-links').removeClass('show');
+            }
+        });
+    </script>
 </body>
 </html>

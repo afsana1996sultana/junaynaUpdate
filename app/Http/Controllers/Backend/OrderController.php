@@ -26,78 +26,49 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $date = $request->date;
-        $delivery_status = null;
-        $payment_status = null;
+        //dd('Real time date', $request);
+        $delivery_status = $request->input('delivery_status');
+        $payment_status = $request->input('payment_status');
+        $note_status = $request->input('note_status');
+        $date_range = $request->input('date_range');
 
-        //dd($request);
+        // Start the query
+        $orders = Order::query();
 
-        //$orders = Order::orderBy('id', 'desc');
-    
-        // if ($request->delivery_status != null) {
-        //     $orders = $orders->where('delivery_status', $request->delivery_status);
-        //     // dd($orders);
-        //     $delivery_status = $request->delivery_status;
-        // }
+        // Filter by delivery_status
+        if (!empty($delivery_status)) {
+            $orders->where('delivery_status', $delivery_status);
+        }
 
-        // if ($request->payment_status != null) {
-        //     $orders = $orders->where('payment_status', $request->payment_status);
-        //     $payment_status = $request->payment_status;
-        // }
+        // Filter by payment_status
+        if (!empty($payment_status)) {
+            $orders->where('payment_status', $payment_status);
+        }
 
-        // if ($date != null) {
-        //     $orders = $orders->where('created_at', '>=', date('Y-m-d', strtotime(explode(" - ", $date)[0])))->where('created_at', '<=', date('Y-m-d', strtotime(explode(" - ", $date)[1])));
-        // }
+        // Filter by note_status
+        if (!empty($note_status)) {
+            $orders->where('note_status', $note_status);
+        }
 
-        if($request->delivery_status != null && $request->payment_status != null && $date != null){
-
-            $orders = Order::where('created_at', '>=', date('Y-m-d', strtotime(explode(" - ", $date)[0])))->where('created_at', '<=', date('Y-m-d', strtotime(explode(" - ", $date)[1])))->where('delivery_status', $request->delivery_status)->where('payment_status', $request->payment_status);
-
-            $delivery_status = $request->delivery_status;
-            $payment_status = $request->payment_status;
-
-        }else if($request->delivery_status == null && $request->payment_status == null && $date == null){
-            $orders = Order::orderBy('id', 'desc');
-        }else{
-            if($request->delivery_status == null){
-                if($request->payment_status != null && $date != null){
-                    $orders = Order::where('created_at', '>=', date('Y-m-d', strtotime(explode(" - ", $date)[0])))->where('created_at', '<=', date('Y-m-d', strtotime(explode(" - ", $date)[1])))->where('payment_status', $request->payment_status);
-                    $payment_status = $request->payment_status;
-                }else if($request->payment_status == null && $date != null){
-                    $orders = Order::where('created_at', '>=', date('Y-m-d', strtotime(explode(" - ", $date)[0])))->where('created_at', '<=', date('Y-m-d', strtotime(explode(" - ", $date)[1])));
-                }else{
-                    $orders = Order::where('payment_status', $request->payment_status);
-                    $payment_status = $request->payment_status;
-                }
-            }else if($request->payment_status == null){
-                if($request->delivery_status != null && $date != null){
-                    $orders = Order::where('created_at', '>=', date('Y-m-d', strtotime(explode(" - ", $date)[0])))->where('created_at', '<=', date('Y-m-d', strtotime(explode(" - ", $date)[1])))->where('delivery_status', $request->delivery_status);
-                    $delivery_status = $request->delivery_status;
-                }else if($request->delivery_status == null && $date != null){
-                    $orders = Order::where('created_at', '>=', date('Y-m-d', strtotime(explode(" - ", $date)[0])))->where('created_at', '<=', date('Y-m-d', strtotime(explode(" - ", $date)[1])));
-                }else{
-                    $orders = Order::where('delivery_status', $request->delivery_status);
-                    $delivery_status = $request->delivery_status;
-                }
-            }else if($request->date == null){
-                if($request->delivery_status != null && $request->payment_status != null){
-                    $orders = Order::where('delivery_status', $request->delivery_status)->where('payment_status', $request->payment_status);
-                    $delivery_status = $request->delivery_status;
-                    $payment_status = $request->payment_status;
-                }else if($request->delivery_status == null && $request->payment_status != null){
-                    $orders = Order::where('payment_status', $request->payment_status);
-                    $payment_status = $request->payment_status;
-                }else{
-                    $orders = Order::where('delivery_status', $request->delivery_status);
-                    $delivery_status = $request->delivery_status;
-                }
+        // Filter by date and hour range
+        if (!empty($date_range)) {
+            try {
+                // Split the date range into start and end times
+                $dates = explode(' - ', $date_range);
+                // Parse the start and end dates
+                $start_date = \Carbon\Carbon::createFromFormat('Y-m-d h:i A', trim($dates[0]));
+                $end_date = \Carbon\Carbon::createFromFormat('Y-m-d h:i A', trim($dates[1]));
+                $orders = $orders->whereBetween('created_at', [$start_date, $end_date]);
+            } catch (\Exception $e) {
+                //dd('Error parsing date range:', $e->getMessage());
             }
         }
 
-        //dd($request);
-
+        // Fetch the filtered orders with pagination
         $orders = $orders->paginate(15);
-        return view('backend.sales.all_orders.index', compact('orders', 'delivery_status', 'date','payment_status'));
+
+        // Return the view with filtered data
+        return view('backend.sales.all_orders.index', compact('orders', 'delivery_status', 'payment_status', 'note_status', 'date_range'));
     }
 
     /**
@@ -131,7 +102,7 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
         $shippings = Shipping::where('status', 1)->get();
-        
+
         return view('backend.sales.all_orders.show', compact('order', 'shippings'));
     }
 
@@ -154,7 +125,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
         $this->validate($request,[
             'payment_method' => 'required',
         ]);
@@ -193,7 +164,7 @@ class OrderController extends Controller
         $order->delete();
 
         $notification = array(
-            'message' => 'Order Deleted Successfully.', 
+            'message' => 'Order Deleted Successfully.',
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
@@ -204,21 +175,16 @@ class OrderController extends Controller
     public function update_payment_status(Request $request)
     {
         $order = Order::findOrFail($request->order_id);
-
         $order->payment_status = $request->status;
         $order->save();
 
         $order_detail = OrderDetail::where('order_id', $order->id)->get();
         foreach($order_detail as $item){
-            // dd($item);
             $item->payment_status = $request->status;
             $item->save();
         }
-
-        // dd($order);
-
         $orderstatus = OrderStatus::create([
-            'order_id' => $order->id, 
+            'order_id' => $order->id,
             'title' => 'Payment Status: '.$request->status,
             'comments' => '',
             'created_at' => Carbon::now(),
@@ -241,7 +207,7 @@ class OrderController extends Controller
         }
 
         $orderstatus = OrderStatus::create([
-            'order_id' => $order->id, 
+            'order_id' => $order->id,
             'title' => 'Delevery Status: '.$request->status,
             'comments' => '',
             'created_at' => Carbon::now(),
@@ -252,6 +218,21 @@ class OrderController extends Controller
     }
 
 
+    /*================= Start update_note_status Methoed ================*/
+    public function update_note_status(Request $request)
+    {
+        $order = Order::findOrFail($request->order_id);
+        $order->note_status = $request->status;
+        $order->save();
+
+        $order_detail = OrderDetail::where('order_id', $order->id)->get();
+        foreach($order_detail as $item){
+            $item->note_status = $request->status;
+            $item->save();
+        }
+        return response()->json(['success'=> 'Note status has been updated']);
+
+    }
 
     /*================= Start admin_user_update Methoed ================*/
     public function admin_user_update(Request $request, $id)
@@ -285,32 +266,16 @@ class OrderController extends Controller
     /* ============= End getupazilla Method ============== */
 
     /* ============= Start invoice_download Method ============== */
-    // public function invoice_download($id){
-    //     $order = Order::findOrFail($id);
-
-    //     $pdf = PDF::loadView('backend.invoices.invoice',compact('order'))->setPaper('a4')->setOptions([
-    //             'tempDir' => public_path(),
-    //             'chroot' => public_path(),
-    //     ]);
-    //     return $pdf->download('invoice.pdf');
-    // } // end method
-
-    /* ============= Start invoice_download Method ============== */
     public function invoice_download($id){
         $order = Order::findOrFail($id);
-        //dd(app('url')->asset('upload/abc.png'));
         $pdf = PDF::loadView('backend.invoices.invoice',compact('order'))->setPaper('a4');
         return $pdf->download('invoice.pdf');
     } // end method
+
     /* ============= End invoice_download Method ============== */
      public function invoice_print_download($id){
-        //dd($id);
         $order = Order::findOrFail($id);
-        //dd(app('url')->asset('upload/abc.png'));
-        // $pdf = PDF::loadView('backend.invoices.invoice',compact('order'))->setPaper('a4');
-        // dd($pdf);
         return view('backend.invoices.invoice_print', compact('order'));
-        // return $pdf->loadView('invoice.pdf');
     } // end method
 
 }

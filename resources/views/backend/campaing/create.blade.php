@@ -7,7 +7,7 @@
         <div class="">
             <a href="{{ route('campaing.index') }}" class="btn btn-primary"><i class="material-icons md-plus"></i> Campaign List</a>
         </div>
-    </div> 
+    </div>
     <div class="row justify-content-center">
     	<div class="col-sm-8">
     		<div class="card">
@@ -59,7 +59,7 @@
 		                        </div>
 
 		                        <div class="mb-4">
-                                    <div class="demo-checkbox">             
+                                    <div class="demo-checkbox">
                                         <input type="checkbox" id="md_checkbox_29" class="form-check-input cursor" name="is_featured" value="1">
                                         <label for="md_checkbox_29" class="form-check-label cursor" style="font-weight: bold; padding-left: 8px;">Is Features</label>
                                     </div>
@@ -72,14 +72,6 @@
 		                            </div>
                                 </div>
 
-		                        <!-- <div class="mb-4">
-		                            <div class="custom-control custom-switch">
-		                                <input type="checkbox" class="form-check-input" name="flash_sell" id="flash" value="1">
-		                                <label class="form-check-label" for="flash">flash Sell</label>
-		                            </div>
-                                </div> -->
-                        		<!-- <div class="" id="flas_end" ></div> -->
-		                        
 		                        <div class="row mb-4 justify-content-sm-end">
 									<div class="col-lg-3 col-md-4 col-sm-5 col-6">
 										<input type="submit" class="btn btn-primary" value="Submit">
@@ -107,7 +99,7 @@
             if(product_ids.length > 0){
                 $.post('{{ route('flash_deals.product_discount') }}', {_token:'{{ csrf_token() }}', product_ids:product_ids}, function(data){
                     $('#discount_table').html(data);
-                    
+
                 });
             }
             else{
@@ -119,18 +111,14 @@
 
 <script>
 	$(function() {
-
-	$('input[name="date_range"]').daterangepicker({
-	    timePicker: true,
-	    startDate: moment().startOf('hour'),
-	    // endDate: moment().startOf('hour').add(32, 'hour'),
-	    endDate: moment().startOf('hour'),
-	    locale: {
-	      format: 'DD-MM-Y HH:mm:ss'
-	    }
-	});
-
-	 
+        $('input[name="date_range"]').daterangepicker({
+            timePicker: true,
+            startDate: moment().startOf('hour'),
+            endDate: moment().startOf('hour'),
+            locale: {
+            format: 'DD-MM-Y HH:mm:ss'
+            }
+        });
 	});
 </script>
 
@@ -143,6 +131,6 @@
 			};
 			reader.readAsDataURL(input.files[0]);
 		}
-	}	
+	}
 </script>
 @endpush

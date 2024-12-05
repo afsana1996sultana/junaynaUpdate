@@ -90,11 +90,11 @@ class BrandController extends Controller
                     unlink($brand->brand_image);
                 }
             } catch (Exception $e) {
-                
+
             }
             $brand_image = $request->brand_image;
             $brand_save = time().$brand_image->getClientOriginalName();
-            $brand_image->move('upload/brand/',$brand_save);
+            Image::make($brand_image)->resize(160,160)->save('upload/brand/'.$brand_save);
             $brand->brand_image = 'upload/brand/'.$brand_save;
         }else{
             $brand_save = '';
@@ -120,7 +120,7 @@ class BrandController extends Controller
         }
         $brand->status = $request->status;
         $brand->created_by = Auth::guard('admin')->user()->id;
-        
+
         $brand->save();
 
         $notification = array(
@@ -138,11 +138,10 @@ class BrandController extends Controller
                 unlink($brand->brand_image);
             }
         } catch (Exception $e) {
-            
+
         }
 
     	$brand->delete();
-
         $notification = array(
             'message' => 'Brand Deleted Successfully.',
             'alert-type' => 'error'
