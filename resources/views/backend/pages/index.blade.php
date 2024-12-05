@@ -15,9 +15,9 @@
                     <thead>
                         <tr>
                             <th scope="col">Sl</th>
-                            <th scope="col">Name</th> 
-                            <th scope="col">Title</th> 
-                            <th scope="col">Description</th> 
+                            <th scope="col">Name</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
                             <th scope="col">Position</th>
                             <th scope="col">Status</th>
                             <th scope="col" class="text-end">Action</th>
@@ -29,41 +29,9 @@
                             <td> {{ $key+1}} </td>
                             <td class="p_name"> {{ $page->name_en ?? 'NULL' }} </td>
                             <td> {{ $page->title ?? 'NULL' }} </td>
-                            <td> 
+                            <td>
                                 <?php $des =  strip_tags(html_entity_decode($page->description_en))?>
                                 {{ Str::limit($des, $limit = 40, $end = '. . .') }}
-
-                                {{-- <button type="button" class="btn btn-md rounded font-sm viweBtn">
-                                <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>Details
-                                </button> --}}
-
-                                <!-- Show Modal -->
-                                {{-- <button type="button" class="btn btn-md rounded font-sm" style="display: block;" data-bs-toggle="modal" data-bs-target="#viewModal{{ $page->id }}">
-                                <i class="fa fa-hand-pointer-o" aria-hidden="true"></i> Details
-                                </button>
-                                <!-- Scrollable modal -->
-                                <div class="modal" id="viewModal{{ $page->id }}" tabindex="-1" role="dialog" aria-bs-labelledby="myModalLabel" aria-bs-hidden="true">
-                                    <div class="modal-dialog modal-dialog-scrollable text-left">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title text-center" id="myModalLabel">{{ $page->title }}</h4>
-                                          <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
-                                        </div>
-                                        <div class="modal-body">
-                                          <p>
-                                            <span id="myModal-title"></span>
-                                          <p>
-                                          <p>{!! $page->description_en !!}</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!--  Modal body end here  --> --}}
-
-
                             </td>
                             <td> {{ $page->position ?? 'NULL' }} </td>
                             <td>
@@ -76,7 +44,6 @@
                                 @endif
                             </td>
                             <td class="text-end">
-                                <a href="#" class="btn btn-md rounded font-sm">Detail</a>
                                 <div class="dropdown">
                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
                                     <div class="dropdown-menu">
@@ -88,9 +55,9 @@
                                 </div>
                                 <!-- dropdown //end -->
                             </td>
-                        </tr> 
+                        </tr>
                         @endforeach
-                        
+
                     </tbody>
                 </table>
             </div>

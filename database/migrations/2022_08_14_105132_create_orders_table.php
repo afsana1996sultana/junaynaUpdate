@@ -34,7 +34,8 @@ class CreateOrdersTable extends Migration
             $table->string('payment_status_viewed')->default(1);
             $table->string('commission_calculated')->default(0);
             $table->text('comment')->nullable();
-            $table->string('delivery_status')->default('pending');
+            $table->string('delivery_status')->default('Pending');
+            $table->string('note_status')->default('pending');
             $table->string('tracking_code', 100)->nullable();
             $table->string('confirmed_date', 30)->nullable();
             $table->string('processing_date', 30)->nullable();

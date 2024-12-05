@@ -16,10 +16,10 @@
                     <thead>
                         <tr>
                             <th scope="col">Sl</th>
-                            <th scope="col">Name</th> 
-                            <th scope="col">Type</th> 
-                            <th scope="col">Shipping Charge</th> 
-                            <th scope="col">Shipping Time</th> 
+                            <th scope="col">Name</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Shipping Charge</th>
+                            <th scope="col">Shipping Time</th>
                             <th scope="col">Status</th>
                             <th scope="col" class="text-end">Action</th>
                         </tr>
@@ -28,7 +28,7 @@
                         @foreach($shippings as $key => $shipping)
                         <tr>
                             <td> {{ $key+1}} </td>
-                           
+
                             <td> {{ $shipping->name ?? ' ' }} </td>
                             <td>
                                 @if($shipping->type == 1)
@@ -49,7 +49,6 @@
                                 @endif
                             </td>
                             <td class="text-end">
-                                <a href="#" class="btn btn-md rounded font-sm">Detail</a>
                                 <div class="dropdown">
                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
                                     <div class="dropdown-menu">

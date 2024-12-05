@@ -16,9 +16,9 @@
                         <tr>
                             <th scope="col">Sl</th>
                             <th scope="col">Image</th>
-                            <th scope="col">Name (English)</th> 
-                            <th scope="col">Name (Bangla)</th> 
-                            <th scope="col">Type</th> 
+                            <th scope="col">Name (English)</th>
+                            <th scope="col">Name (Bangla)</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Parent</th>
                             <th scope="col">Status</th>
                             <th scope="col">Featured</th>
@@ -38,8 +38,8 @@
                                     </div>
                                 </a>
                             </td>
-	                        <td> {{ $category->name_en ?? '' }} </td> 
-	                        <td> {{ $category->name_bn ?? '' }} </td> 
+	                        <td> {{ $category->name_en ?? '' }} </td>
+	                        <td> {{ $category->name_bn ?? '' }} </td>
 	                        <td>
                              @if($category->type==1)
                                 Parent Category
@@ -48,8 +48,8 @@
                              @elseif($category->type==3)
                                 Sub Sub Category
                              @endif
-                            </td> 
-	                        <td> {{ $category->parent_name ?? '-' }} </td> 
+                            </td>
+	                        <td> {{ $category->parent_name ?? '-' }} </td>
                             <td>
                                 @if($category->status == 1)
                                   <a @if(Auth::guard('admin')->user()->role != '2') href="{{ route('category.in_active',['id'=>$category->id]) }}" @endif>
@@ -70,18 +70,8 @@
                             </td>
                             @if(Auth::guard('admin')->user()->role != '2')
                                 <td class="text-end">
-                                    {{-- <a href="#" class="btn btn-md rounded font-sm">Detail</a> --}}
                                     <a class="btn btn-md rounded font-sm" href="{{ route('category.edit',$category->id) }}">Edit</a>
                                     <a class="btn btn-md rounded font-sm bg-danger" href="{{ route('category.delete',$category->id) }}" id="delete">Delete</a>
-
-                                    {{-- <div class="dropdown">
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('category.edit',$category->id) }}">Edit info</a>
-                                            <a class="dropdown-item text-danger" href="{{ route('category.delete',$category->id) }}" id="delete">Delete</a>
-                                        </div>
-                                    </div> --}}
-                                    <!-- dropdown //end -->
                                 </td>
                             @endif
                         </tr>

@@ -93,12 +93,6 @@ class ProductController extends Controller
      return view('backend.product.product_view');
 }
 
-
-
-
-
-
-
     // end method
 
     /*=================== Start ProductAdd Methoed ===================*/

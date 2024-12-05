@@ -20,18 +20,30 @@
         <header class="card-header">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-4 mb-lg-0 mb-15">
-                    <span class="text-white"> <i class="material-icons md-calendar_today"></i> <b>{{ $order->created_at?? ''}}</b> </span> <br />
+                    <span class="text-white">
+                        <i class="material-icons md-calendar_today"></i>
+                        <b>{{ $order->created_at ? $order->created_at->format('Y-m-d g:i:s A') : '' }}</b>
+                    </span> <br />
                     <small class="text-white">Order ID: {{ $order->invoice_no?? ''}}</small>
                 </div>
                 @php
                     $payment_status = $order->payment_status;
                     $delivery_status = $order->delivery_status;
+                    $note_status = $order->note_status;
                 @endphp
                 <div class="col-lg-8 col-md-8 ms-auto text-md-end">
+                    <select class="form-select d-inline-block mb-lg-0 mr-5 mw-200" id="update_note_status">
+                        <option value="Pending" @if ($note_status == 'Pending') selected @endif>Pending</option>
+                        <option value="Response" @if ($note_status == 'Response') selected @endif>Response</option>
+                        <option value="Not Response" @if ($note_status == 'Not Response') selected @endif>Not Response</option>
+                        <option value="Not Pickup call" @if ($note_status == 'Not Pickup call') selected @endif>Not Pickup call</option>
+                    </select>
+
                     <select class="form-select d-inline-block mb-lg-0 mr-5 mw-200" id="update_payment_status">
                         <option value="unpaid" @if ($payment_status == 'unpaid') selected @endif>Unpaid</option>
                         <option value="paid" @if ($payment_status == 'paid') selected @endif>Paid</option>
                     </select>
+
                     @if($delivery_status != 'delivered' && $delivery_status != 'cancelled')
                     <select class="form-select d-inline-block mb-lg-0 mr-5 mw-200" id="update_delivery_status">
                         <option value="pending" @if ($delivery_status == 'pending') selected @endif>Pending</option>
@@ -56,7 +68,7 @@
                         <span class="icon icon-sm rounded-circle bg-primary-light">
                             <i class="text-primary material-icons md-person"></i>
                         </span>
-                       
+
                         <div class="text">
                             <h6 class="mb-1">Customer</h6>
                             <p class="mb-1">
@@ -79,11 +91,11 @@
                             <p class="mb-1">
                                 Order Id: {{ $order->invoice_no?? ''}} </br>
                                 Shipping: {{$order->shipping_name ?? ''}} <br />
-                                Pay method: @if($order->payment_method == 'cod') 
-                                                Cash On Delivery 
-                                            @elseif($order->payment_method == 'bmp') 
+                                Pay method: @if($order->payment_method == 'cod')
+                                                Cash On Delivery
+                                            @elseif($order->payment_method == 'bmp')
                                                 Bkash Manual Payment
-                                            @else {{ $order->payment_method }} 
+                                            @else {{ $order->payment_method }}
                                             @endif
                                             <br />
                                 Status: @php
@@ -186,20 +198,20 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    
+
                                     <th>Payment Date</th>
                                     <td>{{ date_format($order->created_at,"Y/m/d")}}</td>
                                 </tr>
                                 <tr>
                                     <th>Sub Total</th>
                                     <td>{{ $order->sub_total }} <strong>Tk</strong></td>
-                                    
+
                                     <th>Total</th>
                                     <td>{{ $order->grand_total }} <strong>Tk</strong></td>
                                    <!--  <td>
-                                         
+
                                         <span class="badge badge-success">Delivered</span>
-                                            
+
                                     </td> -->
                                 </tr>
                             </tbody>
@@ -233,7 +245,7 @@
                                                     <span class="text-bold">
                                                         {{$orderDetail->product->name_en ?? ' '}}
                                                     </span>
-                                                    
+
                                                 @if($orderDetail->is_varient && count(json_decode($orderDetail->variation))>0)
                                                     @foreach(json_decode($orderDetail->variation) as $varient)
                                                         <br/><span>{{ $varient->attribute_name }} : {{ $varient->attribute_value }}</span>
@@ -289,22 +301,6 @@
                 </div>
                 <!-- col// -->
                 <div class="col-lg-1"></div>
-                {{-- <div class="col-lg-4">
-                    <div class="box shadow-sm bg-light">
-                        <h6 class="mb-15">Payment info</h6>
-                        <p>
-                            <img src="{{ asset('backend/assets/imgs/card-brands/2.png ') }}" class="border" height="20" /> Master Card ** ** 4768 <br />
-                            Business name: Grand Market LLC <br />
-                            Phone: 
-                        </p>
-                    </div>
-                    <div class="h-25 pt-4">
-                        <div class="mb-3">
-                            <label>Notes</label>
-                            <textarea class="form-control" name="notes" id="notes" placeholder="Type some note"></textarea>
-                        </div>
-                    </div>
-                </div> --}}
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">Update Order</button>
                 </div>
@@ -331,7 +327,7 @@
                     success:function(data) {
                         //console.log(data);
                         $('#ship_amount').text(data.shipping_charge);
-                        
+
                         let shipping_price = parseInt(data.shipping_charge);
                         let grand_total_price = parseInt($('#cartSubTotalShi').val());
                         grand_total_price += shipping_price;
@@ -351,11 +347,11 @@
         var status = $('#update_payment_status').val();
         $.post('{{ route('orders.update_payment_status') }}', {_token:'{{ @csrf_token() }}',order_id:order_id,status:status}, function(data){
             // console.log(data);
-            // Start Message 
+            // Start Message
             const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
-                  
+
                   showConfirmButton: false,
                   timer: 1000
                 })
@@ -372,7 +368,7 @@
                     title: data.error
                 })
             }
-            // End Message 
+            // End Message
         });
     });
 
@@ -386,11 +382,11 @@
             status:status
         }, function(data){
             // console.log(data);
-            // Start Message 
+            // Start Message
             const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
-                  
+
                   showConfirmButton: false,
                   timer: 1000
                 })
@@ -407,7 +403,41 @@
                     title: data.error
                 })
             }
-            // End Message 
+            // End Message
+        });
+    });
+
+
+    /* ============ Update Note Status =========== */
+    $('#update_note_status').on('change', function(){
+        var order_id = {{ $order->id }};
+        var status = $('#update_note_status').val();
+        $.post('{{ route('orders.update_note_status') }}', {
+            _token:'{{ @csrf_token() }}',
+            order_id:order_id,
+            status:status
+        }, function(data){
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+
+                  showConfirmButton: false,
+                  timer: 1000
+                })
+            if ($.isEmptyObject(data.error)) {
+                Toast.fire({
+                    type: 'success',
+                    icon: 'success',
+                    title: data.success
+                })
+            }else{
+                Toast.fire({
+                    type: 'error',
+                    icon: 'error',
+                    title: data.error
+                })
+            }
+            // End Message
         });
     });
 </script>
@@ -452,9 +482,6 @@
   $(document).ready(function() {
     $('select[name="district_id"]').on('change', function(){
         var district_id = $(this).val();
-        // const divArray = district.split("-");
-        // var division_id = divArray[0];
-        // $('#district_name').val(divArray[1]);
         if(district_id) {
             $.ajax({
                 url: "{{  url('/district-upazilla/ajax') }}/"+district_id,

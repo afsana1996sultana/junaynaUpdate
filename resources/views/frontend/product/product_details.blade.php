@@ -36,13 +36,13 @@
  <main class="main">
 	<div class="page-header breadcrumb-wrap">
 	    <div class="container">
-	    	
+
 	        <div class="breadcrumb">
 	            <a href="{{ route('product.category', $product->category->slug) }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>
-	            	@if(session()->get('language') == 'bangla') 
+	            	@if(session()->get('language') == 'bangla')
                         {{ $product->category->name_bn ?? 'No Category'}}
-                    @else 
-                        {{ $product->category->name_en ?? 'No Category'}} 
+                    @else
+                        {{ $product->category->name_en ?? 'No Category'}}
                     @endif
 	            </a>
 	        </div>
@@ -109,12 +109,12 @@
 			                            @endif
 
 			                            <input type="hidden" id="discount_amount" value="{{ $discount }}">
-			                             	
+
 	                                    <h2 class="title-detail">
-	                                    	@if(session()->get('language') == 'bangla') 
+	                                    	@if(session()->get('language') == 'bangla')
 			                                    {{ $product->name_bn }}
-			                                @else 
-			                                    {{ $product->name_en }} 
+			                                @else
+			                                    {{ $product->name_en }}
 			                                @endif
 	                                    </h2>
 	                                    <div class="clearfix product-price-cover">
@@ -175,7 +175,7 @@
 	                                        </div>
 
 											<div class="row" id="qty_alert" class="qtyAlert">
-											
+
 											</div>
 	                                    </div>
 	                                    <div class="detail-extralink mb-50">
@@ -190,7 +190,7 @@
 	                                        	<input type="hidden" id="stock_qty" class="stockQty" value="{{ $product->stock_qty }}">
 
 	                                        	<input type="hidden" id="pvarient" class="productVarient" value="">
-												
+
 												<input type="hidden" id="buyNowCheck" value="0">
 
 	                                            <button type="submit" class="button button-add-to-cart" onclick="addToCartDetails({{ $product->id }})"><i class="fi-rs-shoppi ng-cart"></i>Add to cart</button>
@@ -202,25 +202,25 @@
 	                                    <div class="font-xs">
 	                                        <ul class="mr-50 float-start">
 	                                            <li class="mb-5">Regular Price: <span class="text-brand">{{ $product->regular_price }}</span></li>
-	                                            <li class="mb-5">Stock: <span class="text-brand">{{ $product->stock_qty}}</span></li>
+	                                            {{-- <li class="mb-5">Stock: <span class="text-brand">{{ $product->stock_qty}}</span></li> --}}
 	                                            <li class="mb-5">Category:<span class="text-brand">
-	                                            	{{ $product->category->name_en ?? 'No Category'}} 
+	                                            	{{ $product->category->name_en ?? 'No Category'}}
 	                                            </span></li>
 	                                        </ul>
 	                                        <ul class="float-start">
 												@if($product->wholesell_price > 0)
 													<li class="mb-5">
-														Whole Sell Price: 
+														Whole Sell Price:
 														<a href="#">{{ $product->wholesell_price }}</a>
 													</li>
 													<li class="mb-5">
-														Whole Sell Quantity: 
+														Whole Sell Quantity:
 														<a href="#">{{ $product->wholesell_minimum_qty }}</a>
 													</li>
 												@endif
 	                                            <li class="mb-5">Brand:
 	                                            	<a href="#" rel="tag">
-	                                            		{{ $product->brand->name_en ?? 'No Brand'}} 
+	                                            		{{ $product->brand->name_en ?? 'No Brand'}}
 	                                            	</a>
 	                                            </li>
 	                                        </ul>
@@ -246,10 +246,10 @@
 	                                    <div class="tab-pane fade show active" id="Description">
 	                                        <div class="">
 	                                            <p>
-	                                            	@if(session()->get('language') == 'bangla') 
+	                                            	@if(session()->get('language') == 'bangla')
 														{!! $product->description_en ?? 'No Product Long Descrption' !!}
-								                    @else 
-														{!! $product->description_bn ?? 'No Product Logn Descrption' !!} 
+								                    @else
+														{!! $product->description_bn ?? 'No Product Logn Descrption' !!}
 								                    @endif
 	                                            </p>
 	                                        </div>
@@ -406,7 +406,7 @@
                                                             $price_after_discount = $product->regular_price - ($product->regular_price * $product->discount_price / 100);
                                                         }
                                                   	@endphp
-                                        
+
                                                     @if($product->discount_price > 0)
                                                     <div class="product-badges-right product-badges-position-right product-badges-mrg">
                                                             @if($product->discount_type == 1)
@@ -416,7 +416,7 @@
                                                             @endif
                                                     </div>
                                                     @endif
-			     
+
 	                                            </div>
 	                                            <div class="product-content-wrap">
                                                     <h2 class="mt-3" style="height: 40px;">
@@ -432,10 +432,10 @@
                                                     </h2>
                                                     <div class="product-category">
                                                         <a href="{{ route('product.category', $product->category->slug) }}">
-                                                            @if(session()->get('language') == 'bangla') 
+                                                            @if(session()->get('language') == 'bangla')
                                                                 {{ $product->category->name_bn }}
-                                                            @else 
-                                                                {{ $product->category->name_en }} 
+                                                            @else
+                                                                {{ $product->category->name_en }}
                                                             @endif
                                                         </a>
                                                     </div>
@@ -492,10 +492,10 @@
 	                                        </div>
 	                                    </div>
 	                                    @empty
-						                    @if(session()->get('language') == 'bangla') 
-						                        <h5 class="text-danger">এখানে কোন পণ্য খুঁজে পাওয়া যায়নি!</h5> 
-						                    @else 
-						                       <h5 class="text-danger">No products were found here!</h5> 
+						                    @if(session()->get('language') == 'bangla')
+						                        <h5 class="text-danger">এখানে কোন পণ্য খুঁজে পাওয়া যায়নি!</h5>
+						                    @else
+						                       <h5 class="text-danger">No products were found here!</h5>
 						                    @endif
 					                  	@endforelse
 	                                </div>
@@ -503,7 +503,7 @@
 	                        </div>
 	                    </div>
 	                </div>
-	                
+
 	            </div>
 	        </div>
 	    </div>
@@ -533,7 +533,7 @@
                 if(checkSelected == 0){
                     checkNotSelected = 1;
                     checkAlertHtml += `<div class="attr-detail mb-5">
-											<div class="alert alert-danger d-flex align-items-center" role="alert"> 
+											<div class="alert alert-danger d-flex align-items-center" role="alert">
 												<div>
 													<i class="fa fa-warning mr-10"></i> <span> Select `+$('#attribute_name_'+i).val()+`</span>
 												</div>
@@ -544,7 +544,7 @@
             if(checkNotSelected == 1){
                 $('.qtyAlert').html('');
                 $('.attributeAlert').html(`<div class="attr-detail mb-5">
-											<div class="alert alert-danger d-flex align-items-center" role="alert"> 
+											<div class="alert alert-danger d-flex align-items-center" role="alert">
 												<div>
 													<i class="fa fa-warning mr-10"></i> <span> Select all attributes</span>
 												</div>
@@ -561,11 +561,11 @@
             var quantity = parseInt($('.quantityValue').val());
             var varient = $('#pvarient').val();
             var min_qty = parseInt($('.minimumBuyQty').val()) || 0;
-            
+
             if(quantity < min_qty){
                 $('#attribute_alert').html('');
                 $('#qty_alert').html(`<div class="attr-detail mb-5">
-											<div class="alert alert-danger d-flex align-items-center" role="alert"> 
+											<div class="alert alert-danger d-flex align-items-center" role="alert">
 												<div>
 													<i class="fa fa-warning mr-10"></i> <span> Minimum quantity `+ min_qty +` required.</span>
 												</div>
@@ -573,13 +573,13 @@
 										</div>`);
                 return false;
             }
-            
+
             var p_qty = parseInt($('.stockQty').val());
             var options = $('#choice_form').serializeArray();
             var jsonString = JSON.stringify(options);
             //console.log(options);
 
-            // Start Message 
+            // Start Message
             const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
@@ -608,20 +608,20 @@
                             showConfirmButton: false,
                             timer: 1200
                         })
-                        
+
                         Toast.fire({
                           type:'success',
                           title: data.success
                         })
-                        
-                        
+
+
                         $('#qty').val(min_qty);
                         $('#pvarient').val('');
-                        
+
                         for(var i=1; i<=total_attributes; i++){
                             $('#attribute_check_'+i).val(0);
                         }
-                        
+
                     }else{
                         const Toast = Swal.mixin({
                             toast:true,
@@ -630,15 +630,15 @@
                             showConfirmButton: false,
                             timer: 1200
                         })
-                        
+
                         Toast.fire({
                           type:'error',
                           title: data.error
                         })
-                        
+
                         $('#qty').val(min_qty);
                         $('#pvarient').val('');
-                        
+
                         for(var i=1; i<=total_attributes; i++){
                             $('#attribute_check_'+i).val(0);
                         }

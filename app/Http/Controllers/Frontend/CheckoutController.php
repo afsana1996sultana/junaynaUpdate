@@ -103,34 +103,26 @@ class CheckoutController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         // dd($request);
         $data = $request->validate([
             'name' => 'required|max:191',
             'email' => 'nullable|email|max:191',
             'phone' => ['required','regex:/(\+){0,1}(88){0,1}01(3|4|5|6|7|8|9)(\d){8}/','min:11','max:15'],
-            'address' => 'required|max:10000',  
+            'address' => 'required|max:10000',
             'payment_option'=>'required',
             'comment' => 'nullable|max:2000',
             'shipping_id' => 'required',
         ]);
-        // dd(Cart::total()+$request->total_amount);
-        // dd($request->total_amount);
-        // if($request->payment_option == 'nagad'){
-        //     return redirect()->route('checkout.payment');
-        // }
-        $carts = Cart::content();
-        //dd($carts);
 
+        $carts = Cart::content();
         if($carts->isEmpty()){
             $notification = array(
-                'message' => 'Your cart is empty.', 
+                'message' => 'Your cart is empty.',
                 'alert-type' => 'error'
             );
             return redirect()->route('home')->with($notification);
         }
-
-        //dd($request->all());
 
         if(Auth::check()){
             $user_id = Auth::id();
@@ -139,8 +131,7 @@ class CheckoutController extends Controller
             $user_id = 1;
             $type = 2;
         }
-        
-        
+
         if($request->payment_option == 'cod'){
             if($request->payment_option == 'cod'){
                 $payment_status = 'unpaid';
@@ -158,23 +149,6 @@ class CheckoutController extends Controller
                 $invoice_no = Session::get('invoice_no');
             }
         }
-
-        // if($request->payment_option == 'cod'){
-        //     $payment_status = 'unpaid';
-        //     $invoice_no = date('YmdHis') . rand(10, 99);
-        // }else{
-        //     $payment_status = 'paid';
-        //     $invoice_no = Session::get('invoice_no');
-        // }
-        
-        // if($request->payment_option == 'bmp'){
-        //     $payment_status = 'unpaid';
-        //     $invoice_no = date('YmdHis') . rand(10, 99);
-        // }else{
-        //     $payment_status = 'paid';
-        //     $invoice_no = Session::get('invoice_no');
-        // }
-
         // order add //
         $order = Order::create([
             'user_id' => $user_id,
@@ -188,6 +162,7 @@ class CheckoutController extends Controller
             'payment_status' => $payment_status,
             'invoice_no' => $invoice_no,
             'delivery_status' => 'pending',
+            'note_status' => 'Pending',
             'phone' => $request->phone,
             'email' => $request->email,
             'division_id' => $request->division_id,
@@ -196,7 +171,6 @@ class CheckoutController extends Controller
             'address' => $request->address,
             'comment' => $request->comment,
             'type' => $type,
-            //'created_by' => Auth::guard('admin')->user()->id,
         ]);
 
         if(get_setting('otp_system')){
@@ -221,23 +195,7 @@ class CheckoutController extends Controller
                 }else{
                     $phone = '+88'.$order->phone;
                 }
-                //dd($phone);
                 SendSMSUtility::sendSMS($phone, $sms_body);
-
-                // $sms_body = str_replace('আপনার', 'নতুন', $sms_body);
-                // $setting = Setting::where('name', 'phone')->first();
-                // if($setting->value != null){
-                //     $admin_phone=$setting->value;
-
-                //     if(substr($admin_phone,0,3)=="+88"){
-                //         $phone = $admin_phone;
-                //     }elseif(substr($admin_phone,0,2)=="88"){
-                //         $phone = '+'.$admin_phone;
-                //     }else{
-                //         $phone = '+88'.$admin_phone;
-                //     }
-                //     SendSMSUtility::sendSMS($admin_phone, $sms_body);
-                // }
             }
         }
 
@@ -254,7 +212,7 @@ class CheckoutController extends Controller
                     array_push($variations, $item);
                 }
                 OrderDetail::insert([
-                    'order_id' => $order->id, 
+                    'order_id' => $order->id,
                     'product_id' => $cart->id,
                     'product_name' => $cart->name,
                     'is_varient' => 1,
@@ -276,7 +234,7 @@ class CheckoutController extends Controller
 
             }else{
                 OrderDetail::insert([
-                    'order_id' => $order->id, 
+                    'order_id' => $order->id,
                     'product_id' => $cart->id,
                     'product_name' => $cart->name,
                     'is_varient' => 0,
@@ -293,24 +251,23 @@ class CheckoutController extends Controller
 
         Cart::destroy();
 
-
         //OrderStatus Entry
         $orderstatus = OrderStatus::create([
-            'order_id' => $order->id, 
+            'order_id' => $order->id,
             'title' => 'Order Placed',
             'comments' => '',
             'created_at' => Carbon::now(),
         ]);
 
         $orderstatus = OrderStatus::create([
-            'order_id' => $order->id, 
+            'order_id' => $order->id,
             'title' => 'Payment Status: '.$payment_status,
             'comments' => '',
             'created_at' => Carbon::now(),
         ]);
 
         $orderstatus = OrderStatus::create([
-            'order_id' => $order->id, 
+            'order_id' => $order->id,
             'title' => 'Delevery Status: Pending',
             'comments' => '',
             'created_at' => Carbon::now(),
@@ -328,7 +285,7 @@ class CheckoutController extends Controller
         $ledger->save();
 
         $notification = array(
-            'message' => 'Your order has been placed successfully.', 
+            'message' => 'Your order has been placed successfully.',
             'alert-type' => 'success'
         );
         return redirect()->route('checkout.success', $order->invoice_no)->with($notification);
@@ -345,7 +302,7 @@ class CheckoutController extends Controller
         $order = Order::where('invoice_no', $id)->first();
 
         $notification = array(
-            'message' => 'Your Order Successfully.', 
+            'message' => 'Your Order Successfully.',
             'alert-type' => 'success'
         );
 
@@ -392,7 +349,7 @@ class CheckoutController extends Controller
             $checkout = new CheckoutController;
             return $checkout->store($request);
         }
-        
+
         if($request->payment_option == 'bmp'){
             $checkout = new CheckoutController;
             return $checkout->store($request);
@@ -429,7 +386,7 @@ class CheckoutController extends Controller
                 return $aamarpay->index();
             }
         }
-        
+
         return view('frontend.checkout.payment', compact('payment_method', 'total_amount', 'invoice_no'));
     }
 

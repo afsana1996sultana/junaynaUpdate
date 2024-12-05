@@ -39,7 +39,7 @@ class SliderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $this->validate($request,[
             'title_en' => 'required',
             'description_en' => 'required',
@@ -132,11 +132,11 @@ class SliderController extends Controller
                     unlink($slider->slider_img);
                 }
             } catch (Exception $e) {
-                
+
             }
             $slider_img = $request->slider_img;
             $slider_save = time().$slider_img->getClientOriginalName();
-            $slider_img->move('upload/slider/',$slider_save);
+            Image::make($slider_img)->resize(2300,800)->save('upload/slider/'.$slider_save);
             $slider->slider_img = 'upload/slider/'.$slider_save;
         }else{
             $slider_save = '';
@@ -186,13 +186,12 @@ class SliderController extends Controller
                 unlink($slider->slider_img);
             }
         } catch (Exception $e) {
-            
-        }
-        
-        $slider->delete();
 
+        }
+
+        $slider->delete();
         $notification = array(
-            'message' => 'Slider Deleted Successfully.', 
+            'message' => 'Slider Deleted Successfully.',
             'alert-type' => 'error'
         );
         return redirect()->back()->with($notification);
@@ -205,7 +204,7 @@ class SliderController extends Controller
         $slider->save();
 
         $notification = array(
-            'message' => 'Slider Active Successfully.', 
+            'message' => 'Slider Active Successfully.',
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
@@ -217,7 +216,7 @@ class SliderController extends Controller
         $slider->save();
 
         $notification = array(
-            'message' => 'Slider Inactive Successfully.', 
+            'message' => 'Slider Inactive Successfully.',
             'alert-type' => 'error'
         );
         return redirect()->back()->with($notification);
