@@ -13,6 +13,7 @@ use App\Models\Address;
 use App\Models\District;
 use App\Models\Upazilla;
 use App\Models\Shipping;
+use App\Models\Ordernote;
 use Session;
 use PDF;
 use Illuminate\Support\Carbon;
@@ -24,52 +25,42 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request)
     {
-        //dd('Real time date', $request);
         $delivery_status = $request->input('delivery_status');
         $payment_status = $request->input('payment_status');
         $note_status = $request->input('note_status');
         $date_range = $request->input('date_range');
 
-        // Start the query
         $orders = Order::query();
 
-        // Filter by delivery_status
-        if (!empty($delivery_status)) {
+        if ($delivery_status) {
             $orders->where('delivery_status', $delivery_status);
         }
-
-        // Filter by payment_status
-        if (!empty($payment_status)) {
+        if ($payment_status) {
             $orders->where('payment_status', $payment_status);
         }
-
-        // Filter by note_status
-        if (!empty($note_status)) {
+        if ($note_status) {
             $orders->where('note_status', $note_status);
         }
-
-        // Filter by date and hour range
-        if (!empty($date_range)) {
+        if ($date_range) {
             try {
-                // Split the date range into start and end times
                 $dates = explode(' - ', $date_range);
-                // Parse the start and end dates
                 $start_date = \Carbon\Carbon::createFromFormat('Y-m-d h:i A', trim($dates[0]));
                 $end_date = \Carbon\Carbon::createFromFormat('Y-m-d h:i A', trim($dates[1]));
-                $orders = $orders->whereBetween('created_at', [$start_date, $end_date]);
+                $orders->whereBetween('created_at', [$start_date, $end_date]);
             } catch (\Exception $e) {
-                //dd('Error parsing date range:', $e->getMessage());
+                // Handle invalid date range
             }
         }
 
-        // Fetch the filtered orders with pagination
         $orders = $orders->paginate(15);
+        $ordernotes = Ordernote::where('status', 1)->get();
 
-        // Return the view with filtered data
-        return view('backend.sales.all_orders.index', compact('orders', 'delivery_status', 'payment_status', 'note_status', 'date_range'));
+        return view('backend.sales.all_orders.index', compact('orders', 'delivery_status', 'payment_status', 'note_status', 'date_range', 'ordernotes'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -102,8 +93,8 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
         $shippings = Shipping::where('status', 1)->get();
-
-        return view('backend.sales.all_orders.show', compact('order', 'shippings'));
+        $ordernotes = Ordernote::where('status', 1)->get();
+        return view('backend.sales.all_orders.show', compact('order', 'shippings', 'ordernotes'));
     }
 
     /**

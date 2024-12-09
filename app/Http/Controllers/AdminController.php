@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Vendor;
 use App\Models\User;
+use App\Models\Upazilla;
+use App\Models\Order;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
@@ -30,8 +32,8 @@ class AdminController extends Controller
     /*=================== End Index Login Methoed ===================*/
 
     /*=================== Start Dashboard Methoed ===================*/
-    public function Dashboard(){
-
+    public function Dashboard()
+    {
         $vendor = Vendor::where('user_id', Auth::guard('admin')->user()->id)->first();
 
         $userCount = DB::table('users')
@@ -39,22 +41,22 @@ class AdminController extends Controller
             ->where('status', 1)
             ->where('role', 3)
             ->first();
-        
-        if(Auth::guard('admin')->user()->role == '2'){
+
+        if (Auth::guard('admin')->user()->role == '2') {
             $productCount = DB::table('products')
                 ->select(DB::raw('count(*) as total_products'))
                 ->where('vendor_id', Auth::guard('admin')->user()->id)
                 ->where('status', 1)
                 ->first();
-                
-            if($vendor){
+
+            if ($vendor) {
                 $productCount = DB::table('products')
                     ->select(DB::raw('count(*) as total_products'))
                     ->where('vendor_id', $vendor->id)
                     ->where('status', 1)
                     ->first();
             }
-        }else{
+        } else {
             $productCount = DB::table('products')
                 ->select(DB::raw('count(*) as total_products'))
                 ->where('status', 1)
@@ -79,15 +81,15 @@ class AdminController extends Controller
         $orderCount = DB::table('orders')
             ->select(DB::raw('count(*) as total_orders, sum(grand_total) as total_sell'))
             ->first();
-            
+
         $lowStockCount = DB::table('product_stocks as s')
             ->leftjoin('products as p', 's.product_id', '=', 'p.id')
             ->select(DB::raw('count(s.id) as total_low_stocks'))
             ->where('p.vendor_id', Auth::guard('admin')->user()->id)
             ->where('s.qty', '<=', 5)
             ->first();
-            
-        if($vendor){
+
+        if ($vendor) {
             $lowStockCount = DB::table('product_stocks as s')
                 ->leftjoin('products as p', 's.product_id', '=', 'p.id')
                 ->select(DB::raw('count(s.id) as total_low_stocks'))
@@ -96,10 +98,20 @@ class AdminController extends Controller
                 ->first();
         }
 
-        //dd($userCount->total_users);
-    	
-    	return view('admin.index', compact('userCount', 'productCount', 'categoryCount', 'brandCount', 'vendorCount', 'orderCount', 'lowStockCount'));
-    } // end method
+        // Fetching order counts by upazilla
+        $orderData = DB::table('orders')
+            ->join('upazillas', 'orders.upazilla_id', '=', 'upazillas.id')
+            ->select('upazillas.name_en as upazilla_name', DB::raw('count(orders.id) as order_count'))
+            ->groupBy('upazillas.name_en')
+            ->get();
+
+        return view('admin.index', compact(
+            'userCount', 'productCount', 'categoryCount',
+            'brandCount', 'vendorCount', 'orderCount',
+            'lowStockCount', 'orderData'
+        ));
+    }
+     // end method
 
     /*=================== End Dashboard Methoed ===================*/
 
@@ -119,33 +131,33 @@ class AdminController extends Controller
                 return redirect()->route('admin.dashboard')->with('success','Admin Login Successfully.');
             }else{
                 $notification = array(
-                    'message' => 'Invaild Email Or Password.', 
+                    'message' => 'Invaild Email Or Password.',
                     'alert-type' => 'error'
                 );
                 return back()->with($notification);
             }
-    		
+
     	}else{
             $notification = array(
-                'message' => 'Invaild Email Or Password.', 
+                'message' => 'Invaild Email Or Password.',
                 'alert-type' => 'error'
             );
     		return back()->with($notification);
     	}
-    	
+
     } // end method
 
     /*=================== End Admin Login Methoed ===================*/
 
     /*=================== Start Logout Methoed ===================*/
     public function AminLogout(Request $request){
-        
+
     	Auth::guard('admin')->logout();
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
         $notification = array(
-            'message' => 'Admin Logout Successfully.', 
+            'message' => 'Admin Logout Successfully.',
             'alert-type' => 'success'
         );
     	return redirect()->route('login_form')->with($notification);
@@ -154,14 +166,14 @@ class AdminController extends Controller
 
     /*=================== Start AdminRegister Methoed ===================*/
     public function AdminRegister(){
-    	
+
     	return view('admin.admin_register');
     } // end method
     /*=================== End AdminRegister Methoed ===================*/
 
      /*=================== Start AdminForgotPassword Methoed ===================*/
     public function AdminForgotPassword(){
-        
+
         return view('admin.admin_forgot_password');
     } // end method
     /*=================== End AdminForgotPassword Methoed ===================*/
@@ -233,7 +245,7 @@ class AdminController extends Controller
 
         return view('admin.admin_change_password');
 
-    }// 
+    }//
 
     /* =============== Start UpdatePassword Method ================*/
     public function UpdatePassword(Request $request){

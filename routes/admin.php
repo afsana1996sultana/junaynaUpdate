@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\AttributeController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ShippingController;
+use App\Http\Controllers\Backend\OrdernoteController;
 use App\Http\Controllers\Backend\PaymentMethodController;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\SmsController;
@@ -232,6 +233,17 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 	Route::get('/shipping/delete/{id}', [ShippingController::class, 'destroy'])->name('shipping.delete');
 	Route::get('/shipping_active/{id}', [ShippingController::class, 'active'])->name('shipping.active');
 	Route::get('/shipping_inactive/{id}', [ShippingController::class, 'inactive'])->name('shipping.in_active');
+
+
+    // Order Note Route
+	Route::get('/order-note/index', [OrdernoteController::class, 'index'])->name('order-note.index');
+	Route::get('/order-note/create', [OrdernoteController::class, 'create'])->name('order-note.create');
+	Route::post('/order-note/store', [OrdernoteController::class, 'store'])->name('order-note.store');
+	Route::get('/order-note/edit/{id}', [OrdernoteController::class, 'edit'])->name('order-note.edit');
+	Route::post('/order-note/update/{id}', [OrdernoteController::class, 'update'])->name('order-note.update');
+	Route::get('/order-note/delete/{id}', [OrdernoteController::class, 'destroy'])->name('order-note.delete');
+	Route::get('/order-note_active/{id}', [OrdernoteController::class, 'active'])->name('order-note.active');
+	Route::get('/order-note_inactive/{id}', [OrdernoteController::class, 'inactive'])->name('order-note.in_active');
 
 	Route::get('/attributes/combination', [AttributeController::class, 'combination'])->name('combination.index');
 

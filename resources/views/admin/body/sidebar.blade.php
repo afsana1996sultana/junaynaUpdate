@@ -26,7 +26,7 @@
                     <span class="text">Dashboard</span>
                 </a>
             </li>
-            
+
             <li class="menu-item has-submenu
                 {{ ($route == 'slider.index')? 'active':'' }}
                 {{ ($route == 'slider.edit')? 'active':'' }}
@@ -48,7 +48,7 @@
                 </div>
             </li>
 
-            <li class="menu-item has-submenu 
+            <li class="menu-item has-submenu
                 {{ ($prefix == 'admin/product') || ($prefix == 'admin/category')|| ($prefix == 'admin/unit') || ($route == 'attribute.index') || ($prefix == 'admin/brand') ? 'active' : '' }}
             ">
                 @if(Auth::guard('admin')->user()->role == '1' || in_array('1', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
@@ -78,25 +78,6 @@
                     @endif
                 </div>
             </li>
-            
-            {{-- @if(Auth::guard('admin')->user()->role == '1')
-                @if(get_setting('multi_vendor')->value)
-                    <li class="menu-item has-submenu
-                        {{ ($route == 'vendor.index')? 'active':'' }}
-                        {{ ($route == 'vendor.edit')? 'active':'' }}
-                        {{ ($route == 'vendor.create')? 'active':'' }}
-                    ">
-                        <a class="menu-link" href="#">
-                            <i class="icon material-icons md-person_add"></i>
-                            <span class="text">Vendors</span>
-                        </a>
-                        <div class="submenu">
-                            <a class="{{ ($route == 'vendor.index') ? 'active':'' }}" href="{{ route('vendor.index') }}">Vendor List</a>
-                            <a class="{{ ($route == 'vendor.create') ? 'active':'' }}" href="{{ route('vendor.create') }}">Vendor Add</a>
-                        </div>
-                    </li>
-                @endif
-            @endif --}}
 
             @if(Auth::guard('admin')->user()->role == '1')
             <li class="menu-item has-submenu
@@ -111,7 +92,7 @@
                 </div>
             </li>
             @endif
-            
+
             <li class="menu-item has-submenu
                 {{ ($route == 'campaing.index')? 'active':'' }}
                 {{ ($route == 'campaing.create')? 'active':'' }}
@@ -194,7 +175,7 @@
                     @endif
                 </div>
             </li>
-            <li class="menu-item has-submenu 
+            <li class="menu-item has-submenu
                 {{ ($route == 'staff.index')? 'active':'' }}
                 {{ ($route == 'staff.create')? 'active':'' }}
                 {{ ($route == 'staff.edit')? 'active':'' }}
@@ -218,7 +199,7 @@
                 </div>
             </li>
             @if(Auth::guard('admin')->user()->role == '1')
-            <li class="menu-item has-submenu 
+            <li class="menu-item has-submenu
                 {{ ($route == 'stock_report.index')? 'active':'' }}
             ">
                 <a class="menu-link" href="#">
@@ -281,7 +262,7 @@
                     @endif
                 </div>
             </li>
-            
+
             <li class="menu-item has-submenu
                 {{ ($route == 'page.index')? 'active':'' }}
                 {{ ($route == 'page.edit')? 'active':'' }}
@@ -303,7 +284,7 @@
                 </div>
             </li>
             @if(Auth::guard('admin')->user()->role == '1')
-                <li class="menu-item has-submenu 
+                <li class="menu-item has-submenu
                 {{ ($route == 'accounts.heads')? 'active':'' }}
                 {{ ($route == 'accounts.ledgers')? 'active':'' }}
                 {{ ($route == 'accounts.heads.create')? 'active':'' }}
@@ -319,7 +300,7 @@
                 </li>
             @endif
             @if(Auth::guard('admin')->user()->role == '1')
-                <li class="menu-item has-submenu 
+                <li class="menu-item has-submenu
                 {{ ($route == 'customer.index')? 'active':'' }}
                 ">
                     <a class="menu-link" href="#">
@@ -340,6 +321,9 @@
                 {{ ($route == 'shipping.index')? 'active':'' }}
                 {{ ($route == 'shipping.create')? 'active':'' }}
                 {{ ($route == 'shipping.edit')? 'active':'' }}
+                {{ ($route == 'order-note.index')? 'active':'' }}
+                {{ ($route == 'order-note.create')? 'active':'' }}
+                {{ ($route == 'order-note.edit')? 'active':'' }}
                 {{ ($route == 'setting.facebook_plugin_setting')? 'active':'' }}
                 ">
                     <a class="menu-link" href="#">
@@ -351,6 +335,7 @@
                         <a class="{{ ($route == 'setting.activation') ? 'active':'' }}" href="{{ route('setting.activation') }}">Activation</a>
                         <a class="{{ ($route == 'setting.facebook_plugin_setting') ? 'active':'' }}" href="{{ route('setting.facebook_plugin_setting') }}">Facebook Plugin</a>
                         <a class="{{ ($route == 'shipping.index')||($route == 'shipping.create')||($route == 'shipping.edit') ? 'active':'' }}" href="{{ route('shipping.index') }}">Shipping Methods</a>
+                        <a class="{{ ($route == 'order-note.index')||($route == 'order-note.create')||($route == 'order-note.edit') ? 'active':'' }}" href="{{ route('order-note.index') }}">Order Note Status</a>
                         <a class="{{ ($route == 'paymentMethod.config') ? 'active':'' }}" href="{{ route('paymentMethod.config') }}">Payment Methods</a>
                     </div>
                 </li>
