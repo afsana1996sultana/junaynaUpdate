@@ -33,10 +33,11 @@
                 @endphp
                 <div class="col-lg-8 col-md-8 ms-auto text-md-end">
                     <select class="form-select d-inline-block mb-lg-0 mr-5 mw-200" id="update_note_status">
-                        <option value="Pending" @if ($note_status == 'Pending') selected @endif>Pending</option>
-                        <option value="Response" @if ($note_status == 'Response') selected @endif>Response</option>
-                        <option value="Not Response" @if ($note_status == 'Not Response') selected @endif>Not Response</option>
-                        <option value="Not Pickup call" @if ($note_status == 'Not Pickup call') selected @endif>Not Pickup call</option>
+                        @foreach($ordernotes as $ordernote)
+                            <option value="{{ $ordernote->name }}" @if($note_status == $ordernote->name) selected @endif>
+                                {{ $ordernote->name }}
+                            </option>
+                        @endforeach
                     </select>
 
                     <select class="form-select d-inline-block mb-lg-0 mr-5 mw-200" id="update_payment_status">

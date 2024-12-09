@@ -30,13 +30,15 @@
                                 <div class="custom_select">
                                     <select class=" select-active select-nice form-select d-inline-block mb-lg-0 mr-5 mw-200" name="note_status" id="note_status">
                                         <option value="" selected="">Note Status</option>
-                                        <option value="Pending" @if ($note_status == 'Pending') selected @endif>Pending</option>
-                                        <option value="Response" @if ($note_status == 'Response') selected @endif>Response</option>
-                                        <option value="Not Response" @if ($note_status == 'Not Response') selected @endif>Not Response</option>
-                                        <option value="Not Pickup call" @if ($note_status == 'Not Pickup call') selected @endif>Not Pickup call</option>
+                                        @foreach($ordernotes as $ordernote)
+                                            <option value="{{ $ordernote->name }}" @if($note_status == $ordernote->name) selected @endif>
+                                                {{ $ordernote->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-md-2 mt-2">
                                 <div class="custom_select">
                                     <select class="form-select d-inline-block select-active select-nice mb-lg-0 mr-5 mw-200" name="delivery_status" id="delivery_status">

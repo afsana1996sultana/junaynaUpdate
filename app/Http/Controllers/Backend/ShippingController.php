@@ -41,7 +41,7 @@ class ShippingController extends Controller
             'name'  => 'required|max:150',
             'type' => 'required',
             'shipping_charge' => 'required',
-            'time' => 'required',   
+            'time' => 'required',
         ]);
 
         /* ============== type ============ */
@@ -60,7 +60,7 @@ class ShippingController extends Controller
             'shipping_charge'   => $request->shipping_charge,
             'time'              => $request->time,
             'status'            => $request->status,
-            
+
         ]);
 
 
@@ -110,7 +110,7 @@ class ShippingController extends Controller
             'name'  => 'required|max:150',
             'type' => 'required',
             'shipping_charge' => 'required',
-            'time' => 'required',   
+            'time' => 'required',
         ]);
 
         /* ============== type ============ */
@@ -150,9 +150,7 @@ class ShippingController extends Controller
     public function destroy($id)
     {
         $shipping = Shipping::findOrFail($id);
-
         $shipping->delete();
-
         $notification = array(
             'message' => 'Shipping Deleted Successfully.',
             'alert-type' => 'error'
@@ -167,7 +165,7 @@ class ShippingController extends Controller
         $shipping->save();
 
         $notification = array(
-            'message' => 'Shipping Active Successfully.', 
+            'message' => 'Shipping Active Successfully.',
             'alert-type' => 'success'
         );
 
@@ -180,7 +178,7 @@ class ShippingController extends Controller
         $shipping->save();
 
         $notification = array(
-            'message' => 'Shipping Disable Successfully.', 
+            'message' => 'Shipping Disable Successfully.',
             'alert-type' => 'error'
         );
         return redirect()->back()->with($notification);

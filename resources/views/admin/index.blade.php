@@ -1,39 +1,17 @@
 @extends('admin.admin_master')
 @push('css')
-<script type="text/javascript">
-window.onload = function() {
+<style>
+    canvas {
+        border: 1px dotted red;
+    }
 
-var options = {
-    exportEnabled: true,
-    animationEnabled: true,
-    title:{
-        text: "{{ get_setting('site_name')->value ?? ''}}"
-    },
-    legend:{
-        horizontalAlign: "right",
-        verticalAlign: "center"
-    },
-    data: [{
-        type: "pie",
-        showInLegend: true,
-        toolTipContent: "<b>{name}</b>: {y} (#percent)",
-        indexLabel: "{name}",
-        legendText: "{name} (#percent)",
-        indexLabelPlacement: "inside",
-        dataPoints: [
-            { y: 6, name: "Pending" },
-            { y: 9, name: "Prossecing" },
-            { y: 10, name: "Delivery" },
-            { y: 12, name: "Sales" },
-            { y: 5, name: "Others"},
-            { y: 6, name: "Utilities" }
-        ]
-    }]
-};
-$("#chartContainer").CanvasJSChart(options);
-    
-}
-</script>
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 80vh;
+        width: 80vw;
+    }
+</style>
 @endpush
 @section('admin')
  <section class="content-main">
@@ -101,7 +79,7 @@ $("#chartContainer").CanvasJSChart(options);
             </div>
         </div>
         @endif
-  
+
         <div class="col-lg-3">
             <div class="card card-body mb-4">
                 <article class="icontext">
@@ -114,20 +92,6 @@ $("#chartContainer").CanvasJSChart(options);
                 </article>
             </div>
         </div>
-        {{-- @if(Auth::guard('admin')->user()->role != '2')
-        <div class="col-lg-3">
-            <div class="card card-body mb-4">
-                <article class="icontext">
-                    <span class="icon icon-sm rounded-circle bg-info-light"><i class="text-info material-icons md-verified"></i></span>
-                    <div class="text">
-                        <h6 class="mb-1 card-title">Vendors</h6>
-                        <span>{{ number_format($vendorCount->total_vendors) }}</span>
-                        <span class="text-sm"> Who are selling products here. </span>
-                    </div>
-                </article>
-            </div>
-        </div>
-        @endif --}}
         <div class="col-lg-3">
             <div class="card card-body mb-4">
                 <article class="icontext">
@@ -144,17 +108,59 @@ $("#chartContainer").CanvasJSChart(options);
 
     <div class="card mb-4">
         <header class="card-header">
-            <h2 class="text-white">All History</h2>
+            <h2 class="text-white">Order History</h2>
         </header>
-        <div class="card-body">
-            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
+        <div class="chart-container">
+            <canvas id="chart"></canvas>
         </div>
     </div>
-
 </section>
 @endsection
-
 @push('footer-script')
-<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>  
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script type="text/javascript">
+    var orderData = @json($orderData);
+
+    var labels = orderData.map(data => data.upazilla_name);
+    var orderCounts = orderData.map(data => data.order_count);
+
+    var data = {
+        labels: labels,
+        datasets: [{
+            label: "Area wise Order List",
+            backgroundColor: "rgba(54, 162, 235, 0.2)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 2,
+            hoverBackgroundColor: "rgba(54, 162, 235, 0.4)",
+            hoverBorderColor: "rgba(54, 162, 235, 1)",
+            data: orderCounts,
+        }]
+    };
+
+    var options = {
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                stacked: true,
+                grid: {
+                    display: true,
+                    color: "rgba(54, 162, 235, 0.2)"
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                }
+            }
+        }
+    };
+
+    new Chart('chart', {
+        type: 'bar',
+        options: options,
+        data: data
+    });
+</script>
 @endpush
