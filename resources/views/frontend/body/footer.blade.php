@@ -114,7 +114,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-12">
                     <div class="footer-link-widget wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
-                        <h4 class="widget-title">Junayna Info</h4>
+                        <h4 class="widget-title">SEA FOOD Info</h4>
                         <ul class="contact-infor">
                             <li>
                                 <img src="{{ asset('frontend/assets/imgs/theme/icons/icon-location.svg') }}"
