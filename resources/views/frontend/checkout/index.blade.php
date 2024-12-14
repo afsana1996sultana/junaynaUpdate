@@ -100,7 +100,7 @@
                         <div class="d-flex">
                             <h4 class="mb-30 col-9">Billing Details</h4>
                         </div>
-                            
+
                         <div class="row">
                             <div class="form-group col-lg-6">
                                 <label for="name" class="fw-bold text-black"><span class="text-danger">*</span> Name </label>
@@ -116,7 +116,7 @@
                                     <p class="text-danger">{{$message}}</p>
                                 @enderror
                             </div>
-                            
+
                             <div class="form-group col-lg-6">
                                 <label for="email" class="fw-bold text-black">Email</label>
                                 <input id="email" type="email" name="email" placeholder="Email address *" value="{{ Auth::user()->email ?? old('email') }}">
@@ -293,9 +293,9 @@
                                         </span>
                                     </lavel>
                                 </div>
-                                
-                                
-                                
+
+
+
                                 <div class="col-4 col-sm-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <lavel class="cit-megabox d-block mb-3">
                                         <input class="form-check-input" required="" type="radio" name="payment_option" id="bkash_manual" value="bmp">
@@ -308,7 +308,7 @@
                                     </lavel>
                                 </div>
 
-    
+
                                 <!--<div class="col-4 col-sm-3">-->
                                 <!--    <lavel class="cit-megabox d-block mb-3">-->
                                 <!--        <input class="form-check-input" required="" type="radio" name="payment_option" id="bkash" value="bkash">-->
@@ -359,7 +359,7 @@
 
                             </div>
                         <!-- </div> -->
-                            
+
 
                         <!-- <div class="payment_option">
                             <div class="custome-radio">
@@ -483,13 +483,13 @@
             </div>
         </div>
     </div>
-   
+
     <!-- Bkash Manual Payment Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Junayna Bkash Number</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Bkash Number</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -613,7 +613,7 @@
 
 <!-- create address ajax -->
 <script type="text/javascript">
-    $(document).ready(function() {   
+    $(document).ready(function() {
         $('#addressStore').on('click', function() {
             var division_id = $('#division_id').val();
             var district_id = $('#district_id').val();
@@ -647,7 +647,7 @@
                     $('select[name="district_id"]').html('<option value="" selected="" disabled="">Select District</option>');
                     $('select[name="upazilla_id"]').html('<option value="" selected="" disabled="">Select Upazilla</option>');
 
-                    // Start Message 
+                    // Start Message
                     const Toast = Swal.mixin({
                           toast: true,
                           position: 'top-end',

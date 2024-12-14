@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2024 at 01:56 PM
+-- Generation Time: Dec 14, 2024 at 06:37 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -94,7 +94,13 @@ INSERT INTO `account_ledgers` (`id`, `account_head_id`, `particulars`, `debit`, 
 (9, 1, 'Product ID: 9', 390, 0, -2620, 1, 0, 9, '2024-12-05 10:40:17', '2024-12-05 10:40:17'),
 (10, 1, 'Product ID: 10', 450, 0, -3070, 1, 0, 10, '2024-12-05 10:43:16', '2024-12-05 10:43:16'),
 (11, 2, 'Order ID: 1', 0, 660, 660, 2, 1, 0, '2024-12-05 11:16:47', '2024-12-05 11:16:47'),
-(12, 2, 'Order ID: 2', 0, 360, 360, 2, 2, 0, '2024-12-05 12:02:27', '2024-12-05 12:02:27');
+(12, 2, 'Order ID: 2', 0, 360, 360, 2, 2, 0, '2024-12-05 12:02:27', '2024-12-05 12:02:27'),
+(13, 2, 'Order ID: 3', 0, 740, 740, 2, 3, 0, '2024-12-09 05:15:45', '2024-12-09 05:15:45'),
+(14, 2, 'Order ID: 4', 0, 240, 240, 2, 4, 0, '2024-12-09 05:17:03', '2024-12-09 05:17:03'),
+(15, 2, 'Order ID: 5', 0, 240, 240, 2, 5, 0, '2024-12-09 05:18:10', '2024-12-09 05:18:10'),
+(16, 2, 'Order ID: 6', 0, 540, 540, 2, 6, 0, '2024-12-09 05:19:44', '2024-12-09 05:19:44'),
+(17, 2, 'Order ID: 7', 0, 500, 500, 2, 7, 0, '2024-12-09 05:21:24', '2024-12-09 05:21:24'),
+(18, 2, 'Order ID: 8', 0, 580, 580, 2, 8, 0, '2024-12-09 05:22:50', '2024-12-09 05:22:50');
 
 -- --------------------------------------------------------
 
@@ -246,11 +252,11 @@ CREATE TABLE `blogs` (
 --
 
 INSERT INTO `blogs` (`id`, `title_en`, `title_bn`, `tags`, `description`, `slug`, `blog_img`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'MakeUp', 'MakeUp', 'MakeUp', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'makeup', 'upload/blog/1817597303170366.webp', 1, '2024-12-05 10:51:05', '2024-12-05 10:51:05'),
-(2, 'Lades Bag', 'Lades Bag', 'Lades Bag', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'lades-bag', 'upload/blog/1817597421728853.jpg', 1, '2024-12-05 10:52:58', '2024-12-05 10:52:58'),
-(3, 'Latest trends to follow for the perfect wardrobe collection', 'Latest trends to follow for the perfect wardrobe collection', 'Latest trends to follow for the perfect wardrobe collection', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'latest-trends-to-follow-for-the-perfect-wardrobe-collection', 'upload/blog/1817597481160711.jpeg', 1, '2024-12-05 10:53:55', '2024-12-05 10:53:55'),
-(4, 'Wedding Collection', 'Wedding Collection', 'Wedding Collection', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'wedding-collection', 'upload/blog/1817597650095273.webp', 1, '2024-12-05 10:56:36', '2024-12-05 10:56:36'),
-(5, 'New Eid Collection 2024', 'New Eid Collection 2024', 'New Eid Collection 2024', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'new-eid-collection-2024', 'upload/blog/1817597761065450.webp', 1, '2024-12-05 10:58:22', '2024-12-05 10:58:22');
+(1, 'Bangladesh Seafood Industry – Sea Food Expo Bangladesh', 'Bangladesh Seafood Industry – Sea Food Expo Bangladesh', 'Bangladesh Seafood Industry – Sea Food Expo Bangladesh', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'bangladesh-seafood-industry--sea-food-expo-bangladesh', 'upload/blog/17341523532.jpg', 1, '2024-12-14 04:59:13', '2024-12-14 04:59:13'),
+(2, 'Fisheries Industry In Bangladesh', 'Fisheries Industry In Bangladesh', 'Fisheries Industry In Bangladesh', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'fisheries-industry-in-bangladesh', 'upload/blog/1734152311Fisheries-Industries-In-Bangladesh.jpg', 1, '2024-12-14 04:58:31', '2024-12-14 04:58:31'),
+(3, 'Seafood Blog: Fish & Seafood Recipes and More - Crave Fishbar', 'Seafood Blog: Fish & Seafood Recipes and More - Crave Fishbar', 'Seafood Blog: Fish & Seafood Recipes and More - Crave Fishbar', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'seafood-blog-fish--seafood-recipes-and-more---crave-fishbar', 'upload/blog/1734151652Health-Benefits-of-Seafood-Featured.jpg', 1, '2024-12-14 04:47:32', '2024-12-14 04:47:32'),
+(4, 'Best Seafood Restaurants in The World', 'Best Seafood Restaurants in The World', 'Best Seafood Restaurants in The World', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'best-seafood-restaurants-in-the-world', 'upload/blog/1734151583pg-seafood-restaurants-1632836463.jpg', 1, '2024-12-14 04:46:23', '2024-12-14 04:46:23'),
+(5, 'Delights of Korean Seafood', 'Delights of Korean Seafood', 'Delights of Korean Seafood', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'delights-of-korean-seafood', 'upload/blog/1734151252post-10.jpg', 1, '2024-12-14 04:40:52', '2024-12-14 04:40:52');
 
 -- --------------------------------------------------------
 
@@ -277,13 +283,9 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `name_en`, `name_bn`, `slug`, `description_en`, `description_bn`, `brand_image`, `status`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 'Lafz', 'Lafz', 'lafz', 'Lafz', 'Lafz', 'upload/brand/1817589310546464.png', 1, 4, '2024-12-05 08:44:03', '2024-12-05 08:44:03'),
-(2, 'Aveeno', 'Aveeno', 'aveeno', 'Aveeno', 'Aveeno', 'upload/brand/1817589406599919.png', 1, 4, '2024-12-05 08:45:34', '2024-12-05 08:45:34'),
-(3, 'LA Girl', 'LA Girl', 'la-girl', 'LA Girl', 'LA Girl', 'upload/brand/1817589445692090.jpg', 1, 4, '2024-12-05 08:46:12', '2024-12-05 08:46:12'),
-(4, 'Huda Beauty', 'Huda Beauty', 'huda-beauty', 'Huda Beauty', 'Huda Beauty', 'upload/brand/1817589486321043.jpg', 1, 4, '2024-12-05 08:46:50', '2024-12-05 08:46:50'),
-(5, 'JAF', 'JAF', 'jaf', 'JAF', 'JAF', 'upload/brand/1817589531841494.png', 1, 4, '2024-12-05 08:47:34', '2024-12-05 08:47:34'),
-(6, 'Lakme', 'Lakme', 'lakme', 'Lakme', 'Lakme', 'upload/brand/1817589571977738.png', 1, 4, '2024-12-05 08:48:12', '2024-12-05 08:48:12'),
-(7, 'Others', 'Others', 'others', 'Others', 'Others', 'upload/brand/1817589941044520.webp', 1, 4, '2024-12-05 08:54:04', '2024-12-05 08:54:04');
+(6, 'Seafood Source Bangladesh', 'Seafood Source Bangladesh', 'seafood-source-bangladesh', 'Seafood Source Bangladesh', 'Seafood Source Bangladesh', 'upload/brand/1734152515download.png', 1, 4, '2024-12-05 08:48:12', '2024-12-14 05:01:55'),
+(7, 'Others', 'Others', 'others', 'Others', 'Others', 'upload/brand/1734152578174406.jpg', 1, 4, '2024-12-05 08:54:04', '2024-12-14 05:02:58'),
+(8, 'BD Seafood Limited', 'BD Seafood Limited', 'bd-seafood-limited', 'BD Seafood Limited', 'BD Seafood Limited', 'upload/brand/1818390744204606.jpg', 1, 4, '2024-12-14 05:02:30', '2024-12-14 05:02:30');
 
 -- --------------------------------------------------------
 
@@ -350,13 +352,15 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name_en`, `name_bn`, `slug`, `description_en`, `description_bn`, `image`, `parent_id`, `type`, `is_featured`, `status`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 'MAKEUP', 'MAKEUP', 'MAKEUP-yJdVa', 'MAKEUP', 'MAKEUP', 'upload/category/17333872483049675.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:25:14', '2024-12-05 08:27:28'),
-(2, 'WOMEN', 'WOMEN', 'WOMEN-eIwfr', 'WOMEN', 'WOMEN', 'upload/category/1817588333977659.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:28:32', '2024-12-05 08:28:32'),
-(3, 'SKIN CARE', 'SKIN CARE', 'SKIN-CARE-c1EqM', 'SKIN CARE', 'SKIN CARE', 'upload/category/1817588431117737.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:30:04', '2024-12-05 08:30:04'),
-(4, 'HAIR CARE', 'HAIR CARE', 'HAIR-CARE-IQ7SY', 'HAIR CARE', 'HAIR CARE', 'upload/category/1817588586412925.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:32:33', '2024-12-05 08:32:33'),
-(5, 'Fragrance', 'Fragrance', 'Fragrance-AHwVF', 'Fragrance', 'Fragrance', 'upload/category/1817588668224427.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:33:50', '2024-12-05 08:33:50'),
-(6, 'MAKEUP Tools', 'MAKEUP Tools', 'MAKEUP-Tools-ohpOz', 'MAKEUP Tools', 'MAKEUP Tools', 'upload/category/1817588761410904.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:35:19', '2024-12-05 08:35:19'),
-(7, 'Body oil', 'Body oil', 'Body-oil-91mNg', 'Body oil', 'Body oil', 'upload/category/1817588878282085.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:37:11', '2024-12-05 08:37:11');
+(1, 'Tuna', 'Tuna', 'Tuna-Vwc68', 'Tuna', 'Tuna', 'upload/category/1734150575Products_2-540x496.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:25:14', '2024-12-14 04:29:36'),
+(2, 'Snapper', 'Snapper', 'Snapper-eo53e', 'Snapper', 'Snapper', 'upload/category/1734150616Products_3-540x496.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:28:32', '2024-12-14 04:30:16'),
+(3, 'Shrimp', 'Shrimp', 'Shrimp-RJvH3', 'Shrimp', 'Shrimp', 'upload/category/1734150722Products_7-540x496.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:30:04', '2024-12-14 04:32:02'),
+(4, 'Scallops', 'Scallops', 'Scallops-dzU4q', 'Scallops', 'Scallops', 'upload/category/1734150751Products_4-540x496.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:32:33', '2024-12-14 04:32:31'),
+(5, 'Salmon', 'Salmon', 'Salmon-uug9G', 'Salmon', 'Salmon', 'upload/category/1734150781Products_1-540x496.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:33:50', '2024-12-14 04:33:01'),
+(6, 'Mussels', 'Mussels', 'Mussels-maDgo', 'Mussels', 'Mussels', 'upload/category/1734150830Products_8-540x496.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:35:19', '2024-12-14 04:33:50'),
+(7, 'Masago', 'Masago', 'Masago-dxt6a', 'Masago', 'Masago', 'upload/category/1734150860Products_10-540x496.jpg', 0, 1, 1, 1, 4, '2024-12-05 08:37:11', '2024-12-14 04:34:21'),
+(9, 'Lobster', 'Lobster', 'Lobster-pg1vC', 'Lobster', 'Lobster', 'upload/category/1818388997062828.jpg', 0, 1, 1, 1, 4, '2024-12-14 04:34:43', '2024-12-14 04:34:43'),
+(10, 'Crab', 'Crab', 'Crab-7VeeK', 'Crab', 'Crab', 'upload/category/1818389029357196.jpg', 0, 1, 1, 1, 4, '2024-12-14 04:35:14', '2024-12-14 04:35:14');
 
 -- --------------------------------------------------------
 
@@ -584,16 +588,39 @@ CREATE TABLE `multi_imgs` (
 --
 
 INSERT INTO `multi_imgs` (`id`, `product_id`, `photo_name`, `created_at`, `updated_at`) VALUES
-(1, 1, 'upload/products/multi-image/1817589998444962.webp', '2024-12-05 08:54:59', NULL),
-(2, 2, 'upload/products/multi-image/1817590178679369.jpg', '2024-12-05 08:57:51', NULL),
-(3, 3, 'upload/products/multi-image/1817590300633189.jpg', '2024-12-05 08:59:47', NULL),
-(5, 4, 'upload/products/multi-image/1817590844524077.jpg', '2024-12-05 09:08:26', NULL),
-(6, 5, 'upload/products/multi-image/1817595833202670.jpeg', '2024-12-05 10:27:43', NULL),
-(7, 6, 'upload/products/multi-image/1817596074275539.jpg', '2024-12-05 10:31:33', NULL),
-(8, 7, 'upload/products/multi-image/1817596269430664.jpg', '2024-12-05 10:34:39', NULL),
-(9, 8, 'upload/products/multi-image/1817596390415832.webp', '2024-12-05 10:36:35', NULL),
-(10, 9, 'upload/products/multi-image/1817596623085082.webp', '2024-12-05 10:40:17', NULL),
-(11, 10, 'upload/products/multi-image/1817596810248848.jpg', '2024-12-05 10:43:16', NULL);
+(13, 10, 'upload/products/multi-image/1818391171901613.jpg', '2024-12-14 05:09:17', NULL),
+(14, 9, 'upload/products/multi-image/1818391237525892.webp', '2024-12-14 05:10:20', NULL),
+(15, 8, 'upload/products/multi-image/1818391323642863.webp', '2024-12-14 05:11:42', NULL),
+(16, 7, 'upload/products/multi-image/1818391486668937.webp', '2024-12-14 05:14:18', NULL),
+(17, 6, 'upload/products/multi-image/1818391598631602.jpg', '2024-12-14 05:16:04', NULL),
+(18, 5, 'upload/products/multi-image/1818391753343005.jpeg', '2024-12-14 05:18:32', NULL),
+(19, 4, 'upload/products/multi-image/1818391864623284.webp', '2024-12-14 05:20:18', NULL),
+(20, 3, 'upload/products/multi-image/1818392028245028.jpeg', '2024-12-14 05:22:54', NULL),
+(21, 2, 'upload/products/multi-image/1818392156616964.jpg', '2024-12-14 05:24:57', NULL),
+(22, 1, 'upload/products/multi-image/1818392282458342.png', '2024-12-14 05:26:57', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ordernotes`
+--
+
+CREATE TABLE `ordernotes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1=>Active, 0=>Inactive',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ordernotes`
+--
+
+INSERT INTO `ordernotes` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'Response', 1, '2024-12-09 06:48:31', '2024-12-09 06:57:02'),
+(3, 'Not Response', 1, '2024-12-09 06:57:14', '2024-12-09 06:57:14'),
+(4, 'Not Pickup call', 1, '2024-12-09 06:57:25', '2024-12-09 07:07:04');
 
 -- --------------------------------------------------------
 
@@ -653,8 +680,14 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `seller_id`, `name`, `phone`, `email`, `division_id`, `district_id`, `upazilla_id`, `address`, `payment_method`, `payment_status`, `payment_details`, `shipping_charge`, `shipping_type`, `shipping_name`, `sub_total`, `grand_total`, `paid_amount`, `due_amount`, `discount`, `invoice_no`, `staff_id`, `staff_commission`, `viewed`, `delivery_viewed`, `payment_status_viewed`, `commission_calculated`, `comment`, `delivery_status`, `note_status`, `tracking_code`, `confirmed_date`, `processing_date`, `picked_date`, `shipped_date`, `delivered_date`, `cancel_date`, `return_date`, `return_reason`, `type`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, 'Afsana Sultana Labonno', '01753142981', 'afsana1996sultana@gmail.com', 1, 52, 509, 'Cantorment', 'cod', 'paid', NULL, '60.00', '1', 'Redex', '600.00', '660.00', '0.00', '0.00', '0.00', '2024120517164748', NULL, NULL, '0', '1', '1', '0', NULL, 'shipped', 'Not Pickup call', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-05 11:16:47', '2024-12-05 12:20:49'),
-(2, 1, NULL, 'Azmira Sultana', '01753142981', 'azmira@gmail.com', 1, 52, 499, 'Gulshan-1', 'cod', 'unpaid', NULL, '60.00', '1', 'Redex', '300.00', '360.00', '0.00', '0.00', '0.00', '2024120518022760', NULL, NULL, '0', '1', '1', '0', 'Test', 'pending', 'Pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-05 12:02:27', '2024-12-05 12:02:27');
+(1, 1, NULL, 'Afsana Sultana Labonno', '01753142981', 'afsana1996sultana@gmail.com', 1, 52, 509, 'Cantorment', 'cod', 'paid', NULL, '60.00', '1', 'Redex', '600.00', '660.00', '0.00', '0.00', '0.00', '2024120517164748', NULL, NULL, '0', '1', '1', '0', NULL, 'shipped', 'Response', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-05 11:16:47', '2024-12-09 07:05:34'),
+(2, 1, NULL, 'Azmira Sultana', '01753142981', 'azmira@gmail.com', 1, 52, 499, 'Gulshan-1', 'cod', 'unpaid', NULL, '60.00', '1', 'Redex', '300.00', '360.00', '0.00', '0.00', '0.00', '2024120518022760', NULL, NULL, '0', '1', '1', '0', 'Test', 'pending', 'Not Pickup call', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-05 12:02:27', '2024-12-09 07:05:59'),
+(3, 1, NULL, 'Afsana Sultana Labonno', '01753142981', 'afsana1996sultana@gmail.com', 1, 52, 509, 'Kochukhet', 'cod', 'unpaid', NULL, '60.00', '1', 'Redex', '680.00', '740.00', '0.00', '0.00', '0.00', '2024120911154523', NULL, NULL, '0', '1', '1', '0', 'Test', 'pending', 'Not Response', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:15:45', '2024-12-09 07:06:03'),
+(4, 1, NULL, 'Ashiqul Islam', '01689681783', 'ashiqulislamrasel@gmail.com', 1, 52, 519, 'Kadamtoli bus stand', 'cod', 'unpaid', NULL, '60.00', '1', 'Redex', '180.00', '240.00', '0.00', '0.00', '0.00', '2024120911170338', NULL, NULL, '0', '1', '1', '0', 'Test..', 'pending', 'Not Pickup call', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:17:03', '2024-12-09 07:06:11'),
+(5, 1, NULL, 'Minara Akter', '01790173857', 'minara@gmail.com', 1, 52, 495, 'DOHS', 'cod', 'unpaid', NULL, '60.00', '1', 'Redex', '180.00', '240.00', '0.00', '0.00', '0.00', '2024120911181039', NULL, NULL, '0', '1', '1', '0', NULL, 'pending', 'Not Pickup call', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:18:10', '2024-12-09 07:06:16'),
+(6, 1, NULL, 'Najmul Hasan', '01790173857', 'najmul123@gmail.com', 2, 1, 8, 'Laksum bazar', 'cod', 'unpaid', NULL, '150.00', '2', 'Sundarban Courier', '390.00', '540.00', '0.00', '0.00', '0.00', '2024120911194477', NULL, NULL, '0', '1', '1', '0', NULL, 'pending', 'Pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:19:44', '2024-12-09 05:19:44'),
+(7, 1, NULL, 'Afsana Sultana Labonno', '01753142981', 'afsana1996sultana@gmail.com', 3, 13, 116, 'Shalgaria Golapbag', 'cod', 'unpaid', NULL, '150.00', '2', 'Sundarban Courier', '350.00', '500.00', '0.00', '0.00', '0.00', '2024120911212417', NULL, NULL, '0', '1', '1', '0', NULL, 'pending', 'Not Response', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:21:24', '2024-12-09 07:06:21'),
+(8, 1, NULL, 'Jobeda Khatun', '01958106320', 'jobeda@gmail.com', 1, 52, 511, 'Azampur', 'cod', 'unpaid', NULL, '60.00', '1', 'Redex', '520.00', '580.00', '0.00', '0.00', '0.00', '2024120911225028', NULL, NULL, '0', '1', '1', '0', NULL, 'pending', 'Not Pickup call', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:22:50', '2024-12-09 07:31:41');
 
 -- --------------------------------------------------------
 
@@ -688,8 +721,14 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_name`, `is_varient`, `variation`, `qty`, `price`, `tax`, `shipping_cost`, `payment_status`, `shipping_type`, `pickup_point_id`, `product_referral_code`, `delivery_status`, `note_status`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, 'Joyme Gel Nail Strips - 27', 0, NULL, '2', 300.00, 0.00, 0.00, 'paid', NULL, NULL, NULL, 'shipped', 'Not Pickup call', '2024-12-05 11:16:47', '2024-12-05 12:20:49'),
-(2, 2, 3, 'Joyme Gel Nail Strips - 27', 0, NULL, '1', 300.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Pending', '2024-12-05 12:02:27', NULL);
+(1, 1, 3, 'Joyme Gel Nail Strips - 27', 0, NULL, '2', 300.00, 0.00, 0.00, 'paid', NULL, NULL, NULL, 'shipped', 'Response', '2024-12-05 11:16:47', '2024-12-09 07:05:34'),
+(2, 2, 3, 'Joyme Gel Nail Strips - 27', 0, NULL, '1', 300.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Pickup call', '2024-12-05 12:02:27', '2024-12-09 07:05:59'),
+(3, 3, 10, 'L\'Oreal Paris Elvive Colour Protect Anti-Brassiness Purple Conditioner 150ml', 0, NULL, '1', 680.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Response', '2024-12-09 05:15:45', '2024-12-09 07:06:03'),
+(4, 4, 4, 'MAANGE Makeup Auto Brush Cleaner – Pink', 0, NULL, '1', 180.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Pickup call', '2024-12-09 05:17:03', '2024-12-09 07:06:11'),
+(5, 5, 4, 'MAANGE Makeup Auto Brush Cleaner – Pink', 0, NULL, '1', 180.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Pickup call', '2024-12-09 05:18:10', '2024-12-09 07:06:16'),
+(6, 6, 7, 'Lipstick Holder 36 Grids', 0, NULL, '1', 390.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Pending', '2024-12-09 05:19:44', NULL),
+(7, 7, 6, 'Dual Sided Pocket Mirror With Doll - Light Pink', 0, NULL, '1', 350.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Response', '2024-12-09 05:21:24', '2024-12-09 07:06:21'),
+(8, 8, 9, 'Vatika Hair Fall Control Hair Oil 300ml – Cactus', 0, NULL, '1', 520.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Pickup call', '2024-12-09 05:22:50', '2024-12-09 07:31:41');
 
 -- --------------------------------------------------------
 
@@ -718,7 +757,25 @@ INSERT INTO `order_statuses` (`id`, `order_id`, `title`, `comments`, `created_at
 (5, 2, 'Payment Status: unpaid', '', '2024-12-05 12:02:27', '2024-12-05 12:02:27'),
 (6, 2, 'Delevery Status: Pending', '', '2024-12-05 12:02:27', '2024-12-05 12:02:27'),
 (7, 1, 'Payment Status: paid', '', '2024-12-05 12:20:47', '2024-12-05 12:20:47'),
-(8, 1, 'Delevery Status: shipped', '', '2024-12-05 12:20:49', '2024-12-05 12:20:49');
+(8, 1, 'Delevery Status: shipped', '', '2024-12-05 12:20:49', '2024-12-05 12:20:49'),
+(9, 3, 'Order Placed', '', '2024-12-09 05:15:45', '2024-12-09 05:15:45'),
+(10, 3, 'Payment Status: unpaid', '', '2024-12-09 05:15:45', '2024-12-09 05:15:45'),
+(11, 3, 'Delevery Status: Pending', '', '2024-12-09 05:15:45', '2024-12-09 05:15:45'),
+(12, 4, 'Order Placed', '', '2024-12-09 05:17:03', '2024-12-09 05:17:03'),
+(13, 4, 'Payment Status: unpaid', '', '2024-12-09 05:17:03', '2024-12-09 05:17:03'),
+(14, 4, 'Delevery Status: Pending', '', '2024-12-09 05:17:03', '2024-12-09 05:17:03'),
+(15, 5, 'Order Placed', '', '2024-12-09 05:18:10', '2024-12-09 05:18:10'),
+(16, 5, 'Payment Status: unpaid', '', '2024-12-09 05:18:10', '2024-12-09 05:18:10'),
+(17, 5, 'Delevery Status: Pending', '', '2024-12-09 05:18:10', '2024-12-09 05:18:10'),
+(18, 6, 'Order Placed', '', '2024-12-09 05:19:44', '2024-12-09 05:19:44'),
+(19, 6, 'Payment Status: unpaid', '', '2024-12-09 05:19:44', '2024-12-09 05:19:44'),
+(20, 6, 'Delevery Status: Pending', '', '2024-12-09 05:19:44', '2024-12-09 05:19:44'),
+(21, 7, 'Order Placed', '', '2024-12-09 05:21:24', '2024-12-09 05:21:24'),
+(22, 7, 'Payment Status: unpaid', '', '2024-12-09 05:21:24', '2024-12-09 05:21:24'),
+(23, 7, 'Delevery Status: Pending', '', '2024-12-09 05:21:24', '2024-12-09 05:21:24'),
+(24, 8, 'Order Placed', '', '2024-12-09 05:22:50', '2024-12-09 05:22:50'),
+(25, 8, 'Payment Status: unpaid', '', '2024-12-09 05:22:50', '2024-12-09 05:22:50'),
+(26, 8, 'Delevery Status: Pending', '', '2024-12-09 05:22:50', '2024-12-09 05:22:50');
 
 -- --------------------------------------------------------
 
@@ -749,7 +806,7 @@ INSERT INTO `pages` (`id`, `name_en`, `name_bn`, `title`, `slug`, `description_e
 (2, 'Return Policy', 'Return Policy', 'Return Policy', 'return-policy', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'Bottom', 1, '2024-12-05 11:03:35', '2024-12-05 11:03:35'),
 (3, 'Support & Policy', 'Support & Policy', 'Support & Policy', 'support--policy', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'Bottom', 1, '2024-12-05 11:04:05', '2024-12-05 11:04:05'),
 (4, 'Contact Us', 'Contact Us', 'Contact Us', 'contact-us', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'Bottom', 1, '2024-12-05 11:04:37', '2024-12-05 11:04:37'),
-(5, 'Makeup Store', 'Makeup Store', 'Makeup Store', 'makeup-store', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'Bottom', 1, '2024-12-05 11:05:14', '2024-12-05 11:05:14');
+(5, 'Fish Store', 'Fish Store', 'Fish Store', 'fish-store', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', '<p><strong style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>', 'Bottom', 1, '2024-12-14 04:36:19', '2024-12-14 04:36:19');
 
 -- --------------------------------------------------------
 
@@ -853,16 +910,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `brand_id`, `category_id`, `sub_category_id`, `sub_sub_category_id`, `tags`, `vendor_id`, `supplier_id`, `unit_id`, `campaing_id`, `name_en`, `name_bn`, `slug`, `product_code`, `unit_weight`, `purchase_price`, `is_wholesell`, `wholesell_price`, `wholesell_minimum_qty`, `regular_price`, `discount_price`, `discount_type`, `minimum_buy_qty`, `stock_qty`, `product_thumbnail`, `short_description_en`, `short_description_bn`, `description_en`, `description_bn`, `attributes`, `is_varient`, `attribute_values`, `variations`, `is_featured`, `is_deals`, `status`, `is_approved`, `is_digital`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 7, 4, NULL, NULL, '', 0, 5, 0, NULL, 'Biolage Deep Smoothing Hair Serum - Avocado - 100ML [Exp - 12/24]', 'Biolage Deep Smoothing Hair Serum - Avocado - 100ML [Exp - 12/24]', 'Biolage-Deep-Smoothing-Hair-Serum---Avocado---100ML-Exp---1224-8snax', '86527', NULL, 390, 0, 0, 0, 500, 0, 1, 1, 100, 'upload/products/thumbnails/1817589997951318.jpg', '<p>Biolage Deep Smoothing Hair Serum - Avocado - 100ML [Exp - 12/24]</p>', '<p>Biolage Deep Smoothing Hair Serum - Avocado - 100ML [Exp - 12/24]</p>', '<p>Biolage Deep Smoothing Hair Serum - Avocado - 100ML [Exp - 12/24]</p>', '<p>Biolage Deep Smoothing Hair Serum - Avocado - 100ML [Exp - 12/24]</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 08:54:59', '2024-12-05 08:54:59'),
-(2, 7, 4, NULL, NULL, '', 0, 5, 0, NULL, 'Loreal Total Repair - Smoothening & Repairing Hair Serum - 80ML [Exp - 02/25]', 'Loreal Total Repair - Smoothening & Repairing Hair Serum - 80ML [Exp - 02/25]', 'Loreal-Total-Repair---Smoothening--Repairing-Hair-Serum---80ML-Exp---0225-vGQ2C', '87840', NULL, 500, 0, 0, 0, 760, 0, 1, 1, 100, 'upload/products/thumbnails/1817590178616689.jpeg', '<p>Loreal Total Repair - Smoothening &amp; Repairing Hair Serum - 80ML [Exp - 02/25]</p>', '<p>Loreal Total Repair - Smoothening &amp; Repairing Hair Serum - 80ML [Exp - 02/25]</p>', '<p>Loreal Total Repair - Smoothening &amp; Repairing Hair Serum - 80ML [Exp - 02/25]</p>', '<p>Loreal Total Repair - Smoothening &amp; Repairing Hair Serum - 80ML [Exp - 02/25]</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 08:57:51', '2024-12-05 08:57:51'),
-(3, 5, 6, NULL, NULL, '', 0, 5, 0, NULL, 'Joyme Gel Nail Strips - 27', 'Joyme Gel Nail Strips - 27', 'Joyme-Gel-Nail-Strips---27-scLvr', '91936', NULL, 200, 0, 0, 0, 300, 0, 1, 1, -3, 'upload/products/thumbnails/1817590300488824.jpg', '<p>Joyme Gel Nail Strips - 27</p>', '<p>Joyme Gel Nail Strips - 27</p>', '<p>Joyme Gel Nail Strips - 27</p>', '<p>Joyme Gel Nail Strips - 27</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 08:59:47', '2024-12-05 12:02:27'),
-(4, 6, 6, NULL, NULL, '', 0, 5, 0, NULL, 'MAANGE Makeup Auto Brush Cleaner – Pink', 'MAANGE Makeup Auto Brush Cleaner – Pink', 'MAANGE-Makeup-Auto-Brush-Cleaner--Pink-CDiIb', '64720', NULL, 120, 0, 0, 0, 180, 0, 1, 1, 50, 'upload/products/thumbnails/1817590844388978.jpeg', '<p>MAANGE Makeup Auto Brush Cleaner – Pink</p>', '<p>MAANGE Makeup Auto Brush Cleaner – Pink</p>', '<p>MAANGE Makeup Auto Brush Cleaner – Pink</p>', '<p>MAANGE Makeup Auto Brush Cleaner – Pink</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 09:02:10', '2024-12-05 09:08:26'),
-(5, 6, 6, NULL, NULL, '', 0, 0, 0, NULL, 'Imagic Beauty Blender - Merun', 'Imagic Beauty Blender - Merun', 'Imagic-Beauty-Blender---Merun-VVxd5', '25907', NULL, 150, 0, 0, 0, 220, 0, 1, 1, 50, 'upload/products/thumbnails/1817595833134775.jpeg', '<p>Imagic Beauty Blender - Merun</p>', '<p>Imagic Beauty Blender - Merun</p>', '<p>Imagic Beauty Blender - Merun</p>', '<p>Imagic Beauty Blender - Merun</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:27:43', '2024-12-05 10:27:43'),
-(6, 7, 6, NULL, NULL, '', 0, 0, 0, NULL, 'Dual Sided Pocket Mirror With Doll - Light Pink', 'Dual Sided Pocket Mirror With Doll - Light Pink', 'Dual-Sided-Pocket-Mirror-With-Doll---Light-Pink-Qo8CJ', '76226', NULL, 220, 0, 0, 0, 350, 0, 1, 1, 50, 'upload/products/thumbnails/1817596074146843.webp', '<p>Dual Sided Pocket Mirror With Doll - Light Pink</p>', '<p>Dual Sided Pocket Mirror With Doll - Light Pink</p>', '<p>Dual Sided Pocket Mirror With Doll - Light Pink</p>', '<p>Dual Sided Pocket Mirror With Doll - Light Pink</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:31:33', '2024-12-05 10:31:33'),
-(7, 5, 6, NULL, NULL, '', 0, 0, 0, NULL, 'Lipstick Holder 36 Grids', 'Lipstick Holder 36 Grids', 'Lipstick-Holder-36-Grids-9Gz2s', '24136', NULL, 220, 0, 0, 0, 390, 0, 1, 1, 40, 'upload/products/thumbnails/1817596269325159.jpg', '<p>Lipstick Holder 36 Grids</p>', '<p>Lipstick Holder 36 Grids</p>', '<p>Lipstick Holder 36 Grids</p>', '<p>Lipstick Holder 36 Grids</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:34:39', '2024-12-05 10:34:39'),
-(8, 7, 4, NULL, NULL, '', 0, 0, 0, NULL, 'Sunsilk Perfect Straight Shampoo - 400ml', 'Sunsilk Perfect Straight Shampoo - 400ml', 'Sunsilk-Perfect-Straight-Shampoo---400ml-lQJrm', '56719', NULL, 430, 0, 0, 0, 600, 0, 1, 1, 100, 'upload/products/thumbnails/1817596390359259.jpeg', 'Sunsilk Perfect Straight Shampoo - 400ml', '<p>Sunsilk Perfect Straight Shampoo - 400ml</p>', '<p>Sunsilk Perfect Straight Shampoo - 400ml</p>', '<p>Sunsilk Perfect Straight Shampoo - 400ml</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:36:35', '2024-12-05 10:36:35'),
-(9, 7, 4, NULL, NULL, '', 0, 0, 0, NULL, 'Vatika Hair Fall Control Hair Oil 300ml – Cactus', 'Vatika Hair Fall Control Hair Oil 300ml – Cactus', 'Vatika-Hair-Fall-Control-Hair-Oil-300ml--Cactus-EzqE7', '51213', NULL, 390, 0, 0, 0, 520, 0, 1, 1, 100, 'upload/products/thumbnails/1817596622847672.jpg', '<p>Vatika Hair Fall Control Hair Oil 300ml – Cactus</p>', '<p>Vatika Hair Fall Control Hair Oil 300ml – Cactus</p>', '<p>Vatika Hair Fall Control Hair Oil 300ml – Cactus</p>', '<p>Vatika Hair Fall Control Hair Oil 300ml – Cactus</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:40:17', '2024-12-05 10:40:17'),
-(10, 7, 4, NULL, NULL, '', 0, 0, 0, NULL, 'L\'Oreal Paris Elvive Colour Protect Anti-Brassiness Purple Conditioner 150ml', 'L\'Oreal Paris Elvive Colour Protect Anti-Brassiness Purple Conditioner 150ml', 'LOreal-Paris-Elvive-Colour-Protect-Anti-Brassiness-Purple-Conditioner-150ml-FRHEy', '86673', NULL, 450, 0, 0, 0, 680, 0, 1, 1, 50, 'upload/products/thumbnails/1817596810037992.jpg', '<p>L\'Oreal Paris Elvive Colour Protect Anti-Brassiness Purple Conditioner 150ml</p>', '<p>L\'Oreal Paris Elvive Colour Protect Anti-Brassiness Purple Conditioner 150ml</p>', '<p>L\'Oreal Paris Elvive Colour Protect Anti-Brassiness Purple Conditioner 150ml</p>', '<p>L\'Oreal Paris Elvive Colour Protect Anti-Brassiness Purple Conditioner 150ml</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:43:15', '2024-12-05 10:43:16');
+(1, 7, 5, NULL, NULL, '', 0, 5, 0, NULL, 'Salmon Fresh - Huon Tasmania', 'Salmon Fresh - Huon Tasmania', 'Salmon-Fresh---Huon-Tasmania-frO0q', '86527', NULL, 2390, 0, 0, 0, 4500, 0, 1, 1, 100, 'upload/products/thumbnails/1818392282345716.webp', '<p>Salmon Fresh - Huon Tasmania</p>', '<p>Salmon Fresh - Huon Tasmania</p>', '<p>Salmon Fresh - Huon Tasmania</p>', '<p>Salmon Fresh - Huon Tasmania</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 08:54:59', '2024-12-14 05:26:56'),
+(2, 7, 5, NULL, NULL, '', 0, 5, 0, NULL, 'Whole Fresh Var Salmon', 'Whole Fresh Var Salmon', 'Whole-Fresh-Var-Salmon-S0uWF', '87840', NULL, 2500, 0, 0, 0, 3760, 0, 1, 1, 100, 'upload/products/thumbnails/1818392156525772.webp', '<p>Whole Fresh Var Salmon</p>', '<p>Whole Fresh Var Salmon</p>', '<p>Whole Fresh Var Salmon</p>', '<p>Whole Fresh Var Salmon</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 08:57:51', '2024-12-14 05:24:56'),
+(3, 8, 5, NULL, NULL, '', 0, 5, 0, NULL, 'European / Norwegian Salmon', 'European / Norwegian Salmon', 'European--Norwegian-Salmon-8Kkhh', '91936', NULL, 2200, 0, 0, 0, 3300, 0, 1, 1, 15, 'upload/products/thumbnails/1818392028051720.webp', '<p>European / Norwegian Salmon</p>', '<p>European / Norwegian Salmon</p>', '<p>European / Norwegian Salmon</p>', '<p>European / Norwegian Salmon</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 08:59:47', '2024-12-14 05:22:54'),
+(4, 6, 5, NULL, NULL, '', 0, 5, 0, NULL, 'FRESH ATLANTIC SALMON', 'FRESH ATLANTIC SALMON', 'FRESH-ATLANTIC-SALMON-QkqI8', '64720', NULL, 2120, 0, 0, 0, 3180, 0, 1, 1, 48, 'upload/products/thumbnails/1818391864566965.jpg', '<p>FRESH ATLANTIC SALMON</p>', '<p>FRESH ATLANTIC SALMON</p>', '<p>FRESH ATLANTIC SALMON</p>', '<p>FRESH ATLANTIC SALMON</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 09:02:10', '2024-12-14 05:20:18'),
+(5, 6, 5, NULL, NULL, '', 0, 0, 0, NULL, 'Fresh Whole Indian Salmon', 'Fresh Whole Indian Salmon', 'Fresh-Whole-Indian-Salmon-90qYP', '25907', NULL, 2150, 0, 0, 0, 3220, 0, 1, 1, 50, 'upload/products/thumbnails/1818391753170620.webp', '<p>Fresh Whole Indian Salmon</p>', '<p>Fresh Whole Indian Salmon</p>', '<p>Fresh Whole Indian Salmon</p>', '<p>Fresh Whole Indian Salmon</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:27:43', '2024-12-14 05:18:32'),
+(6, 7, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Golda Shrimp', 'Golda Shrimp', 'Golda-Shrimp-zEMlj', '76226', NULL, 1220, 0, 0, 0, 1350, 0, 1, 1, 49, 'upload/products/thumbnails/1818391598553779.jpg', '<p>Golda Shrimp</p>', '<p>Golda Shrimp</p>', '<p>Golda Shrimp</p>', '<p>Golda Shrimp</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:31:33', '2024-12-14 05:16:04'),
+(7, 7, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Red Sea Prawns', 'Red Sea Prawns', 'Red-Sea-Prawns-YweiE', '24136', NULL, 1220, 0, 0, 0, 1590, 0, 1, 1, 39, 'upload/products/thumbnails/1818391486500456.webp', '<p>Red Sea Prawns</p>', '<p>Red Sea Prawns</p>', '<p>Red Sea Prawns</p>', '<p>Red Sea Prawns</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:34:39', '2024-12-14 05:14:17'),
+(8, 7, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Black Tiger Shrimp', 'Black Tiger Shrimp', 'Black-Tiger-Shrimp-04YgQ', '56719', NULL, 1430, 0, 0, 0, 1600, 0, 1, 1, 100, 'upload/products/thumbnails/1818391323571333.jpg', 'Black Tiger Shrimp', '<p>Black Tiger Shrimp</p>', '<p>Black Tiger Shrimp</p>', '<p>Black Tiger Shrimp</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:36:35', '2024-12-14 05:11:42'),
+(9, 8, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Frozen Scambi Head On Shell', 'Frozen Scambi Head On Shell', 'Frozen-Scambi-Head-On-Shell-0uH5N', '51213', NULL, 1390, 0, 0, 0, 1520, 0, 1, 1, 99, 'upload/products/thumbnails/1818391225935676.jpg', '<font face=\"Arial, sans-serif\">Frozen Scambi Head On Shell</font>', '<p>Frozen Scambi Head On Shell</p>', '<p>Frozen Scambi Head On Shell</p>', '<p>Frozen Scambi Head On Shell</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:40:17', '2024-12-14 05:10:09'),
+(10, 8, 3, NULL, NULL, '', 0, 0, 0, NULL, 'BD Shrimp Trading', 'BD Shrimp Trading', 'BD-Shrimp-Trading-sgTea', '86673', NULL, 1450, 0, 0, 0, 1680, 0, 1, 1, 49, 'upload/products/thumbnails/1818391171711769.png', '<p>BD Shrimp Trading</p>', '<p>BD Shrimp Trading</p>', '<p>BD Shrimp Trading</p>', '<p>BD Shrimp Trading</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:43:15', '2024-12-14 05:09:17');
 
 -- --------------------------------------------------------
 
@@ -957,16 +1014,16 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `name`, `value`, `created_at`, `updated_at`) VALUES
-(1, 'site_name', 'JUNAYNA', '2022-08-22 02:57:04', '2023-09-11 07:51:55'),
-(2, 'site_logo', 'upload/setting/logo/173313242617164540531697637666Logo.png', '2022-08-03 12:46:20', '2024-12-02 09:40:26'),
-(3, 'site_favicon', 'upload/setting/favicon/173313242617164540531697637666Logo.png', '2022-08-04 12:46:20', '2024-12-02 09:40:26'),
-(4, 'site_footer_logo', 'upload/setting/logo/173313242617164540531697637666Logo.png', '2022-08-03 12:46:20', '2024-12-02 09:40:26'),
-(5, 'phone', '+8801710200595', '2022-08-04 12:47:27', '2023-09-11 07:51:55'),
-(6, 'email', 'info@junayna.com', '2022-08-12 12:47:52', '2023-09-19 04:58:11'),
-(7, 'business_name', 'JUNAYNA', '2022-08-08 12:48:27', '2023-09-11 07:51:55'),
-(8, 'business_address', 'Sunrise Plaza, Shop number: 06, 2nd floor (Lift – 3), 3/1, Block - A, Lalmatia (Opposite to Dhanmondi govt. boys school and in between of Rapa Plaza and AARONG)', '2022-08-04 12:48:53', '2023-09-11 07:51:55'),
+(1, 'site_name', 'SEA FOOD', '2022-08-22 02:57:04', '2024-12-14 05:35:22'),
+(2, 'site_logo', 'upload/setting/logo/1734154298360_F_284988042_S1tff5ED13vn8N9ZyBli30ZNZnhytyxC__1_-removebg-preview.png', '2022-08-03 12:46:20', '2024-12-14 05:31:38'),
+(3, 'site_favicon', 'upload/setting/favicon/1734154298360_F_284988042_S1tff5ED13vn8N9ZyBli30ZNZnhytyxC__1_-removebg-preview.png', '2022-08-04 12:46:20', '2024-12-14 05:31:38'),
+(4, 'site_footer_logo', 'upload/setting/logo/1734154298360_F_284988042_S1tff5ED13vn8N9ZyBli30ZNZnhytyxC__1_-removebg-preview.png', '2022-08-03 12:46:20', '2024-12-14 05:31:38'),
+(5, 'phone', '+8801700000000', '2022-08-04 12:47:27', '2024-12-14 05:35:22'),
+(6, 'email', 'info@seafood.com', '2022-08-12 12:47:52', '2024-12-14 05:35:22'),
+(7, 'business_name', 'SEA FOOD', '2022-08-08 12:48:27', '2024-12-14 05:35:22'),
+(8, 'business_address', 'Uttara, Dhaka', '2022-08-04 12:48:53', '2024-12-14 05:35:22'),
 (9, 'business_hours', '10:00 - 8:00, Sa - Thu', '2022-08-01 12:49:29', NULL),
-(10, 'copy_right', 'Copy Right JUNAYNA  2023', '2022-08-05 12:49:58', '2023-09-11 07:51:55'),
+(10, 'copy_right', 'Copy Right SEA FOOD 2024', '2022-08-05 12:49:58', '2024-12-14 05:35:22'),
 (11, 'developed_by', 'Classic IT & Sky Mart Ltd.', '2022-08-14 12:50:24', NULL),
 (12, 'developer_link', 'https://www.classicit.com.bd/', '2022-08-13 12:50:56', NULL),
 (13, 'facebook_url', 'https://www.facebook.com/', '2022-08-18 12:51:19', '2022-09-06 22:56:57'),
@@ -1035,10 +1092,11 @@ CREATE TABLE `sliders` (
 --
 
 INSERT INTO `sliders` (`id`, `slider_img`, `title_en`, `title_bn`, `slider_url`, `description_bn`, `description_en`, `slug`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'upload/slider/1733386382beauty-salon-slider.jpg', 'Slider-1', 'Slider-1', '#', 'Slider-1', 'Slider-1', 'slider-1', 1, '2024-12-05 08:13:02', '2024-12-05 08:13:02'),
-(2, 'upload/slider/1817587402590563.jpg', 'Slider-2', 'Slider-2', '#', 'Slider-2', 'Slider-2', 'slider-2', 1, '2024-12-05 08:13:44', '2024-12-05 08:13:44'),
-(3, 'upload/slider/1817587462075778.jpg', 'Slider-3', 'Slider-3', '#', 'Slider-3', 'Slider-3', 'slider-3', 1, '2024-12-05 08:14:42', '2024-12-05 08:14:42'),
-(4, 'upload/slider/1817587504766129.jpg', 'Slider-4', 'Slider-4', '#', 'Slider-4', 'Slider-4', 'slider-4', 1, '2024-12-05 08:15:21', '2024-12-05 08:15:21');
+(1, 'upload/slider/1734150419gift-packages-banner_1.jpg', 'Slider-1', 'Slider-1', '#', 'Slider-1', 'Slider-1', 'slider-1', 1, '2024-12-14 04:26:59', '2024-12-14 04:26:59'),
+(2, 'upload/slider/1734150344seafood-display.jpg', 'Slider-2', 'Slider-2', '#', 'Slider-2', 'Slider-2', 'slider-2', 1, '2024-12-14 04:25:44', '2024-12-14 04:25:44'),
+(3, 'upload/slider/1734150334Seafood-banner.webp', 'Slider-3', 'Slider-3', '#', 'Slider-3', 'Slider-3', 'slider-3', 1, '2024-12-14 04:25:35', '2024-12-14 04:25:35'),
+(4, 'upload/slider/1734150431bg_counters.jpg', 'Slider-4', 'Slider-4', '#', 'Slider-4', 'Slider-4', 'slider-4', 1, '2024-12-14 04:27:11', '2024-12-14 04:27:11'),
+(6, 'upload/slider/1818388577671956.jpg', 'Slider-5', 'Slider-5', '#', 'Slider-5', 'Slider-5', 'slider-5', 1, '2024-12-14 04:28:04', '2024-12-14 04:28:04');
 
 -- --------------------------------------------------------
 
@@ -1963,6 +2021,12 @@ ALTER TABLE `multi_imgs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ordernotes`
+--
+ALTER TABLE `ordernotes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -2135,7 +2199,7 @@ ALTER TABLE `account_heads`
 -- AUTO_INCREMENT for table `account_ledgers`
 --
 ALTER TABLE `account_ledgers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `addresses`
@@ -2183,7 +2247,7 @@ ALTER TABLE `blogs`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `campaings`
@@ -2201,7 +2265,7 @@ ALTER TABLE `campaing_products`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -2237,25 +2301,31 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `multi_imgs`
 --
 ALTER TABLE `multi_imgs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `ordernotes`
+--
+ALTER TABLE `ordernotes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `order_statuses`
 --
 ALTER TABLE `order_statuses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -2315,7 +2385,7 @@ ALTER TABLE `shippings`
 -- AUTO_INCREMENT for table `sliders`
 --
 ALTER TABLE `sliders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `staff`
