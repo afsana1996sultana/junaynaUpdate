@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2024 at 06:37 AM
+-- Generation Time: Dec 15, 2024 at 11:00 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -100,7 +100,10 @@ INSERT INTO `account_ledgers` (`id`, `account_head_id`, `particulars`, `debit`, 
 (15, 2, 'Order ID: 5', 0, 240, 240, 2, 5, 0, '2024-12-09 05:18:10', '2024-12-09 05:18:10'),
 (16, 2, 'Order ID: 6', 0, 540, 540, 2, 6, 0, '2024-12-09 05:19:44', '2024-12-09 05:19:44'),
 (17, 2, 'Order ID: 7', 0, 500, 500, 2, 7, 0, '2024-12-09 05:21:24', '2024-12-09 05:21:24'),
-(18, 2, 'Order ID: 8', 0, 580, 580, 2, 8, 0, '2024-12-09 05:22:50', '2024-12-09 05:22:50');
+(18, 2, 'Order ID: 8', 0, 580, 580, 2, 8, 0, '2024-12-09 05:22:50', '2024-12-09 05:22:50'),
+(19, 2, 'Order ID: 9', 0, 1830, 1830, 2, 9, 0, '2024-12-14 09:56:28', '2024-12-14 09:56:28'),
+(20, 2, 'Invoice No: 0000013', 0, 1590, 1590, 2, 13, 0, '2024-12-15 05:26:48', '2024-12-15 05:26:48'),
+(21, 2, 'Order ID: 1', 0, 3330, 3330, 2, 1, 0, '2024-12-15 05:35:20', '2024-12-15 05:35:20');
 
 -- --------------------------------------------------------
 
@@ -646,6 +649,7 @@ CREATE TABLE `orders` (
   `shipping_type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `shipping_name` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sub_total` decimal(10,2) DEFAULT 0.00,
+  `pur_sub_total` decimal(10,2) DEFAULT 0.00,
   `grand_total` decimal(10,2) NOT NULL DEFAULT 0.00,
   `paid_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
   `due_amount` decimal(10,2) DEFAULT 0.00,
@@ -670,24 +674,11 @@ CREATE TABLE `orders` (
   `return_date` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `return_reason` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `type` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1=>Not guest order, 2=>Guest Order',
+  `sale_type` int(10) DEFAULT 1 COMMENT '1=>Manual Sale, 2=>Online Order',
   `created_by` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `user_id`, `seller_id`, `name`, `phone`, `email`, `division_id`, `district_id`, `upazilla_id`, `address`, `payment_method`, `payment_status`, `payment_details`, `shipping_charge`, `shipping_type`, `shipping_name`, `sub_total`, `grand_total`, `paid_amount`, `due_amount`, `discount`, `invoice_no`, `staff_id`, `staff_commission`, `viewed`, `delivery_viewed`, `payment_status_viewed`, `commission_calculated`, `comment`, `delivery_status`, `note_status`, `tracking_code`, `confirmed_date`, `processing_date`, `picked_date`, `shipped_date`, `delivered_date`, `cancel_date`, `return_date`, `return_reason`, `type`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, 'Afsana Sultana Labonno', '01753142981', 'afsana1996sultana@gmail.com', 1, 52, 509, 'Cantorment', 'cod', 'paid', NULL, '60.00', '1', 'Redex', '600.00', '660.00', '0.00', '0.00', '0.00', '2024120517164748', NULL, NULL, '0', '1', '1', '0', NULL, 'shipped', 'Response', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-05 11:16:47', '2024-12-09 07:05:34'),
-(2, 1, NULL, 'Azmira Sultana', '01753142981', 'azmira@gmail.com', 1, 52, 499, 'Gulshan-1', 'cod', 'unpaid', NULL, '60.00', '1', 'Redex', '300.00', '360.00', '0.00', '0.00', '0.00', '2024120518022760', NULL, NULL, '0', '1', '1', '0', 'Test', 'pending', 'Not Pickup call', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-05 12:02:27', '2024-12-09 07:05:59'),
-(3, 1, NULL, 'Afsana Sultana Labonno', '01753142981', 'afsana1996sultana@gmail.com', 1, 52, 509, 'Kochukhet', 'cod', 'unpaid', NULL, '60.00', '1', 'Redex', '680.00', '740.00', '0.00', '0.00', '0.00', '2024120911154523', NULL, NULL, '0', '1', '1', '0', 'Test', 'pending', 'Not Response', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:15:45', '2024-12-09 07:06:03'),
-(4, 1, NULL, 'Ashiqul Islam', '01689681783', 'ashiqulislamrasel@gmail.com', 1, 52, 519, 'Kadamtoli bus stand', 'cod', 'unpaid', NULL, '60.00', '1', 'Redex', '180.00', '240.00', '0.00', '0.00', '0.00', '2024120911170338', NULL, NULL, '0', '1', '1', '0', 'Test..', 'pending', 'Not Pickup call', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:17:03', '2024-12-09 07:06:11'),
-(5, 1, NULL, 'Minara Akter', '01790173857', 'minara@gmail.com', 1, 52, 495, 'DOHS', 'cod', 'unpaid', NULL, '60.00', '1', 'Redex', '180.00', '240.00', '0.00', '0.00', '0.00', '2024120911181039', NULL, NULL, '0', '1', '1', '0', NULL, 'pending', 'Not Pickup call', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:18:10', '2024-12-09 07:06:16'),
-(6, 1, NULL, 'Najmul Hasan', '01790173857', 'najmul123@gmail.com', 2, 1, 8, 'Laksum bazar', 'cod', 'unpaid', NULL, '150.00', '2', 'Sundarban Courier', '390.00', '540.00', '0.00', '0.00', '0.00', '2024120911194477', NULL, NULL, '0', '1', '1', '0', NULL, 'pending', 'Pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:19:44', '2024-12-09 05:19:44'),
-(7, 1, NULL, 'Afsana Sultana Labonno', '01753142981', 'afsana1996sultana@gmail.com', 3, 13, 116, 'Shalgaria Golapbag', 'cod', 'unpaid', NULL, '150.00', '2', 'Sundarban Courier', '350.00', '500.00', '0.00', '0.00', '0.00', '2024120911212417', NULL, NULL, '0', '1', '1', '0', NULL, 'pending', 'Not Response', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:21:24', '2024-12-09 07:06:21'),
-(8, 1, NULL, 'Jobeda Khatun', '01958106320', 'jobeda@gmail.com', 1, 52, 511, 'Azampur', 'cod', 'unpaid', NULL, '60.00', '1', 'Redex', '520.00', '580.00', '0.00', '0.00', '0.00', '2024120911225028', NULL, NULL, '0', '1', '1', '0', NULL, 'pending', 'Not Pickup call', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-12-09 05:22:50', '2024-12-09 07:31:41');
 
 -- --------------------------------------------------------
 
@@ -716,20 +707,6 @@ CREATE TABLE `order_details` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `order_details`
---
-
-INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_name`, `is_varient`, `variation`, `qty`, `price`, `tax`, `shipping_cost`, `payment_status`, `shipping_type`, `pickup_point_id`, `product_referral_code`, `delivery_status`, `note_status`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, 'Joyme Gel Nail Strips - 27', 0, NULL, '2', 300.00, 0.00, 0.00, 'paid', NULL, NULL, NULL, 'shipped', 'Response', '2024-12-05 11:16:47', '2024-12-09 07:05:34'),
-(2, 2, 3, 'Joyme Gel Nail Strips - 27', 0, NULL, '1', 300.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Pickup call', '2024-12-05 12:02:27', '2024-12-09 07:05:59'),
-(3, 3, 10, 'L\'Oreal Paris Elvive Colour Protect Anti-Brassiness Purple Conditioner 150ml', 0, NULL, '1', 680.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Response', '2024-12-09 05:15:45', '2024-12-09 07:06:03'),
-(4, 4, 4, 'MAANGE Makeup Auto Brush Cleaner – Pink', 0, NULL, '1', 180.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Pickup call', '2024-12-09 05:17:03', '2024-12-09 07:06:11'),
-(5, 5, 4, 'MAANGE Makeup Auto Brush Cleaner – Pink', 0, NULL, '1', 180.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Pickup call', '2024-12-09 05:18:10', '2024-12-09 07:06:16'),
-(6, 6, 7, 'Lipstick Holder 36 Grids', 0, NULL, '1', 390.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Pending', '2024-12-09 05:19:44', NULL),
-(7, 7, 6, 'Dual Sided Pocket Mirror With Doll - Light Pink', 0, NULL, '1', 350.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Response', '2024-12-09 05:21:24', '2024-12-09 07:06:21'),
-(8, 8, 9, 'Vatika Hair Fall Control Hair Oil 300ml – Cactus', 0, NULL, '1', 520.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', 'Not Pickup call', '2024-12-09 05:22:50', '2024-12-09 07:31:41');
-
 -- --------------------------------------------------------
 
 --
@@ -744,38 +721,6 @@ CREATE TABLE `order_statuses` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `order_statuses`
---
-
-INSERT INTO `order_statuses` (`id`, `order_id`, `title`, `comments`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Order Placed', '', '2024-12-05 11:16:47', '2024-12-05 11:16:47'),
-(2, 1, 'Payment Status: unpaid', '', '2024-12-05 11:16:47', '2024-12-05 11:16:47'),
-(3, 1, 'Delevery Status: Pending', '', '2024-12-05 11:16:47', '2024-12-05 11:16:47'),
-(4, 2, 'Order Placed', '', '2024-12-05 12:02:27', '2024-12-05 12:02:27'),
-(5, 2, 'Payment Status: unpaid', '', '2024-12-05 12:02:27', '2024-12-05 12:02:27'),
-(6, 2, 'Delevery Status: Pending', '', '2024-12-05 12:02:27', '2024-12-05 12:02:27'),
-(7, 1, 'Payment Status: paid', '', '2024-12-05 12:20:47', '2024-12-05 12:20:47'),
-(8, 1, 'Delevery Status: shipped', '', '2024-12-05 12:20:49', '2024-12-05 12:20:49'),
-(9, 3, 'Order Placed', '', '2024-12-09 05:15:45', '2024-12-09 05:15:45'),
-(10, 3, 'Payment Status: unpaid', '', '2024-12-09 05:15:45', '2024-12-09 05:15:45'),
-(11, 3, 'Delevery Status: Pending', '', '2024-12-09 05:15:45', '2024-12-09 05:15:45'),
-(12, 4, 'Order Placed', '', '2024-12-09 05:17:03', '2024-12-09 05:17:03'),
-(13, 4, 'Payment Status: unpaid', '', '2024-12-09 05:17:03', '2024-12-09 05:17:03'),
-(14, 4, 'Delevery Status: Pending', '', '2024-12-09 05:17:03', '2024-12-09 05:17:03'),
-(15, 5, 'Order Placed', '', '2024-12-09 05:18:10', '2024-12-09 05:18:10'),
-(16, 5, 'Payment Status: unpaid', '', '2024-12-09 05:18:10', '2024-12-09 05:18:10'),
-(17, 5, 'Delevery Status: Pending', '', '2024-12-09 05:18:10', '2024-12-09 05:18:10'),
-(18, 6, 'Order Placed', '', '2024-12-09 05:19:44', '2024-12-09 05:19:44'),
-(19, 6, 'Payment Status: unpaid', '', '2024-12-09 05:19:44', '2024-12-09 05:19:44'),
-(20, 6, 'Delevery Status: Pending', '', '2024-12-09 05:19:44', '2024-12-09 05:19:44'),
-(21, 7, 'Order Placed', '', '2024-12-09 05:21:24', '2024-12-09 05:21:24'),
-(22, 7, 'Payment Status: unpaid', '', '2024-12-09 05:21:24', '2024-12-09 05:21:24'),
-(23, 7, 'Delevery Status: Pending', '', '2024-12-09 05:21:24', '2024-12-09 05:21:24'),
-(24, 8, 'Order Placed', '', '2024-12-09 05:22:50', '2024-12-09 05:22:50'),
-(25, 8, 'Payment Status: unpaid', '', '2024-12-09 05:22:50', '2024-12-09 05:22:50'),
-(26, 8, 'Delevery Status: Pending', '', '2024-12-09 05:22:50', '2024-12-09 05:22:50');
 
 -- --------------------------------------------------------
 
@@ -858,6 +803,23 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pos_carts`
+--
+
+CREATE TABLE `pos_carts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `admin_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `stock_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `session_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quantity` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -913,13 +875,13 @@ INSERT INTO `products` (`id`, `brand_id`, `category_id`, `sub_category_id`, `sub
 (1, 7, 5, NULL, NULL, '', 0, 5, 0, NULL, 'Salmon Fresh - Huon Tasmania', 'Salmon Fresh - Huon Tasmania', 'Salmon-Fresh---Huon-Tasmania-frO0q', '86527', NULL, 2390, 0, 0, 0, 4500, 0, 1, 1, 100, 'upload/products/thumbnails/1818392282345716.webp', '<p>Salmon Fresh - Huon Tasmania</p>', '<p>Salmon Fresh - Huon Tasmania</p>', '<p>Salmon Fresh - Huon Tasmania</p>', '<p>Salmon Fresh - Huon Tasmania</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 08:54:59', '2024-12-14 05:26:56'),
 (2, 7, 5, NULL, NULL, '', 0, 5, 0, NULL, 'Whole Fresh Var Salmon', 'Whole Fresh Var Salmon', 'Whole-Fresh-Var-Salmon-S0uWF', '87840', NULL, 2500, 0, 0, 0, 3760, 0, 1, 1, 100, 'upload/products/thumbnails/1818392156525772.webp', '<p>Whole Fresh Var Salmon</p>', '<p>Whole Fresh Var Salmon</p>', '<p>Whole Fresh Var Salmon</p>', '<p>Whole Fresh Var Salmon</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 08:57:51', '2024-12-14 05:24:56'),
 (3, 8, 5, NULL, NULL, '', 0, 5, 0, NULL, 'European / Norwegian Salmon', 'European / Norwegian Salmon', 'European--Norwegian-Salmon-8Kkhh', '91936', NULL, 2200, 0, 0, 0, 3300, 0, 1, 1, 15, 'upload/products/thumbnails/1818392028051720.webp', '<p>European / Norwegian Salmon</p>', '<p>European / Norwegian Salmon</p>', '<p>European / Norwegian Salmon</p>', '<p>European / Norwegian Salmon</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 08:59:47', '2024-12-14 05:22:54'),
-(4, 6, 5, NULL, NULL, '', 0, 5, 0, NULL, 'FRESH ATLANTIC SALMON', 'FRESH ATLANTIC SALMON', 'FRESH-ATLANTIC-SALMON-QkqI8', '64720', NULL, 2120, 0, 0, 0, 3180, 0, 1, 1, 48, 'upload/products/thumbnails/1818391864566965.jpg', '<p>FRESH ATLANTIC SALMON</p>', '<p>FRESH ATLANTIC SALMON</p>', '<p>FRESH ATLANTIC SALMON</p>', '<p>FRESH ATLANTIC SALMON</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 09:02:10', '2024-12-14 05:20:18'),
+(4, 6, 5, NULL, NULL, '', 0, 5, 0, NULL, 'FRESH ATLANTIC SALMON', 'FRESH ATLANTIC SALMON', 'FRESH-ATLANTIC-SALMON-QkqI8', '64720', NULL, 2120, 0, 0, 0, 3180, 0, 1, 1, 46, 'upload/products/thumbnails/1818391864566965.jpg', '<p>FRESH ATLANTIC SALMON</p>', '<p>FRESH ATLANTIC SALMON</p>', '<p>FRESH ATLANTIC SALMON</p>', '<p>FRESH ATLANTIC SALMON</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 09:02:10', '2024-12-15 05:45:47'),
 (5, 6, 5, NULL, NULL, '', 0, 0, 0, NULL, 'Fresh Whole Indian Salmon', 'Fresh Whole Indian Salmon', 'Fresh-Whole-Indian-Salmon-90qYP', '25907', NULL, 2150, 0, 0, 0, 3220, 0, 1, 1, 50, 'upload/products/thumbnails/1818391753170620.webp', '<p>Fresh Whole Indian Salmon</p>', '<p>Fresh Whole Indian Salmon</p>', '<p>Fresh Whole Indian Salmon</p>', '<p>Fresh Whole Indian Salmon</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:27:43', '2024-12-14 05:18:32'),
-(6, 7, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Golda Shrimp', 'Golda Shrimp', 'Golda-Shrimp-zEMlj', '76226', NULL, 1220, 0, 0, 0, 1350, 0, 1, 1, 49, 'upload/products/thumbnails/1818391598553779.jpg', '<p>Golda Shrimp</p>', '<p>Golda Shrimp</p>', '<p>Golda Shrimp</p>', '<p>Golda Shrimp</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:31:33', '2024-12-14 05:16:04'),
-(7, 7, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Red Sea Prawns', 'Red Sea Prawns', 'Red-Sea-Prawns-YweiE', '24136', NULL, 1220, 0, 0, 0, 1590, 0, 1, 1, 39, 'upload/products/thumbnails/1818391486500456.webp', '<p>Red Sea Prawns</p>', '<p>Red Sea Prawns</p>', '<p>Red Sea Prawns</p>', '<p>Red Sea Prawns</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:34:39', '2024-12-14 05:14:17'),
-(8, 7, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Black Tiger Shrimp', 'Black Tiger Shrimp', 'Black-Tiger-Shrimp-04YgQ', '56719', NULL, 1430, 0, 0, 0, 1600, 0, 1, 1, 100, 'upload/products/thumbnails/1818391323571333.jpg', 'Black Tiger Shrimp', '<p>Black Tiger Shrimp</p>', '<p>Black Tiger Shrimp</p>', '<p>Black Tiger Shrimp</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:36:35', '2024-12-14 05:11:42'),
-(9, 8, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Frozen Scambi Head On Shell', 'Frozen Scambi Head On Shell', 'Frozen-Scambi-Head-On-Shell-0uH5N', '51213', NULL, 1390, 0, 0, 0, 1520, 0, 1, 1, 99, 'upload/products/thumbnails/1818391225935676.jpg', '<font face=\"Arial, sans-serif\">Frozen Scambi Head On Shell</font>', '<p>Frozen Scambi Head On Shell</p>', '<p>Frozen Scambi Head On Shell</p>', '<p>Frozen Scambi Head On Shell</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:40:17', '2024-12-14 05:10:09'),
-(10, 8, 3, NULL, NULL, '', 0, 0, 0, NULL, 'BD Shrimp Trading', 'BD Shrimp Trading', 'BD-Shrimp-Trading-sgTea', '86673', NULL, 1450, 0, 0, 0, 1680, 0, 1, 1, 49, 'upload/products/thumbnails/1818391171711769.png', '<p>BD Shrimp Trading</p>', '<p>BD Shrimp Trading</p>', '<p>BD Shrimp Trading</p>', '<p>BD Shrimp Trading</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:43:15', '2024-12-14 05:09:17');
+(6, 7, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Golda Shrimp', 'Golda Shrimp', 'Golda-Shrimp-zEMlj', '76226', NULL, 1220, 0, 0, 0, 1350, 0, 1, 1, 46, 'upload/products/thumbnails/1818391598553779.jpg', '<p>Golda Shrimp</p>', '<p>Golda Shrimp</p>', '<p>Golda Shrimp</p>', '<p>Golda Shrimp</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:31:33', '2024-12-15 05:42:12'),
+(7, 7, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Red Sea Prawns', 'Red Sea Prawns', 'Red-Sea-Prawns-YweiE', '24136', NULL, 1220, 0, 0, 0, 1590, 0, 1, 1, 37, 'upload/products/thumbnails/1818391486500456.webp', '<p>Red Sea Prawns</p>', '<p>Red Sea Prawns</p>', '<p>Red Sea Prawns</p>', '<p>Red Sea Prawns</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:34:39', '2024-12-15 05:45:47'),
+(8, 7, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Black Tiger Shrimp', 'Black Tiger Shrimp', 'Black-Tiger-Shrimp-04YgQ', '56719', NULL, 1430, 0, 0, 0, 1600, 0, 1, 1, 99, 'upload/products/thumbnails/1818391323571333.jpg', 'Black Tiger Shrimp', '<p>Black Tiger Shrimp</p>', '<p>Black Tiger Shrimp</p>', '<p>Black Tiger Shrimp</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:36:35', '2024-12-15 05:42:12'),
+(9, 8, 3, NULL, NULL, '', 0, 0, 0, NULL, 'Frozen Scambi Head On Shell', 'Frozen Scambi Head On Shell', 'Frozen-Scambi-Head-On-Shell-0uH5N', '51213', NULL, 1390, 0, 0, 0, 1520, 0, 1, 1, 98, 'upload/products/thumbnails/1818391225935676.jpg', '<font face=\"Arial, sans-serif\">Frozen Scambi Head On Shell</font>', '<p>Frozen Scambi Head On Shell</p>', '<p>Frozen Scambi Head On Shell</p>', '<p>Frozen Scambi Head On Shell</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:40:17', '2024-12-15 05:42:12'),
+(10, 8, 3, NULL, NULL, '', 0, 0, 0, NULL, 'BD Shrimp Trading', 'BD Shrimp Trading', 'BD-Shrimp-Trading-sgTea', '86673', NULL, 1450, 0, 0, 0, 1680, 0, 1, 1, 48, 'upload/products/thumbnails/1818391171711769.png', '<p>BD Shrimp Trading</p>', '<p>BD Shrimp Trading</p>', '<p>BD Shrimp Trading</p>', '<p>BD Shrimp Trading</p>', '[]', 0, '[]', NULL, 1, 0, 1, 1, 0, 4, '2024-12-05 10:43:15', '2024-12-14 09:56:28');
 
 -- --------------------------------------------------------
 
@@ -1845,6 +1807,9 @@ CREATE TABLE `users` (
   `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `division_id` int(11) DEFAULT NULL,
+  `district_id` int(11) DEFAULT NULL,
+  `upazilla_id` int(11) DEFAULT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `profile_image` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -1859,10 +1824,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `role`, `name`, `username`, `phone`, `email`, `address`, `profile_image`, `email_verified_at`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 4, 'Walking Customer', 'guest-user', '01627490402', 'guestuser@gmail.com', 'Dhaka', 'upload/user/1663045118avatar5.png', NULL, '$2y$10$iy93F5hZNH/zmluBuHBm5.1.hUsNJVR5PauM4Nu4Dg0rt5dBhoODK', 1, NULL, '2022-07-30 03:25:27', '2023-01-05 01:18:49'),
-(4, 1, 'Admin', 'admin', '01914424525', 'admin@gmail.com', 'Mirpur, Dhaka', '202312200922junayna logo design png-01.png', NULL, '$2y$10$AqTBF47mQF/pi9eLT1EACOK/Lo9Devx8LXorHmCELRlJJ9g4y5puK', 1, NULL, '2022-08-12 23:46:40', '2024-01-04 11:54:19'),
-(23, 2, 'Imogene Carr', 'Imogene-Carr-nlIIl', '01958106312', 'jazataqig@mailinator.com', 'Eum exercitation ea', NULL, NULL, '$2y$10$idvPLWfdLMIiUEfOH96QFeSTgcDBGhza3j2pK8L1oACN3/xf9NeMS', 1, NULL, '2023-01-31 02:06:35', '2023-01-31 02:09:07');
+INSERT INTO `users` (`id`, `role`, `name`, `username`, `phone`, `email`, `division_id`, `district_id`, `upazilla_id`, `address`, `profile_image`, `email_verified_at`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 4, 'Walking Customer', 'guest-user', '01627490402', 'guestuser@gmail.com', NULL, NULL, NULL, 'Dhaka', 'upload/user/1663045118avatar5.png', NULL, '$2y$10$iy93F5hZNH/zmluBuHBm5.1.hUsNJVR5PauM4Nu4Dg0rt5dBhoODK', 1, NULL, '2022-07-30 03:25:27', '2023-01-05 01:18:49'),
+(4, 1, 'Admin', 'admin', '01914424525', 'admin@gmail.com', NULL, NULL, NULL, 'Mirpur, Dhaka', '202312200922junayna logo design png-01.png', NULL, '$2y$10$AqTBF47mQF/pi9eLT1EACOK/Lo9Devx8LXorHmCELRlJJ9g4y5puK', 1, NULL, '2022-08-12 23:46:40', '2024-01-04 11:54:19'),
+(23, 2, 'Imogene Carr', 'Imogene-Carr-nlIIl', '01958106312', 'jazataqig@mailinator.com', NULL, NULL, NULL, 'Eum exercitation ea', NULL, NULL, '$2y$10$idvPLWfdLMIiUEfOH96QFeSTgcDBGhza3j2pK8L1oACN3/xf9NeMS', 1, NULL, '2023-01-31 02:06:35', '2023-01-31 02:09:07'),
+(249, 3, 'Soudia Mannan', 'Mumu', '01796325894', 'soudia@gmail.com', 8, 567, 9397, 'Sekhkuni Bazar', 'upload/admin_images/1818420572298459.jpg', NULL, '$2y$10$mYVqoIT8I6woMeIOOE3zY.nq/2YGDeRxebbZMHwZskNfZDpP0p8EO', 1, NULL, '2024-12-14 12:56:36', '2024-12-15 05:08:26');
 
 -- --------------------------------------------------------
 
@@ -2066,6 +2032,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `pos_carts`
+--
+ALTER TABLE `pos_carts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -2199,7 +2171,7 @@ ALTER TABLE `account_heads`
 -- AUTO_INCREMENT for table `account_ledgers`
 --
 ALTER TABLE `account_ledgers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `addresses`
@@ -2313,19 +2285,19 @@ ALTER TABLE `ordernotes`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_statuses`
 --
 ALTER TABLE `order_statuses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -2338,6 +2310,12 @@ ALTER TABLE `pages`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pos_carts`
+--
+ALTER TABLE `pos_carts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -2439,7 +2417,7 @@ ALTER TABLE `upazillas`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=249;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=250;
 
 --
 -- AUTO_INCREMENT for table `vendors`
