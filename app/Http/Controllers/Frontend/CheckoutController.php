@@ -171,6 +171,7 @@ class CheckoutController extends Controller
             'address' => $request->address,
             'comment' => $request->comment,
             'type' => $type,
+            'sale_type'   => 2,
         ]);
 
         if(get_setting('otp_system')){
@@ -283,6 +284,14 @@ class CheckoutController extends Controller
         ]);
         $ledger->balance = get_account_balance() + $order->grand_total;
         $ledger->save();
+
+        $amount = 0;
+        foreach ($order->order_details as $order_detail) {
+            $product_purchase_price = $order_detail->product->purchase_price;
+            $amount += $order_detail->product->purchase_price;
+        }
+        $order->pur_sub_total = $amount;
+        $order->save();
 
         $notification = array(
             'message' => 'Your order has been placed successfully.',

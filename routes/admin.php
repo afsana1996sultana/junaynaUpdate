@@ -154,7 +154,9 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 	Route::get('/vendor_inactive/{id}', [VendorController::class, 'inactive'])->name('vendor.in_active');
 
 	// Admin Customer All Routes
-	Route::resource('/customer', UserController::class);
+    Route::resource('/customer', UserController::class);
+    Route::get('/customer-status/{id}', [UserController::class, 'status'])->name('customer.status');
+    Route::get('/customer/delete/{id}', [UserController::class, 'destroy'])->name('customer.delete');
 
 	//Admin Campaign All Route
 	Route::resource('/campaing', CampaingController::class);
@@ -255,6 +257,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 	Route::prefix('orders')->group(function(){
 		// Orders All Route
 		Route::get('/all_orders', [OrderController::class, 'index'])->name('all_orders.index');
+        Route::get('/pos_all_orders', [OrderController::class, 'posindex'])->name('all_orders.posindex');
 		Route::get('/all_orders/{id}/show', [OrderController::class, 'show'])->name('all_orders.show');
 
 		Route::get('/orders_delete/{id}', [OrderController::class, 'destroy'])->name('delete.orders');
@@ -337,14 +340,18 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 		Route::get('/account-ledgers/delete/{id}', [AccountsController::class, 'ledger_destroy'])->name('accounts.ledgers.delete');
 	});
 
-	Route::post('/pos/customer/insert',[PosController::class,'customerInsert'])->name('customer.ajax.store.pos');
+    Route::post('/pos/customer/insert',[PosController::class,'customerInsert'])->name('customer.ajax.store.pos');
 
 	//Admin POS All Routes
-	Route::prefix('pos')->group(function(){
+    Route::prefix('pos')->group(function(){
 		Route::get('/', [PosController::class, 'index'])->name('pos.index');
 		Route::get('/product/{id}', [PosController::class, 'getProduct'])->name('pos.getProduct');
 		Route::get('/get-products', [PosController::class, 'filter'])->name('pos.filter');
 		Route::POST('/store', [PosController::class, 'store'])->name('pos.store');
+        Route::get('add-to-cart/product',[PosController::class, 'add_pos_product'])->name('add.pos.product');
+        Route::get('get-pos-cart/product',[PosController::class, 'getPosCartData'])->name('get.pos.CartData');
+        Route::get('/pos/delete/{id}', [PosController::class, 'posdelete'])->name('pos.delete.item');
+		Route::get('/pos/cart/update', [PosController::class, 'updatePosCart'])->name('pos.cart.update');
 	});
 
 });
