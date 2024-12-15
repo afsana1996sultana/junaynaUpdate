@@ -13,7 +13,7 @@
 <section class="content-main">
     <div class="content-header">
         <div>
-            <h2 class="content-title card-title">Online Order List</h2>
+            <h2 class="content-title card-title">POS Order List</h2>
         </div>
     </div>
     <div class="row">
@@ -24,7 +24,7 @@
                     <form class="" action="" method="GET">
                         <div class="form-group row mb-3">
                             <div class="col-md-2">
-                                <label class="col-form-label"><span>All Online Orders :</span></label>
+                                <label class="col-form-label"><span>All Inhouse Orders :</span></label>
                             </div>
                             <div class="col-md-2 mt-2">
                                 <div class="custom_select">
@@ -81,11 +81,11 @@
                                         <th>Customer Phone</th>
                                         <th>Amount</th>
                                         <th>Profit</th>
-                                        <th>Shipping</th>
                                         <th>Delivery Status</th>
                                         <th>Payment Status</th>
                                         <th>Note Status</th>
                                         <th>Created Date</th>
+                                        <th>Sale By</th>
                                         <th class="text-end">Options</th>
                                     </tr>
                                 </thead>
@@ -96,8 +96,7 @@
                                         <td><b>{{ $order->name ?? '' }}</b></td>
                                         <td>{{ $order->phone ?? 'No Phone' }}</td>
                                         <td>{{ $order->grand_total }}</td>
-                                        <td>{{ $order->grand_total - ($order->shipping_charge + $order->pur_sub_total) }}</td>
-                                        <td>{{ $order->shipping_charge }}</td>
+                                        <td>{{ $order->grand_total - $order->pur_sub_total }}</td>
                                         <td>
                                             @php
                                                 $status = $order->delivery_status;
@@ -125,6 +124,7 @@
                                         </td>
                                         <td>{{ $order->note_status }}</td>
                                         <td>{{ $order->created_at ? $order->created_at->format('Y-m-d g:i:s A') : '' }}</td>
+                                        <td>{{ $order->staff->user->name ?? 'Admin' }}</td>
                                         <td class="text-end">
                                             <a  class="btn btn-primary btn-icon btn-circle btn-sm btn-xs" href="{{route('all_orders.show',$order->id) }}">
                                                 <i class="fa-solid fa-eye"></i>

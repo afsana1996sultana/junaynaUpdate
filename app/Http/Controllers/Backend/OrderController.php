@@ -26,40 +26,76 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request)
-    {
-        $delivery_status = $request->input('delivery_status');
-        $payment_status = $request->input('payment_status');
-        $note_status = $request->input('note_status');
-        $date_range = $request->input('date_range');
+     public function index(Request $request)
+     {
+         $delivery_status = $request->input('delivery_status');
+         $payment_status = $request->input('payment_status');
+         $note_status = $request->input('note_status');
+         $date_range = $request->input('date_range');
 
-        $orders = Order::query();
+         $orders = Order::query();
 
-        if ($delivery_status) {
-            $orders->where('delivery_status', $delivery_status);
-        }
-        if ($payment_status) {
-            $orders->where('payment_status', $payment_status);
-        }
-        if ($note_status) {
-            $orders->where('note_status', $note_status);
-        }
-        if ($date_range) {
-            try {
-                $dates = explode(' - ', $date_range);
-                $start_date = \Carbon\Carbon::createFromFormat('Y-m-d h:i A', trim($dates[0]));
-                $end_date = \Carbon\Carbon::createFromFormat('Y-m-d h:i A', trim($dates[1]));
-                $orders->whereBetween('created_at', [$start_date, $end_date]);
-            } catch (\Exception $e) {
-                // Handle invalid date range
-            }
-        }
+         if ($delivery_status) {
+             $orders->where('delivery_status', $delivery_status);
+         }
+         if ($payment_status) {
+             $orders->where('payment_status', $payment_status);
+         }
+         if ($note_status) {
+             $orders->where('note_status', $note_status);
+         }
+         if ($date_range) {
+             try {
+                 $dates = explode(' - ', $date_range);
+                 $start_date = \Carbon\Carbon::createFromFormat('Y-m-d h:i A', trim($dates[0]));
+                 $end_date = \Carbon\Carbon::createFromFormat('Y-m-d h:i A', trim($dates[1]));
+                 $orders->whereBetween('created_at', [$start_date, $end_date]);
+             } catch (\Exception $e) {
+                 // Handle invalid date range
+             }
+         }
 
-        $orders = $orders->paginate(15);
-        $ordernotes = Ordernote::where('status', 1)->get();
+         $orders = $orders->where('sale_type', 2)->paginate(15);
+         $ordernotes = Ordernote::where('status', 1)->get();
 
-        return view('backend.sales.all_orders.index', compact('orders', 'delivery_status', 'payment_status', 'note_status', 'date_range', 'ordernotes'));
-    }
+         return view('backend.sales.all_orders.index', compact('orders', 'delivery_status', 'payment_status', 'note_status', 'date_range', 'ordernotes'));
+     }
+
+
+     public function Posindex(Request $request)
+     {
+         $delivery_status = $request->input('delivery_status');
+         $payment_status = $request->input('payment_status');
+         $note_status = $request->input('note_status');
+         $date_range = $request->input('date_range');
+
+         $orders = Order::query();
+
+         if ($delivery_status) {
+             $orders->where('delivery_status', $delivery_status);
+         }
+         if ($payment_status) {
+             $orders->where('payment_status', $payment_status);
+         }
+         if ($note_status) {
+             $orders->where('note_status', $note_status);
+         }
+         if ($date_range) {
+             try {
+                 $dates = explode(' - ', $date_range);
+                 $start_date = \Carbon\Carbon::createFromFormat('Y-m-d h:i A', trim($dates[0]));
+                 $end_date = \Carbon\Carbon::createFromFormat('Y-m-d h:i A', trim($dates[1]));
+                 $orders->whereBetween('created_at', [$start_date, $end_date]);
+             } catch (\Exception $e) {
+                 // Handle invalid date range
+             }
+         }
+
+         $orders = $orders->where('sale_type', 1)->paginate(15);
+         $ordernotes = Ordernote::where('status', 1)->get();
+
+         return view('backend.sales.all_orders.pos_sale_index', compact('orders', 'delivery_status', 'payment_status', 'note_status', 'date_range', 'ordernotes'));
+     }
 
 
     /**

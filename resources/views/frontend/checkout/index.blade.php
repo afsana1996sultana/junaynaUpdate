@@ -674,5 +674,4 @@
          });
     });
 </script>
-
 @endpush
