@@ -490,7 +490,7 @@
 
             BasicSlider.slick({
                 autoplay: true,
-                autoplaySpeed: 3000,
+                autoplaySpeed: 1000,
                 dots: false,
                 infinite: true,
                 prevArrow: '<button type="button" class="slick-prev"><i class="fa fa-angle-left"></i></button>',

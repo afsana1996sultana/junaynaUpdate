@@ -155,8 +155,6 @@ if (!function_exists('get_upazilla_by_district_id')) {
     }
 }
 
-
-
 if (!function_exists('get_guest_user_id')) {
     function get_guest_user_id()
     {

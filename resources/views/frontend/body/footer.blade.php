@@ -214,10 +214,10 @@
             <div class="row align-items-center copyright__content">
                  <div class="col-12 text-center">
                       <p class="m-0">&copy; {{ get_setting('copy_right')->value ?? 'null' }} All rights reserved </p>
-                    <!--<span> -->
-                    <!--Developed by:-->
-                    <!--    <a target="_blank" href="https://classicit.com.bd/">Classic IT</a>-->
-                    <!--</span>-->
+                    <span>
+                        Developed by:
+                        <a target="_blank" href="https://codehouseit.com/">Codehouse IT</a>
+                    </span>
                 </div>
             </div>
         </div>

@@ -349,10 +349,10 @@ class PosController extends Controller
             $user_name = $find_user->name;
             $user_email = $find_user->email;
             $user_phone = $find_user->phone;
-            $user_city  = $find_user->division_id;
-            $user_zone = $find_user->district_id;
-            $user_area = $find_user->upazilla_id;
-            $user_address = $find_user->address;
+            $user_city  = $find_user->division_id ?? '0';
+            $user_zone = $find_user->district_id ?? '0';
+            $user_area = $find_user->upazilla_id ?? '0';
+            $user_address = $find_user->address ?? '0';
         }
         if ($request->paid_amount == '') {
             $notification = array(
@@ -386,9 +386,9 @@ class PosController extends Controller
             'name'              => $user_name,
             'phone'             => $user_phone,
             'email'             => $user_email,
-            'division_id'       => $user_city,
-            'district_id'       => $user_zone,
-            'upazilla_id'       => $user_area,
+            'division_id'       => $request->division_id ?? '0',
+            'district_id'       => $request->district_id ?? '0',
+            'upazilla_id'       => $request->upazilla_id ?? '0',
             'address'           => $user_address,
             'type'              => 1,
             'sale_type'         => 1,
