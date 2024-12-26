@@ -202,7 +202,6 @@
 	                                    <div class="font-xs">
 	                                        <ul class="mr-50 float-start">
 	                                            <li class="mb-5">Regular Price: <span class="text-brand">{{ $product->regular_price }}</span></li>
-	                                            {{-- <li class="mb-5">Stock: <span class="text-brand">{{ $product->stock_qty}}</span></li> --}}
 	                                            <li class="mb-5">Category:<span class="text-brand">
 	                                            	{{ $product->category->name_en ?? 'No Category'}}
 	                                            </span></li>

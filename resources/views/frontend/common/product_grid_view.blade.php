@@ -78,7 +78,7 @@
                 <span class="rating-count">({{ number_format($averageRating, 1) }})</span>
             </div>
  
-             <div class="product-card-bottom">
+             <div class="product-card-bottom d-flex">
                 @if ($product->discount_price > 0)
                      <div class="product-price">
                          <span class="price">৳{{ $price_after_discount }}</span>
@@ -89,19 +89,10 @@
                          <span class="price">৳{{ $product->regular_price }}</span>
                      </div>
                  @endif
-                 {{--  <div class="add-cart">
-                     @if ($product->is_varient == 1)
-                         <a class="add" id="{{ $product->id }}" onclick="productView(this.id)"
-                             data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                 class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                     @else
-                         <input type="hidden" id="pfrom" value="direct">
-                         <input type="hidden" id="product_product_id" value="{{ $product->id }}" min="1">
-                         <input type="hidden" id="{{ $product->id }}-product_pname" value="{{ $product->name_en }}">
-                         <a class="add" onclick="addToCartDirect({{ $product->id }})"><i
-                                 class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                     @endif
-                 </div>  --}}
+                @php
+                    $productsellcount = \App\Models\OrderDetail::where('product_id', $product->id)->sum('qty') ?? 0;
+                @endphp
+                <span class="price">Sold({{ $productsellcount }})</span>
              </div>
          </div>
      </div>

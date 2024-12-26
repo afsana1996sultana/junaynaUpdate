@@ -24,6 +24,7 @@
 	                    @endif
                 	</a>
                 </h2>
+
 				@php
 					$reviews = \App\Models\Review::where('product_id', $product->id)
 					->where('status', 1)
@@ -69,6 +70,11 @@
 	                    	<span class="price"> ৳{{ $product->regular_price }} </span>
 	                    </div>
 	                @endif
+					@php
+						$productsellcount = \App\Models\OrderDetail::where('product_id', $product->id)->sum('qty') ?? 0;
+					@endphp
+					<span class="price">Sold({{ $productsellcount }})</span>
+
                     <div class="add-cart">
                         @if($product->is_varient == 1)
 	                        <a class="add" id="{{ $product->id }}" onclick="productView(this.id)" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
