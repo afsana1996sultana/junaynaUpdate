@@ -54,7 +54,7 @@
                             <div class="col-sm-6 mb-4">
                                 <label for="address" class="col-form-label" style="font-weight: bold;"><span class="text-danger">*</span> Cities:</label>
                                 <select class="form-control select-active" aria-label="Default select example" name="division_id" id="division_id" required>
-                                    <option value="" selected disabled>Select a City</option>
+                                    <option value="" selected disabled>Select a Division</option>
                                     @foreach(get_divisions() as $division)
                                         <option value="{{ $division->id }}" {{ $division->id == $customer->division_id ? 'selected' : '' }}>{{ ucwords($division->division_name_en) }}</option>
                                     @endforeach
@@ -64,31 +64,27 @@
                             <div class="col-sm-6 mb-4">
                                 <label for="address" class="col-form-label" style="font-weight: bold;"><span class="text-danger">*</span> Zone:</label>
                                 <select class="form-control select-active"aria-label="Default select example" name="district_id" id="district_id" required>
-                                    <option value="" selected disabled>Select a Zone</option>
-                                    @foreach ($zones as $zone)
-                                        <option value="{{ $zone->zone_id }}" {{ $zone->zone_id == $customer->district_id ? 'selected' : '' }}>
-                                            {{ ucwords($zone->zone_name) }}
+                                    <option selected="" value="">Select District</option>
+                                    @foreach (get_district_by_division_id($customer->division_id) as $district)
+                                        <option value="{{ $district->id }}"
+                                            {{ $district->id == $customer->district_id ? 'selected' : '' }}>
+                                            {{ ucwords($district->district_name_en) }}
                                         </option>
                                     @endforeach
                                 </select>
-
-                                <label for="district_id" class="col-form-label" style="font-weight: bold;"><span class="text-danger">*</span> District:</label>
-                                <select class="form-control select-active" name="district_id" id="district_id" required>
-                                    <option selected=""  value="">Select District</option>
-                                </select>
-                                @error('district_id')
-                                    <span>{{ $message }}</span>
-                                @enderror
                             </div>
 
                             <div class="col-sm-6 mb-4">
                                 <label for="address" class="col-form-label" style="font-weight: bold;"> Upazilla:</label>
                                 <select class="form-control select-active" name="upazilla_id" id="upazilla_id" required>
-                                    <option selected=""  value="">Select Upazilla</option>
+                                    <option selected="" value="">Select Upazilla</option>
+                                    @foreach (get_upazilla_by_district_id($customer->district_id) as $upazilla)
+                                        <option value="{{ $upazilla->id }}"
+                                            {{ $upazilla->id == $customer->upazilla_id ? 'selected' : '' }}>
+                                            {{ ucwords($upazilla->name_en) }}
+                                        </option>
+                                    @endforeach
                                 </select>
-                               @error('upazilla_id')
-                                   <span>{{ $message }}</span>
-                               @enderror
                             </div>
 
                             <div class="col-sm-6 mb-4">
@@ -126,80 +122,87 @@
 </section>
 <!--  Division To District Show Ajax -->
 <script type="text/javascript">
-    $(document).ready(function() {
-      $('select[name="division_id"]').on('change', function(){
-          var division_id = $(this).val();
-          if(division_id) {
-              $.ajax({
-                  url: "{{  url('/division-district/ajax') }}/"+division_id,
-                  type:"GET",
-                  dataType:"json",
-                  success:function(data) {
-                      $('select[name="district_id"]').html('<option value="" selected="" disabled="">Select District</option>');
-                          $.each(data, function(key, value){
-                          $('select[name="district_id"]').append('<option value="'+ value.id +'">' + capitalizeFirstLetter(value.district_name_en) + '</option>');
-                      });
-                      $('select[name="upazilla_id"]').html('<option value="" selected="" disabled="">Select District</option>');
-                  },
-              });
-          } else {
-             alert('danger');
-          }
-      });
+    $(document).on('change',"#division_id", function() {
+        var division_id = $(this).val();
+        console.log('ore vaiya division id key ha!',division_id)
+        if (division_id) {
+            $.ajax({
+                url: "{{ url('/division-district/ajax') }}/" + division_id,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    $('select[name="district_id"]').html(
+                        '<option value="" selected="" disabled="">Select District</option>'
+                    );
+                    $.each(data, function(key, value) {
+                        $('select[name="district_id"]').append(
+                            '<option value="' + value.id + '">' +
+                            capitalizeFirstLetter(value.district_name_en) +
+                            '</option>');
+                    });
+                    $('select[name="upazilla_id"]').html(
+                        '<option value="" selected="" disabled="">Select District</option>'
+                    );
+                },
+            });
+        } else {
+            alert('danger');
+        }
+    });
 
-      function capitalizeFirstLetter(string) {
+    function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
-      }
+    }
 
-      // Address Realtionship Division/District/Upazilla Show Data Ajax //
-      $('select[name="address_id"]').on('change', function(){
-          var address_id = $(this).val();
-          $('.selected_address').removeClass('d-none');
-          if(address_id) {
-              $.ajax({
-                  url: "{{  url('/address/ajax') }}/"+address_id,
-                  type:"GET",
-                  dataType:"json",
-                  success:function(data) {
-
-                      $('#dynamic_division').text(capitalizeFirstLetter(data.division_name_en));
-                      $('#dynamic_division_input').val(data.division_id);
-                      $("#dynamic_district").text(capitalizeFirstLetter(data.district_name_en));
-                      $('#dynamic_district_input').val(data.district_id);
-                      $("#dynamic_upazilla").text(capitalizeFirstLetter(data.upazilla_name_en));
-                      $('#dynamic_upazilla_input').val(data.upazilla_id);
-                      $("#dynamic_address").text(data.address);
-                      $('#dynamic_address_input').val(data.address);
-                  },
-              });
-          } else {
-             alert('danger');
-          }
-      });
-  });
-  </script>
-
-  <!--  District To Upazilla Show Ajax -->
-  <script type="text/javascript">
-      $(document).ready(function() {
-          $('select[name="district_id"]').on('change', function(){
-              var district_id = $(this).val();
-              if(district_id) {
-                  $.ajax({
-                      url: "{{  url('/district-upazilla/ajax') }}/"+district_id,
-                      type:"GET",
-                      dataType:"json",
-                      success:function(data) {
-                         var d =$('select[name="upazilla_id"]').empty();
-                          $.each(data, function(key, value){
-                              $('select[name="upazilla_id"]').append('<option value="'+ value.id +'">' + value.name_en + '</option>');
-                          });
-                      },
-                  });
-              } else {
-                  alert('danger');
-              }
-          });
-      });
-  </script>
+    // Address Realtionship Division/District/Upazilla Show Data Ajax //
+    $(document).on('change',"#address_id", function() {
+        var address_id = $(this).val();
+        $('.selected_address').removeClass('d-none');
+        if (address_id) {
+            $.ajax({
+                url: "{{ url('/address/ajax') }}/" + address_id,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    $('#dynamic_division').text(capitalizeFirstLetter(data
+                        .division_name_en));
+                    $('#dynamic_division_input').val(data.division_id);
+                    $("#dynamic_district").text(capitalizeFirstLetter(data
+                        .district_name_en));
+                    $('#dynamic_district_input').val(data.district_id);
+                    $("#dynamic_upazilla").text(capitalizeFirstLetter(data
+                        .upazilla_name_en));
+                    $('#dynamic_upazilla_input').val(data.upazilla_id);
+                    $("#dynamic_address").text(data.address);
+                    $('#dynamic_address_input').val(data.address);
+                },
+            });
+        } else {
+            alert('danger');
+        }
+    });
+</script>
+ <!--  District To Upazilla Show Ajax -->
+ <script type="text/javascript">
+    $(document).on('change',"#district_id", function() {
+        var district_id = $(this).val();
+        if (district_id) {
+            $.ajax({
+                url: "{{ url('/district-upazilla/ajax') }}/" + district_id,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    var d = $('select[name="upazilla_id"]').empty();
+                    $.each(data, function(key, value) {
+                        $('select[name="upazilla_id"]').append(
+                            '<option value="' + value.id + '">' + value
+                            .name_en + '</option>');
+                    });
+                },
+            });
+        } else {
+            alert('danger');
+        }
+    });
+</script>
 @endsection

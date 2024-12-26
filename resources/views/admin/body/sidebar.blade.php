@@ -203,7 +203,7 @@
             </li>
             @if(Auth::guard('admin')->user()->role == '1')
             <li class="menu-item has-submenu
-                {{ ($route == 'stock_report.index')? 'active':'' }}
+                {{ ($route == 'stock_report.index') || ($route == 'product_sell_report.index')? 'active':'' }}
             ">
                 <a class="menu-link" href="#">
                    <i class="icon material-icons md-pie_chart"></i>
@@ -211,6 +211,7 @@
                 </a>
                 <div class="submenu">
                     <a class="{{ ($route == 'stock_report.index') ? 'active':'' }}" href="{{ route('stock_report.index') }}">Product Stock</a>
+                    <a class="{{ ($route == 'product_sell_report.index') ? 'active':'' }}" href="{{ route('product_sell_report.index') }}">Product Sell Report</a>
                 </div>
             </li>
             @endif

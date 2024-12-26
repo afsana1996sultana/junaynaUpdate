@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Vendor;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -17,28 +19,62 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        $sort_by =null;
+        $sort_by = null;
         $products = Product::orderBy('created_at', 'desc');
-
-        if(Auth::guard('admin')->user()->role == '2'){
+        $categories = Category::where('id', $request->category_id)->select('id', 'name_en')->first();
+        
+        if (Auth::guard('admin')->user()->role == '2') {
             $products = Product::orderBy('created_at', 'desc')->where('vendor_id', Auth::guard('admin')->user()->id);
-            if ($request->has('category_id')){
+        
+            // Check if category_id is present in the request
+            if ($request->has('category_id')) {
                 $sort_by = $request->category_id;
-                $products = $products->where('category_id', $sort_by);
+                $products->where('category_id', $sort_by);
             }
             $vendor = Vendor::where('user_id', Auth::guard('admin')->user()->id)->first();
-            if($vendor){
-                $products = Product::where('vendor_id', $vendor->id)->latest()->paginate(20);
+        
+            if ($vendor) {
+                $products->where('vendor_id', $vendor->user_id)->latest();
             }
-        }else{
-            if ($request->has('category_id')){
+            //return $products->get();
+        } else {
+            $products = Product::orderBy('created_at', 'desc');
+        
+            if ($request->has('category_id')) {
                 $sort_by = $request->category_id;
-                $products = $products->where('category_id', $sort_by);
+                $products->where('category_id', $sort_by);
             }
-            $products = $products->paginate(20);
+
+            //return $products->get();
+        }
+        $products = $products->paginate(20);
+        return view('backend.reports.index', compact('products', 'categories'));
+    }
+
+
+    public function ProductSellindex(Request $request)
+    {
+        $products = Product::query()->orderBy('created_at', 'desc');
+        // Filter by vendor if the user is a vendor
+        if (Auth::guard('admin')->user()->role == '2') {
+            $vendorId = Auth::guard('admin')->user()->id;
+            $products->where('vendor_id', $vendorId);
         }
 
-        return view('backend.reports.index', compact('products'));
+        // Filter by category if provided
+        if ($request->has('category_id')) {
+            $products->where('category_id', $request->category_id);
+        }
+    
+        // Paginate the result
+        $products = $products->withCount(['orderDetails as product_sell_count' => function ($query) {
+            $query->select(DB::raw("SUM(qty)"));
+        }])->paginate(20);
+    
+        // Fetch the category (if needed)
+        $categories = Category::find($request->category_id);
+    
+        return view('backend.reports.productsellindex', compact('products', 'categories'));
     }
 
     /**

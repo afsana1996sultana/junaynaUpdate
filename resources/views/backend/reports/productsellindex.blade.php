@@ -11,7 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <section class="content-main">
     <div class="content-header">
-        <h2 class="content-title">Product wise stock report</h2>
+        <h2 class="content-title">Product Sell report</h2>
     </div>
     <div class="row justify-content-center">
     	<div class="col-sm-10">
@@ -20,7 +20,7 @@
 		            <div class="row">
 		                <div class="col-md-12">
 		                   <div class="card-body">
-				                <form action="{{ route('stock_report.index') }}" method="GET">
+				                <form action="{{ route('product_sell_report.index') }}" method="GET">
 				                    <div class="form-group row mb-3">
 				                        <label class="col-md-6 col-form-label">Sort by Category : {{ $categories->name_en ?? ''}}</label>
 				                        <div class="col-md-4">
@@ -41,44 +41,27 @@
 				                    <thead>
 				                        <tr>
 				                            <th>Product Name</th>
-				                            <th class="text-center">Variant</th>
-				                            <th class="text-center">Purchase price</th>
-				                            <th class="text-center">Selling price</th>
-				                            <th class="text-center">Stock</th>
+											<th class="text-center">Recent Stock</th>
+				                            <th class="text-center">Product Sell Count</th>
 				                        </tr>
 				                    </thead>
 				                    @if($products->count() > 0)
-					                    <tbody>
-						                        @foreach ($products as $key => $product)
-						                        	@if($product->is_varient)
-						                        		@foreach ($product->stocks as $key => $stock)
-					                        				<tr>
-								                                <td>{{ $product->name_en }}</td>
-								                                <td class="text-center">{{ $stock->varient }}</td>
-								                                <td class="text-center">{{ $product->purchase_price }}</td>
-								                                <td class="text-center">{{ $product->regular_price }}</td>
-								                                <td class="text-center">{{ $stock->pre_qty }}</td>
-								                                <td class="text-center">{{ $stock->qty }}</td>
-								                            </tr>
-						                        		@endforeach
-						                        	@else
-							                            <tr>
-							                                <td>{{ $product->name_en }}</td>
-							                                <td class="text-center">-</td>
-                                                            <td class="text-center">{{ $product->purchase_price }}</td>
-                                                            <td class="text-center">{{ $product->regular_price }}</td>
-							                                <td class="text-center">{{ $product->stock_qty }}</td>
-							                            </tr>
-						                            @endif
-						                        @endforeach
-					                    </tbody>
-				                    @else
-					                    <tbody>
-					                       <tr>
-				                                <td colspan="3" class="text-center">There Are No Products.</td>
-				                            </tr>
-					                    </tbody>
-				                    @endif
+										<tbody>
+											@foreach ($products as $product)
+												<tr>
+													<td>{{ $product->name_en }}</td>
+													<td class="text-center">{{ $product->stock_qty }}</td>
+													<td class="text-center">{{ $product->product_sell_count ?? '0' }}</td>
+												</tr>
+											@endforeach
+										</tbody>
+									@else
+										<tbody>
+											<tr>
+												<td colspan="3" class="text-center">There Are No Products.</td>
+											</tr>
+										</tbody>
+									@endif
 				                </table>
 				                <div class="pagination-area mt-25 mb-50">
 		                            <nav aria-label="Page navigation example">

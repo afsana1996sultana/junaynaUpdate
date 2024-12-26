@@ -21,7 +21,7 @@
                             <div class="mb-4">
                                 <label for="name" class="col-form-label col-md-3" style="font-weight: bold;">Provider Name:</label>
                                 <input class="form-control" id="name" type="hidden" name="name" placeholder="Write name here" value="{{old('name')}}">
-                                <input class="form-control" type="text" placeholder="Classic IT" value="">
+                                <input class="form-control" type="text" placeholder="Codehouse IT" value="">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -29,7 +29,7 @@
                             <div class="mb-4">
                                 <label for="url" class="col-form-label col-md-3" style="font-weight: bold;">Provider URL:</label>
                                 <input class="form-control" id="url" type="hidden" name="url" placeholder="Write url here" value="{{old('url')}}">
-                                 <input class="form-control" type="text" placeholder="http://sms.classicit.com.bd/smsapi" value="">
+                                 <input class="form-control" type="text" placeholder="http://sms.codehouseit.com/smsapi" value="">
                                 @error('url')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -45,7 +45,7 @@
                             <div class="mb-4">
                                 <label for="sender_id" class="col-form-label col-md-3" style="font-weight: bold;">Sender ID:</label>
                                 <input class="form-control" id="sender_id" type="hidden" name="sender_id" placeholder="Write sender id here" value="{{old('sender_id')}}">
-                                <input class="form-control" type="text" placeholder="Classic IT" value="">
+                                <input class="form-control" type="text" placeholder="Codehouse IT" value="">
                                 @error('sender_id')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

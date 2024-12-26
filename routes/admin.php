@@ -43,8 +43,8 @@ use App\Http\Controllers\Backend\UserController;
 
 
 /*========================== Start Admin Route  ==========================*/
-Route::get('/admin',[AdminController::class, 'Index'])->name('login_form');
-Route::post('/admin',[AdminController::class, 'Login'])->name('admin.login');
+Route::get('/c/admin',[AdminController::class, 'Index'])->name('login_form');
+Route::post('/c/admin',[AdminController::class, 'Login'])->name('admin.login');
 
 // Admin All Routes
 Route::prefix('admin')->middleware('admin')->group(function(){
@@ -275,6 +275,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 	// Report All Route
 	Route::get('/stock_report', [ReportController::class, 'index'])->name('stock_report.index');
+	Route::get('/product_sell_report', [ReportController::class, 'ProductSellindex'])->name('product_sell_report.index');
 
 	/*================  Admin Address Updated  ==================*/
 	Route::post('/address/update/{id}', [OrderController::class, 'admin_address_update'])->name('admin.address.update');
