@@ -1,11 +1,3 @@
-<!-- <ul>
-    @foreach($products as $item)
-        <li>
-            <img src="{{ asset($item->product_thumbnail) }}" style="width: 30px; height: 30px;">
-            {{ $item->name_en }}</li>
-    @endforeach
-</ul> -->
-
 <style>
     .card {
         background-color: #fff;
@@ -64,8 +56,6 @@
     @if($products -> isEmpty())
     <h5 class="text-center text-danger p-4">Product Not Found </h5>
     @else
-     
-    
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">

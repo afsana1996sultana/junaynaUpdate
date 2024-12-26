@@ -96,6 +96,7 @@ Category Nest Online Shop
                                         {{ Str::limit($p_name_en, $limit = 30, $end = '. . .') }}
                                     @endif
                                 </a>
+                               
                                 @php
                                    $reviews = \App\Models\Review::where('product_id', $product->id)
                                    ->where('status', 1)
@@ -123,7 +124,7 @@ Category Nest Online Shop
                                    @endif
                                    <span class="rating-count">({{ number_format($averageRating, 1) }})</span>
                                </div>
-                                <div class="price">
+                                <div class="price d-flex">
                                     <span>
                                         @php
                                             if ($product->discount_type == 1) {
@@ -145,6 +146,10 @@ Category Nest Online Shop
                                             </div>
                                         @endif
                                     </span>
+                                    @php
+                                        $productsellcount = \App\Models\OrderDetail::where('product_id', $product->id)->sum('qty') ?? 0;
+                                    @endphp
+                                    <span class="price">Sold({{ $productsellcount }})</span>
                                 </div>
                             </div>
                         </div>

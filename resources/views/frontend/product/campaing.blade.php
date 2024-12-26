@@ -185,7 +185,7 @@ Category Nest Online Shop
                                                     <span class="rating-count">({{ number_format($averageRating, 1) }})</span>
                                                 </div>
                                      
-                                                 <div class="product-card-bottom">
+                                                 <div class="product-card-bottom d-flex">
                                                     @if ($product->discount_price > 0)
                                                          <div class="product-price">
                                                              <span class="price">৳{{ $price_after_discount }}</span>
@@ -196,6 +196,10 @@ Category Nest Online Shop
                                                              <span class="price">৳{{ $product->regular_price }}</span>
                                                          </div>
                                                      @endif
+                                                     @php
+                                                        $productsellcount = \App\Models\OrderDetail::where('product_id', $product->id)->sum('qty') ?? 0;
+                                                    @endphp
+                                                    <span class="price">Sold({{ $productsellcount }})</span>
                                                  </div>
                                              </div>
                                          </div>

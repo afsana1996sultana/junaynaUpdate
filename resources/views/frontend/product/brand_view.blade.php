@@ -95,7 +95,7 @@
                                    @endif
                                    <span class="rating-count">({{ number_format($averageRating, 1) }})</span>
                                </div>
-                                <div class="price">
+                                <div class="price d-flex">
                                     <span>
                                         @php
                                             if ($product->discount_type == 1) {
@@ -117,6 +117,10 @@
                                             </div>
                                         @endif
                                     </span>
+                                    @php
+                                        $productsellcount = \App\Models\OrderDetail::where('product_id', $product->id)->sum('qty') ?? 0;
+                                    @endphp
+                                    <span class="price">Sold({{ $productsellcount }})</span>
                                 </div>
                             </div>
                         </div>

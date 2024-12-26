@@ -15,6 +15,12 @@
                     @endif
                 </a>
             </h5>
+            @php
+                $productsellcount = \App\Models\OrderDetail::where('product_id', $product->id)->sum('qty') ?? 0;
+            @endphp
+            <div class="product-price price-derection">
+                <span class="price">Sold({{ $productsellcount }})</span>
+            </div>
             <p class="price mb-0 mt-5">৳{{ $product->regular_price }}</p>
             <div class="product-rate">
                 <div class="product-rating" style="width: 90%"></div>
