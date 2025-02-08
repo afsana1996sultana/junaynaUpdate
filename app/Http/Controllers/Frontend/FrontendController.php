@@ -322,7 +322,6 @@ class FrontendController extends Controller
         return view('frontend.settings.page.order_tracking');
     }
 
-
     public function orderTrack(Request $request)
     {
         $this->validate($request, [
@@ -332,8 +331,9 @@ class FrontendController extends Controller
         $searchQuery = $request->invoice_no;
 
         $order = Order::where('invoice_no', $searchQuery)
-                    ->orWhere('phone', $searchQuery)
-                    ->orWhere('name', 'LIKE', "%$searchQuery%") // Search by name (partial match)
+                    ->orWhere('phone', $searchQuery) // Exact phone number match
+                    ->orWhere('phone', 'LIKE', "%$searchQuery") // Last 4-digit phone match
+                    ->orWhere('name', 'LIKE', "%$searchQuery%") // Partial name match
                     ->first();
 
         if (!$order) {
@@ -344,6 +344,7 @@ class FrontendController extends Controller
         }
         return view('frontend.settings.page.track', compact('order'));
     }
+
 
     /* ================= Start Product Search =================== */
     public function ProductSearch(Request $request){
