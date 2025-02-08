@@ -325,20 +325,24 @@ class FrontendController extends Controller
 
     public function orderTrack(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'invoice_no' => 'required',
-            'phone' => 'required',
         ]);
-        $order = Order::where('invoice_no', $request->invoice_no)->where('phone', $request->phone)->first();
-        if(!$order){
-            $notification = array(
-                'message' => 'Required Data Not Found.',
+
+        $searchQuery = $request->invoice_no;
+
+        $order = Order::where('invoice_no', $searchQuery)
+                    ->orWhere('phone', $searchQuery)
+                    ->orWhere('name', 'LIKE', "%$searchQuery%") // Search by name (partial match)
+                    ->first();
+
+        if (!$order) {
+            return redirect()->back()->with([
+                'message' => 'Order not found. Please check your input.',
                 'alert-type' => 'error'
-            );
-            return redirect()->back()->with($notification);
+            ]);
         }
-        // dd($order);
-        return view('frontend.settings.page.track',compact('order'));
+        return view('frontend.settings.page.track', compact('order'));
     }
 
     /* ================= Start Product Search =================== */

@@ -29,19 +29,12 @@
                                             <form method="POST" action="{{ route('order.track') }}" class="row g-3 needs-validation" novalidate>
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label>Order ID <span class="text-danger">*</span></label>
-                                                    <input type="text" name="invoice_no" placeholder="Found in your order confirmation email" value="{{ old('invoice_no') }}" required/>
+                                                    <label>Order ID/ Phone No /Name<span class="text-danger">*</span></label>
+                                                    <input type="text" name="invoice_no" placeholder="Found in your order via Invoice Number, Phone No or Name" value="{{ old('invoice_no') }}" required/>
                                                     @error('invoice_no')
                                                         <div class="text-danger" style="font-weight: bold;">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Phone <span class="text-danger">*</span></label>
-                                                    <input type="number" name="phone" placeholder="Phone you used during checkout" value="{{ old('phone')}}"  required/>
-                                                    @error('phone')
-                                                        <div class="text-danger" style="font-weight: bold;">{{ $message }}</div>
-                                                    @enderror
-                                                </div> 
                                                 <div class="form-group">
                                                     <button class="submit submit-auto-width" type="submit">Track</button>
                                                 </div>
